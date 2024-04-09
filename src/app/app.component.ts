@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 import { Window } from '@keplr-wallet/types';
 import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
 import {
   GasPrice,
   MsgVoteEncodeObject,
+  QueryClient,
   SigningStargateClient,
+  setupGovExtension,
 } from '@cosmjs/stargate';
+import { connectComet } from '@cosmjs/tendermint-rpc';
 
 @Component({
   standalone: true,
@@ -15,8 +23,12 @@ import {
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private readonly window = inject<Window>(WINDOW);
+
+  public async ngOnInit(): Promise<void> {
+    this.fetchProposals();
+  }
 
   /**
    * Temporary handler, which initiate transaction with 2 yes votes on proposals 897 & 899
@@ -69,5 +81,24 @@ export class AppComponent {
     ];
 
     await signingClient.signAndBroadcast(voter, messages, 'auto');
+  }
+
+  /**
+   * Temporary method, which retrieves proposals in voting phase from RPC node
+   */
+  private async fetchProposals(): Promise<void> {
+    // 1. Setup `CometClient` for `QueryClient`
+    const cometClient = await connectComet(COSMOS_HUB_RPC);
+
+    // 2. Setup `QueryClient` for `setupGovExtension`
+    const queryClient = new QueryClient(cometClient);
+
+    // 2. Setup `GovExtension` abstraction, which provides some methods to retrieve governance staff
+    const govExtension = setupGovExtension(queryClient);
+
+    // 4. Retrieve proposals in voting phase
+    const votingProposals = await govExtension.gov.proposals(2, '', '');
+
+    console.log(votingProposals);
   }
 }
