@@ -1,3 +1,13 @@
 :host {
   display: block;
 }
+
+.card {
+  background-color: white;
+  width: 800px;
+  min-height: 600px;
+  margin: 100px auto 0;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}

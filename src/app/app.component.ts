@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 import { Window } from '@keplr-wallet/types';
 import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
@@ -15,6 +10,10 @@ import {
   setupGovExtension,
 } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
+import {
+  IStep,
+  StepperComponent,
+} from './components/stepper/stepper.component';
 
 @Component({
   standalone: true,
@@ -22,20 +21,32 @@ import { connectComet } from '@cosmjs/tendermint-rpc';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [StepperComponent],
 })
-export class AppComponent implements OnInit {
-  private readonly window = inject<Window>(WINDOW);
+export class AppComponent {
+  protected readonly steps: IStep[] = [
+    {
+      title: 'Select a network',
+    },
+    {
+      title: 'Vote on proposals',
+    },
+    {
+      title: 'Confirmation',
+    },
+    {
+      title: 'Finish',
+    },
+  ];
 
-  public async ngOnInit(): Promise<void> {
-    this.fetchProposals();
-  }
+  private readonly window = inject<Window>(WINDOW);
 
   /**
    * Temporary handler, which initiate transaction with 2 yes votes on proposals 897 & 899
    *
-   * TODO: (AlexanderFSP) Decouple logic into services
+   * TODO: [AlexanderFSP] Decouple logic into services
    */
-  protected async onVote(): Promise<void> {
+  private async onVote(): Promise<void> {
     if (!this.window.keplr) {
       throw new Error('Install Keplr');
     }
@@ -46,7 +57,7 @@ export class AppComponent implements OnInit {
      * Decided to use `getOfflineSignerOnlyAmino` instead of `getOfflineSigner`, because for Ledger I get such kind
      * of error: "Error: SIGN_MODE_DIRECT can’t be signed on Ledger. Contact the web app provider to fix this issue."
      *
-     * TODO: (AlexanderFSP) Understand the difference between `OfflineAminoSigner` and `OfflineDirectSigner`..
+     * TODO: [AlexanderFSP] Understand the difference between `OfflineAminoSigner` and `OfflineDirectSigner`..
      */
     const offlineSigner =
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

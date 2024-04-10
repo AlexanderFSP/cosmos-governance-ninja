@@ -49,6 +49,12 @@
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "scss",
+      "changeDetection": "OnPush",
+      "displayBlock": true,
+      "skipTests": true
     }
   },
   "defaultProject": "cosmos-governance-ninja"
