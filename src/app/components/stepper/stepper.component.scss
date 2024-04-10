@@ -1,3 +1,14 @@
 :host {
   display: block;
 }
+
+.chart {
+  display: flex;
+  padding: 60px 100px 0;
+}
+
+app-step {
+  &:not(:last-child) {
+    flex-grow: 1;
+  }
+}

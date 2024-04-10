@@ -1,6 +1,11 @@
 <div class="chart">
   @for (step of steps(); track $index) {
-  <div></div>
+  <app-step
+    [current]="$index === currentStepIdx()"
+    [completed]="$index < currentStepIdx()"
+    [last]="$last"
+    [title]="step.title"
+  />
   }
 </div>
 

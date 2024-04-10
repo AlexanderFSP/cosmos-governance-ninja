@@ -1,0 +1,113 @@
+$main-blue: #99bbff;
+$ligher-blue: #e2f1ff;
+$main-green: #2dc193;
+$text-main: #414756;
+$text-secondary: #a5abbd;
+
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &.current {
+    .outer-circle {
+      background-color: white;
+      border: 2px solid $main-blue;
+      width: 24px;
+      height: 24px;
+      padding: 6px;
+    }
+
+    .inner-circle {
+      background-color: $main-blue;
+    }
+
+    .line-progress {
+      width: 50%;
+      height: 3px;
+      border-radius: 4px;
+
+      background-color: $main-blue;
+    }
+
+    .step-status {
+      color: $main-blue;
+    }
+  }
+
+  &.completed {
+    .outer-circle {
+      background-color: $main-green;
+    }
+
+    .line {
+      background-color: $main-green;
+    }
+
+    .step-status {
+      color: $main-green;
+    }
+  }
+}
+
+.outer-circle {
+  width: 40px;
+  height: 40px;
+  background-color: $ligher-blue;
+  border-radius: 50%;
+}
+
+.line {
+  margin: 0 20px;
+  width: 100%;
+  border-radius: 4px;
+
+  height: 3px;
+  background-color: $ligher-blue;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+.caption {
+  position: absolute;
+  top: 60px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+.inner-circle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+img {
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+
+.step-number {
+  color: $text-secondary;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.step-title {
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.step-status {
+  margin-top: 8px;
+  font-size: 12px;
+  color: $text-secondary;
+}

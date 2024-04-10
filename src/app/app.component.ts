@@ -29,10 +29,10 @@ export class AppComponent {
       title: 'Select a network',
     },
     {
-      title: 'Vote on proposals',
+      title: 'Vote',
     },
     {
-      title: 'Confirmation',
+      title: 'Get confirmation',
     },
     {
       title: 'Finish',

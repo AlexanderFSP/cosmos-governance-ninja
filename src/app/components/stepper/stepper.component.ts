@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { StepComponent } from './components/step.component';
 
 export interface IStep {
   title: string;
@@ -10,6 +11,7 @@ export interface IStep {
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [StepComponent],
 })
 export class StepperComponent {
   /** Starts from 0 */
