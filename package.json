@@ -21,6 +21,7 @@
     "@cosmjs/tendermint-rpc": "0.32.3",
     "@ng-web-apis/common": "3.0.6",
     "@nx/angular": "18.2.3",
+    "normalize.css": "8.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
