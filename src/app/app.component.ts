@@ -14,6 +14,7 @@ import {
   IStep,
   StepperComponent,
 } from './components/stepper/stepper.component';
+import { NetworkCardComponent } from './components/network-card/network-card.component';
 
 @Component({
   standalone: true,
@@ -21,7 +22,7 @@ import {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepperComponent],
+  imports: [StepperComponent, NetworkCardComponent],
 })
 export class AppComponent {
   protected readonly steps: IStep[] = [

@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2f1ff;
+  border-radius: 8px;
+  padding: 20px 28px;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out;
+
+  &:hover {
+    background-color: rgba(226, 241, 255, 0.2);
+  }
+}
+
+img {
+  width: 40px;
+  height: 40px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  width: 425px;
+  margin-left: 24px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+
+  font-size: 18px;
+}
+
+.ticker {
+  color: #a5abbd;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.description {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.block {
+  color: #a5abbd;
+  margin-top: 12px;
+  font-size: 10px;
+}
+
+.keplr {
+  display: flex;
+  align-items: center;
+  color: #99bbff;
+  margin-left: auto;
+}
+
+.arrow-right {
+  margin-left: 4px;
+  width: 12px;
+  height: 12px;
+}
