@@ -1,0 +1,22 @@
+<div class="step">
+  <div class="outer-circle">
+    <div class="inner-circle">
+      @if (status() === stepStatus.COMPLETED) {
+      <img src="assets/checkmark.svg" alt="" />
+      }
+    </div>
+  </div>
+
+  <app-step-info
+    class="step-info"
+    [number]="number()"
+    [title]="title()"
+    [status]="status()"
+  />
+</div>
+
+@if (!last()) {
+<div class="line">
+  <div class="line-progress"></div>
+</div>
+}

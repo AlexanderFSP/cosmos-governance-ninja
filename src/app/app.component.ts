@@ -10,10 +10,7 @@ import {
   setupGovExtension,
 } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
-import {
-  IStep,
-  StepperComponent,
-} from './components/stepper/stepper.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 import { NetworkCardComponent } from './components/network-card/network-card.component';
 
 @Component({
@@ -25,19 +22,11 @@ import { NetworkCardComponent } from './components/network-card/network-card.com
   imports: [StepperComponent, NetworkCardComponent],
 })
 export class AppComponent {
-  protected readonly steps: IStep[] = [
-    {
-      title: 'Select a network',
-    },
-    {
-      title: 'Vote',
-    },
-    {
-      title: 'Get confirmation',
-    },
-    {
-      title: 'Finish',
-    },
+  protected readonly steps: string[] = [
+    'Select a network',
+    'Vote',
+    'Get confirmation',
+    'Finish',
   ];
 
   private readonly window = inject<Window>(WINDOW);

@@ -1,12 +1,11 @@
-<div class="chart">
+<div class="steps">
   @for (step of steps(); track $index) {
   <app-step
-    [current]="$index === currentStepIdx()"
-    [completed]="$index < currentStepIdx()"
+    class="step"
+    [status]="$index | stepStatus : currentStepIdx()"
     [last]="$last"
-    [title]="step.title"
+    [title]="step"
+    [number]="$index + 1"
   />
   }
 </div>
-
-<!-- TODO: [AlexanderFSP] Captions (💭 justify space under chart & use absolute positioning to render text)-->

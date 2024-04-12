@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { StepComponent } from './components/step.component';
-
-export interface IStep {
-  title: string;
-}
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
+import { StepComponent } from './components/step/step.component';
+import { StepStatusPipe } from './pipes/step-status.pipe';
 
 @Component({
   standalone: true,
@@ -11,10 +13,12 @@ export interface IStep {
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepComponent],
+  imports: [StepComponent, StepStatusPipe],
 })
 export class StepperComponent {
   /** Starts from 0 */
   public readonly currentStepIdx = input.required<number>();
-  public readonly steps = input.required<IStep[]>();
+  public readonly steps = input.required<string[]>();
+
+  public readonly selectStep = output<number>();
 }

@@ -2,12 +2,12 @@
   display: block;
 }
 
-.chart {
+.steps {
   display: flex;
   padding: 60px 140px 0;
 }
 
-app-step {
+.step {
   &:not(:last-child) {
     flex-grow: 1;
   }

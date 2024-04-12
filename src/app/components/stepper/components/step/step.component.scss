@@ -1,9 +1,3 @@
-$main-blue: #99bbff;
-$ligher-blue: #e2f1ff;
-$main-green: #2dc193;
-$text-main: #414756;
-$text-secondary: #a5abbd;
-
 :host {
   position: relative;
   display: flex;
@@ -12,14 +6,14 @@ $text-secondary: #a5abbd;
   &.current {
     .outer-circle {
       background-color: white;
-      border: 2px solid $main-blue;
+      border: 2px solid var(--color-primary);
       width: 24px;
       height: 24px;
       padding: 6px;
     }
 
     .inner-circle {
-      background-color: $main-blue;
+      background-color: var(--color-primary);
     }
 
     .line-progress {
@@ -27,25 +21,17 @@ $text-secondary: #a5abbd;
       height: 3px;
       border-radius: 4px;
 
-      background-color: $main-blue;
-    }
-
-    .step-status {
-      color: $main-blue;
+      background-color: var(--color-primary);
     }
   }
 
   &.completed {
     .outer-circle {
-      background-color: $main-green;
+      background-color: var(--color-indication-success);
     }
 
     .line {
-      background-color: $main-green;
-    }
-
-    .step-status {
-      color: $main-green;
+      background-color: var(--color-indication-success);
     }
   }
 }
@@ -53,7 +39,7 @@ $text-secondary: #a5abbd;
 .outer-circle {
   width: 40px;
   height: 40px;
-  background-color: $ligher-blue;
+  background-color: var(--color-secondary);
   border-radius: 50%;
 }
 
@@ -63,7 +49,7 @@ $text-secondary: #a5abbd;
   border-radius: 4px;
 
   height: 3px;
-  background-color: $ligher-blue;
+  background-color: var(--color-secondary);
 }
 
 .step {
@@ -71,13 +57,6 @@ $text-secondary: #a5abbd;
   flex-direction: column;
   align-items: center;
   justify-items: center;
-}
-
-.caption {
-  position: absolute;
-  top: 60px;
-  text-align: center;
-  text-wrap: nowrap;
 }
 
 .inner-circle {
@@ -95,19 +74,7 @@ img {
   color: white;
 }
 
-.step-number {
-  color: $text-secondary;
-  text-transform: uppercase;
-  font-size: 12px;
-}
-
-.step-title {
-  margin-top: 4px;
-  font-size: 20px;
-}
-
-.step-status {
-  margin-top: 8px;
-  font-size: 12px;
-  color: $text-secondary;
+.step-info {
+  position: absolute;
+  top: 60px;
 }

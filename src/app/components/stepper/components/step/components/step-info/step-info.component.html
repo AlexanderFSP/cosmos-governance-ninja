@@ -1,0 +1,5 @@
+<div class="step-number">Step {{ number() }}</div>
+
+<div class="step-title">{{ title() }}</div>
+
+<div class="step-status" [ngClass]="status()">{{ statusTitle[status()] }}</div>

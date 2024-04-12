@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+html {
+  --color-primary: #99bbff;
+  --color-secondary: #e2f1ff;
+  --color-text-main: #414756;
+  --color-text-secondary: #a5abbd;
+  --color-indication-success: #2dc193;
+}
+
 body {
-  background-color: rgb(153, 187, 255);
+  background-color: var(--color-primary);
   font-family: 'Barlow', sans-serif;
   font-weight: 400;
   font-style: normal;
