@@ -1,13 +1,15 @@
+@use 'styles/mixins' as *;
+
 :host {
   display: block;
 }
 
 .card {
-  background-color: white;
-  width: 860px;
-  min-height: 600px;
-  margin: 100px auto 0;
-  padding-bottom: 60px;
+  @include rectangle(860px, 80dvh);
+
+  background-color: var(--color-always-white);
+  margin: 10dvh auto;
+  padding: 60px 70px;
   border-radius: 8px;
   box-shadow: 1px 2px 2px hsl(var(--shadow-color) / 0.2),
     2px 4px 4px hsl(var(--shadow-color) / 0.2),
@@ -16,13 +18,6 @@
     16px 32px 32px hsl(var(--shadow-color) / 0.2);
 }
 
-.network-list {
+.content {
   margin-top: 140px;
-  padding: 0 70px;
-}
-
-app-network-card {
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
 }

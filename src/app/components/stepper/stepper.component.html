@@ -1,11 +1,9 @@
-<div class="steps">
-  @for (step of steps(); track $index) {
-  <app-step
-    class="step"
-    [status]="$index | stepStatus : currentStepIdx()"
-    [last]="$last"
-    [title]="step"
-    [number]="$index + 1"
-  />
-  }
-</div>
+@for (step of steps(); track $index) {
+<app-step
+  class="step"
+  [status]="$index | stepStatus : currentStepIdx()"
+  [last]="$last"
+  [title]="step"
+  [number]="$index + 1"
+/>
+}

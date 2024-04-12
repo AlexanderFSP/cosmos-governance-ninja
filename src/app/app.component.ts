@@ -16,7 +16,7 @@ import {
 } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
 import { StepperComponent } from './components/stepper/stepper.component';
-import { NetworkCardComponent } from './components/network-card/network-card.component';
+import { ChainListComponent } from './components/chain-list/chain-list.component';
 
 @Component({
   standalone: true,
@@ -24,12 +24,12 @@ import { NetworkCardComponent } from './components/network-card/network-card.com
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepperComponent, NetworkCardComponent],
+  imports: [StepperComponent, ChainListComponent],
 })
 export class AppComponent {
   protected currentStepIdx = 0;
   protected readonly steps: string[] = [
-    'Select a network',
+    'Select a chain',
     'Vote',
     'Get confirmation',
     'Finish',

@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+app-chain-card {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}

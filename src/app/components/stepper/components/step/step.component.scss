@@ -52,7 +52,7 @@
 
 .outer-circle {
   @include flex(center, center);
-  @include rectangle(36px);
+  @include rectangle(40px);
 
   position: relative;
   border-radius: 50%;

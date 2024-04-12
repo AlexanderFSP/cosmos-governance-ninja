@@ -1,10 +1,9 @@
-:host {
-  display: block;
-}
+@use 'styles/mixins' as *;
 
-.steps {
-  display: flex;
-  padding: 60px 140px 0;
+:host {
+  @include flex;
+
+  padding: 0 70px;
 }
 
 .step {
