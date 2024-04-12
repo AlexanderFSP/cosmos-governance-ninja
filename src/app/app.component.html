@@ -1,9 +1,10 @@
 <main class="card">
-  <app-stepper [currentStepIdx]="1" [steps]="steps" />
+  <app-stepper [currentStepIdx]="currentStepIdx" [steps]="steps" />
 
   <div class="network-list">
-    <app-network-card />
-    <app-network-card />
-    <app-network-card />
+    <!-- TODO: (AlexanderFSP) Implement proper handling -->
+    <app-network-card (click)="currentStepIdx = 1" />
+    <app-network-card (click)="currentStepIdx = 2" />
+    <app-network-card (click)="currentStepIdx = 3" />
   </div>
 </main>

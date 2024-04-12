@@ -1,0 +1,24 @@
+$props: center, column, column-reverse, space-between, space-around, flex-end,
+  flex-start, baseline, wrap, nowrap, row-reverse;
+
+@mixin flex($x: 0, $y: 0, $direction: 0, $wrap: 0) {
+  @each $value in $props {
+    @if $x != 0 and $x == $value {
+      align-items: $value;
+    }
+
+    @if $y != 0 and $y == $value {
+      justify-content: $value;
+    }
+
+    @if $direction != 0 and $direction == $value {
+      flex-direction: $value;
+    }
+
+    @if $wrap != 0 and $wrap == $value {
+      flex-wrap: $value;
+    }
+  }
+
+  display: flex;
+}

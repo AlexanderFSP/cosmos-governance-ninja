@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 import { Window } from '@keplr-wallet/types';
 import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
@@ -22,6 +27,7 @@ import { NetworkCardComponent } from './components/network-card/network-card.com
   imports: [StepperComponent, NetworkCardComponent],
 })
 export class AppComponent {
+  protected currentStepIdx = 0;
   protected readonly steps: string[] = [
     'Select a network',
     'Vote',

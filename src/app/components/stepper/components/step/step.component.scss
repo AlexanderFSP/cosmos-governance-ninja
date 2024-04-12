@@ -1,80 +1,114 @@
+@use 'styles/mixins' as *;
+
 :host {
+  @include flex(center);
+
   position: relative;
-  display: flex;
-  align-items: center;
 
   &.current {
     .outer-circle {
-      background-color: white;
-      border: 2px solid var(--color-primary);
-      width: 24px;
-      height: 24px;
-      padding: 6px;
+      border-color: var(--color-primary);
     }
 
     .inner-circle {
+      @include rectangle(24px);
+
       background-color: var(--color-primary);
+    }
+
+    .outer-circle,
+    .inner-circle {
+      transition: all 150ms ease-in-out;
+      transition-delay: 300ms; // Run animation only when previous circle becomes green (150ms) & it's line reaches the current circle (150ms)
     }
 
     .line-progress {
       width: 50%;
-      height: 3px;
-      border-radius: 4px;
-
-      background-color: var(--color-primary);
+      transition-delay: 450ms; // Run animation only when the current circle becomes visually selected
     }
   }
 
   &.completed {
     .outer-circle {
-      background-color: var(--color-indication-success);
+      border-color: var(--color-primary);
     }
 
-    .line {
+    .inner-circle {
       background-color: var(--color-indication-success);
+      transition: all 150ms ease-in-out;
+    }
+
+    .line-progress {
+      width: 100%;
+      background-color: var(--color-indication-success);
+      transition-delay: 150ms; // Run animation only when the current circle becomes green
     }
   }
 }
 
-.outer-circle {
-  width: 40px;
-  height: 40px;
-  background-color: var(--color-secondary);
-  border-radius: 50%;
-}
-
-.line {
-  margin: 0 20px;
-  width: 100%;
-  border-radius: 4px;
-
-  height: 3px;
-  background-color: var(--color-secondary);
-}
-
 .step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
+  @include flex(center, null, column);
+}
+
+.outer-circle {
+  @include flex(center, center);
+  @include rectangle(36px);
+
+  position: relative;
+  border-radius: 50%;
+  border: 2px solid var(--color-secondary);
 }
 
 .inner-circle {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(center, center);
+  @include rectangle(40px);
+
+  position: absolute;
   border-radius: 50%;
+  background-color: var(--color-secondary);
 }
 
-img {
-  width: 16px;
-  height: 16px;
-  color: white;
+.checkmark-icon {
+  @include rectangle(16px);
+
+  color: var(--color-always-white);
+  animation: checkmarkIconAnimation 300ms ease-in-out;
 }
 
 .step-info {
   position: absolute;
   top: 60px;
+}
+
+.line {
+  @include rectangle(100%, 3px);
+
+  margin: 0 20px;
+  border-radius: 4px;
+  background-color: var(--color-secondary);
+}
+
+.line-progress {
+  @include rectangle(0, 3px);
+
+  border-radius: 4px;
+  background-color: var(--color-primary);
+  transition: all 150ms ease-in-out;
+}
+
+@keyframes checkmarkIconAnimation {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  50% {
+    display: block;
+    opacity: 0;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+  }
 }
