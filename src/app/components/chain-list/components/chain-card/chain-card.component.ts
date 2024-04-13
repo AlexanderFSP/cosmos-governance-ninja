@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { IChainInfo } from 'src/app/models/chain-info.model';
 
 @Component({
   standalone: true,
@@ -6,5 +8,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './chain-card.component.html',
   styleUrl: './chain-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DatePipe],
 })
-export class ChainCardComponent {}
+export class ChainCardComponent {
+  public readonly chain = input.required<IChainInfo>();
+}

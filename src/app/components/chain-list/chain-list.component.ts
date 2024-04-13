@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChainCardComponent } from './components/chain-card/chain-card.component';
+import { CHAIN_LIST } from 'src/app/constants/chain-list';
 
 @Component({
   standalone: true,
@@ -9,4 +10,6 @@ import { ChainCardComponent } from './components/chain-card/chain-card.component
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ChainCardComponent],
 })
-export class ChainListComponent {}
+export class ChainListComponent {
+  protected readonly chains = CHAIN_LIST;
+}

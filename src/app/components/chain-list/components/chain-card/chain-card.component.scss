@@ -1,38 +1,38 @@
+@use 'styles/mixins' as *;
+
 :host {
-  display: flex;
-  align-items: center;
-  border: 1px solid #e2f1ff;
+  @include flex(center);
+
+  border: 1px solid var(--color-secondary);
   border-radius: 8px;
   padding: 20px 28px;
-  cursor: pointer;
   transition: background-color 100ms ease-in-out;
+  cursor: pointer;
 
   &:hover {
-    background-color: rgba(226, 241, 255, 0.2);
+    background-color: rgba(var(--color-secondary-rgb), 0.2);
   }
 }
 
-img {
-  width: 40px;
-  height: 40px;
+.logo {
+  @include rectangle(40px);
 }
 
-.group {
-  display: flex;
-  flex-direction: column;
+.info {
+  @include flex(null, null, column);
+
   width: 425px;
   margin-left: 24px;
 }
 
 .title {
-  display: flex;
-  align-items: center;
+  @include flex(center);
 
   font-size: 18px;
 }
 
 .ticker {
-  color: #a5abbd;
+  color: var(--color-text-secondary);
   font-size: 12px;
   margin-left: 8px;
 }
@@ -42,21 +42,21 @@ img {
   font-size: 12px;
 }
 
-.block {
-  color: #a5abbd;
+.start-date {
+  color: var(--color-text-secondary);
   margin-top: 12px;
   font-size: 10px;
 }
 
 .keplr {
-  display: flex;
-  align-items: center;
-  color: #99bbff;
+  @include flex(center);
+
+  color: var(--color-primary);
   margin-left: auto;
 }
 
 .arrow-right {
+  @include rectangle(12px);
+
   margin-left: 4px;
-  width: 12px;
-  height: 12px;
 }
