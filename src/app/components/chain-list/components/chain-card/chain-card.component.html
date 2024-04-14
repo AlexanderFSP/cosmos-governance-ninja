@@ -13,8 +13,21 @@
   </div>
 </div>
 
-<div class="keplr">
-  Add to Keplr
+<div
+  class="keplr"
+  [class.not-installed]="!keplrService.isInstalled"
+  role="button"
+  (click)="onAddToKeplr($event)"
+>
+  @if (isRegistered$ | async) { Added
+
+  <img
+    class="checkmark-circle"
+    src="assets/images/checkmark-circle.svg"
+    alt=""
+  />
+  } @else { Add to Keplr
 
   <img class="arrow-right" src="assets/right-arrow-svgrepo-com.svg" alt="" />
+  }
 </div>

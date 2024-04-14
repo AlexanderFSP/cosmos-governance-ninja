@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 import { Window } from '@keplr-wallet/types';
 import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
@@ -17,6 +12,9 @@ import {
 import { connectComet } from '@cosmjs/tendermint-rpc';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { ChainListComponent } from './components/chain-list/chain-list.component';
+import { IChainInfo } from './models/chain-info.model';
+import { CHAIN_LIST } from './constants/chain-list';
+import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
 
 @Component({
   standalone: true,
@@ -24,7 +22,7 @@ import { ChainListComponent } from './components/chain-list/chain-list.component
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepperComponent, ChainListComponent],
+  imports: [StepperComponent, ChainListComponent, ProposalListComponent],
 })
 export class AppComponent {
   protected currentStepIdx = 0;
@@ -34,8 +32,15 @@ export class AppComponent {
     'Get confirmation',
     'Finish',
   ];
+  protected readonly chains = CHAIN_LIST;
 
   private readonly window = inject<Window>(WINDOW);
+  private selectedChain?: IChainInfo;
+
+  protected onSelectChain(chain: IChainInfo): void {
+    this.selectedChain = chain;
+    this.currentStepIdx++;
+  }
 
   /**
    * Temporary handler, which initiate transaction with 2 yes votes on proposals 897 & 899

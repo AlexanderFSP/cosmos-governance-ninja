@@ -1,6 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { ChainCardComponent } from './components/chain-card/chain-card.component';
-import { CHAIN_LIST } from 'src/app/constants/chain-list';
+import { IChainInfo } from '../../models/chain-info.model';
 
 @Component({
   standalone: true,
@@ -11,5 +16,7 @@ import { CHAIN_LIST } from 'src/app/constants/chain-list';
   imports: [ChainCardComponent],
 })
 export class ChainListComponent {
-  protected readonly chains = CHAIN_LIST;
+  public readonly chains = input.required<IChainInfo[]>();
+
+  public readonly selectChain = output<IChainInfo>();
 }

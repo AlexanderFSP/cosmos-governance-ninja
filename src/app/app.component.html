@@ -2,6 +2,10 @@
   <app-stepper [currentStepIdx]="currentStepIdx" [steps]="steps" />
 
   <div class="content">
-    <app-chain-list />
+    @switch (currentStepIdx) { @case (0) {
+    <app-chain-list [chains]="chains" (selectChain)="onSelectChain($event)" />
+    } @case (1) {
+    <app-proposal-list />
+    } }
   </div>
 </main>

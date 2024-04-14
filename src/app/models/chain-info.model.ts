@@ -1,3 +1,5 @@
+import { ChainInfo } from '@keplr-wallet/types';
+
 export interface IChainInfo {
   id: string;
   logoSrc: string;
@@ -6,4 +8,5 @@ export interface IChainInfo {
   ticker: string;
   description: string;
   startDate: Date;
+  info: ChainInfo;
 }

@@ -53,10 +53,22 @@
 
   color: var(--color-primary);
   margin-left: auto;
+  user-select: none;
+
+  &.not-installed {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .arrow-right {
   @include rectangle(12px);
 
   margin-left: 4px;
+}
+
+.checkmark-circle {
+  @include rectangle(14px);
+
+  margin: 2px 0 0 4px;
 }
