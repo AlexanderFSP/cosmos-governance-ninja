@@ -9,6 +9,10 @@ export interface IChainInfoView {
    */
   rpcUrl: string;
   /**
+   * Allnodes REST endpoint link
+   */
+  restUrl: string;
+  /**
    * Short chain description for `ChainCardComponent`
    */
   description: string;
