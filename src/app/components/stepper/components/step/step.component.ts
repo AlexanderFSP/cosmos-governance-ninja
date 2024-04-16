@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
 import { StepStatus } from './models/step-status.model';
 import { StepInfoComponent } from './components/step-info/step-info.component';
 
@@ -13,7 +8,7 @@ import { StepInfoComponent } from './components/step-info/step-info.component';
   templateUrl: './step.component.html',
   styleUrl: './step.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepInfoComponent],
+  imports: [StepInfoComponent]
 })
 export class StepComponent {
   @HostBinding('class.completed') protected get isCompleted(): boolean {

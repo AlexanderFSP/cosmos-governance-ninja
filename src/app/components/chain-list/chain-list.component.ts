@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { ChainCardComponent } from './components/chain-card/chain-card.component';
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
@@ -13,7 +8,7 @@ import { IChainInfoView } from '../../models/chain-info-view.model';
   templateUrl: './chain-list.component.html',
   styleUrl: './chain-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ChainCardComponent],
+  imports: [ChainCardComponent]
 })
 export class ChainListComponent {
   public readonly chains = input.required<IChainInfoView[]>();

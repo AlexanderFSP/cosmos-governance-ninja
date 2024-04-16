@@ -5,6 +5,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-proposal-card',
   templateUrl: './proposal-card.component.html',
   styleUrl: './proposal-card.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProposalCardComponent {}

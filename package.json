@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write ."
   },
   "private": true,
   "dependencies": {

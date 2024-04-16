@@ -7,6 +7,6 @@ import { ProposalCardComponent } from './components/proposal-card/proposal-card.
   templateUrl: './proposal-list.component.html',
   styleUrl: './proposal-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ProposalCardComponent],
+  imports: [ProposalCardComponent]
 })
 export class ProposalListComponent {}

@@ -2,13 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 import { Window } from '@keplr-wallet/types';
 import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
-import {
-  GasPrice,
-  MsgVoteEncodeObject,
-  QueryClient,
-  SigningStargateClient,
-  setupGovExtension,
-} from '@cosmjs/stargate';
+import { GasPrice, MsgVoteEncodeObject, QueryClient, SigningStargateClient, setupGovExtension } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { ChainListComponent } from './components/chain-list/chain-list.component';
@@ -22,16 +16,11 @@ import { ProposalListComponent } from './components/proposal-list/proposal-list.
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepperComponent, ChainListComponent, ProposalListComponent],
+  imports: [StepperComponent, ChainListComponent, ProposalListComponent]
 })
 export class AppComponent {
   protected currentStepIdx = 0;
-  protected readonly steps: string[] = [
-    'Select a chain',
-    'Vote',
-    'Get confirmation',
-    'Finish',
-  ];
+  protected readonly steps: string[] = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
 
   private readonly window = inject<Window>(WINDOW);
@@ -64,13 +53,9 @@ export class AppComponent {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.window.getOfflineSignerOnlyAmino!(COSMOS_HUB_CHAIN_ID);
 
-    const signingClient = await SigningStargateClient.connectWithSigner(
-      COSMOS_HUB_RPC,
-      offlineSigner,
-      {
-        gasPrice: GasPrice.fromString('0.025ucosm'),
-      }
-    );
+    const signingClient = await SigningStargateClient.connectWithSigner(COSMOS_HUB_RPC, offlineSigner, {
+      gasPrice: GasPrice.fromString('0.025ucosm')
+    });
 
     const voter = (await offlineSigner.getAccounts())[0].address;
     const messages: MsgVoteEncodeObject[] = [
@@ -79,17 +64,17 @@ export class AppComponent {
         value: {
           proposalId: BigInt(897),
           voter,
-          option: 1,
-        },
+          option: 1
+        }
       },
       {
         typeUrl: '/cosmos.gov.v1beta1.MsgVote',
         value: {
           proposalId: BigInt(899),
           voter,
-          option: 1,
-        },
-      },
+          option: 1
+        }
+      }
     ];
 
     await signingClient.signAndBroadcast(voter, messages, 'auto');

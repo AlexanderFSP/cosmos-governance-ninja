@@ -4,7 +4,7 @@ import { ChainInfo, Window } from '@keplr-wallet/types';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class KeplrService {
   public readonly isInstalled: boolean;
@@ -19,9 +19,7 @@ export class KeplrService {
   }
 
   public isChainRegistered(chainId: string): Observable<boolean> {
-    return this.registeredChainIds$.pipe(
-      map((registeredChainIds) => registeredChainIds.includes(chainId))
-    );
+    return this.registeredChainIds$.pipe(map(registeredChainIds => registeredChainIds.includes(chainId)));
   }
 
   public async suggestChain(chainInfo: ChainInfo): Promise<void> {
@@ -44,9 +42,9 @@ export class KeplrService {
     }
 
     try {
-      const registeredChainIds = (
-        await this.window.keplr.getChainInfosWithoutEndpoints()
-      ).map((chainInfo) => chainInfo.chainId);
+      const registeredChainIds = (await this.window.keplr.getChainInfosWithoutEndpoints()).map(
+        chainInfo => chainInfo.chainId
+      );
 
       this.registeredChainIds$.next(registeredChainIds);
     } catch {

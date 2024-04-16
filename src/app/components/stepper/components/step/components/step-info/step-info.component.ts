@@ -5,7 +5,7 @@ import { NgClass } from '@angular/common';
 const STATUS_TITLE: Record<StepStatus, string> = {
   [StepStatus.COMPLETED]: 'Completed',
   [StepStatus.IN_PROGRESS]: 'In Progress',
-  [StepStatus.PENDING]: 'Pending',
+  [StepStatus.PENDING]: 'Pending'
 };
 
 @Component({
@@ -14,7 +14,7 @@ const STATUS_TITLE: Record<StepStatus, string> = {
   templateUrl: './step-info.component.html',
   styleUrl: './step-info.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgClass],
+  imports: [NgClass]
 })
 export class StepInfoComponent {
   public readonly number = input.required<number>();

@@ -1,5 +1,5 @@
-$props: center, column, column-reverse, space-between, space-around, flex-end,
-  flex-start, baseline, wrap, nowrap, row-reverse;
+$props: center, column, column-reverse, space-between, space-around, flex-end, flex-start, baseline, wrap, nowrap,
+  row-reverse;
 
 @mixin flex($x: 0, $y: 0, $direction: 0, $wrap: 0) {
   @each $value in $props {

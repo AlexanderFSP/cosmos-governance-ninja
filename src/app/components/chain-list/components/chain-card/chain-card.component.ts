@@ -1,12 +1,5 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  inject,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject, input } from '@angular/core';
 import { IChainInfoView } from '../../../../models/chain-info-view.model';
 import { KeplrService } from '../../../../services/keplr.service';
 import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
@@ -17,7 +10,7 @@ import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
   templateUrl: './chain-card.component.html',
   styleUrl: './chain-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, AsyncPipe],
+  imports: [DatePipe, AsyncPipe]
 })
 export class ChainCardComponent implements OnInit, OnDestroy {
   public readonly chain = input.required<IChainInfoView>();
@@ -29,9 +22,7 @@ export class ChainCardComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
-    this.isRegistered$ = this.keplrService.isChainRegistered(
-      this.chain().info.chainId
-    );
+    this.isRegistered$ = this.keplrService.isChainRegistered(this.chain().info.chainId);
   }
 
   public ngOnDestroy(): void {
@@ -45,9 +36,7 @@ export class ChainCardComponent implements OnInit, OnDestroy {
     this.isRegistered$
       .pipe(
         take(1),
-        filter(
-          (isRegistered) => !isRegistered && this.keplrService.isInstalled
-        ),
+        filter(isRegistered => !isRegistered && this.keplrService.isInstalled),
         takeUntil(this.destroy$)
       )
       .subscribe(() => this.keplrService.suggestChain(this.chain().info));

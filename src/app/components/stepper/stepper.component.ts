@@ -8,7 +8,7 @@ import { StepStatusPipe } from './pipes/step-status.pipe';
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepComponent, StepStatusPipe],
+  imports: [StepComponent, StepStatusPipe]
 })
 export class StepperComponent {
   /** Starts from 0 */

@@ -3,7 +3,7 @@ import { StepStatus } from '../components/step/models/step-status.model';
 
 @Pipe({
   standalone: true,
-  name: 'stepStatus',
+  name: 'stepStatus'
 })
 export class StepStatusPipe implements PipeTransform {
   public transform(stepIdx: number, currentStepIdx: number): StepStatus {
