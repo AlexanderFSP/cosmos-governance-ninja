@@ -1,12 +1,9 @@
-import { IChainInfo } from '../models/chain-info.model';
+import { IChainInfoView } from '../models/chain-info-view.model';
 
-export const CHAIN_LIST: IChainInfo[] = [
+export const CHAIN_LIST: IChainInfoView[] = [
   {
-    id: 'cosmoshub-4',
     logoSrc: 'assets/images/chains/cosmos-hub.svg',
     rpcUrl: 'https://cosmos-rpc.publicnode.com:443',
-    name: 'Cosmos Hub',
-    ticker: 'ATOM',
     description:
       'Cosmos Hub is the first of thousands of interconnected blockchains that will eventually comprise the Cosmos Network. The primary token of the Cosmos Hub is the ATOM, but the Hub will support many tokens in the future.',
     startDate: new Date(2019, 2, 13),
@@ -66,11 +63,8 @@ export const CHAIN_LIST: IChainInfo[] = [
     },
   },
   {
-    id: 'osmosis-1',
     logoSrc: 'assets/images/chains/osmosis.svg',
     rpcUrl: 'https://cosmos-rpc.publicnode.com:443',
-    name: 'Osmosis',
-    ticker: 'OSMO',
     description:
       'Osmosis is an advanced automated market maker (AMM) protocol that allows developers to build customized AMMs with sovereign liquidity pools. Built using the Cosmos SDK, Osmosis utilizes Inter-Blockchain Communication (IBC) to enable cross-chain transactions.',
     startDate: new Date(2021, 5, 18),
@@ -254,11 +248,8 @@ export const CHAIN_LIST: IChainInfo[] = [
     },
   },
   {
-    id: 'dymension_1100-1',
     logoSrc: 'assets/images/chains/dymension.svg',
     rpcUrl: 'https://dymension-rpc.publicnode.com:443',
-    name: 'Dymension',
-    ticker: 'DYM',
     description:
       'Dymension is a modular blockchain designed to secure and interconnect rollups using the Inter-Blockchain Communication (IBC) standard.',
     startDate: new Date(2024, 1, 6),
@@ -318,11 +309,8 @@ export const CHAIN_LIST: IChainInfo[] = [
     },
   },
   {
-    id: 'pirin-1',
     logoSrc: 'assets/images/chains/nolus-logo.svg',
     rpcUrl: 'https://nolus-rpc.publicnode.com:443',
-    name: 'Nolus',
-    ticker: 'NLS',
     description:
       "Nolus is revolutionizing the realm of crypto borrowing, inspired by the traditional finance leasing model. In conventional leasing, customers can secure assets by paying just a part of their total value upfront, utilize them for the lease's duration, and eventually acquire full ownership after settling the loan.",
     startDate: new Date(2023, 5, 23),

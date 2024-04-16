@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { IChainInfo } from '../../../../models/chain-info.model';
+import { IChainInfoView } from '../../../../models/chain-info-view.model';
 import { KeplrService } from '../../../../services/keplr.service';
 import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
 
@@ -20,7 +20,7 @@ import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
   imports: [DatePipe, AsyncPipe],
 })
 export class ChainCardComponent implements OnInit, OnDestroy {
-  public readonly chain = input.required<IChainInfo>();
+  public readonly chain = input.required<IChainInfoView>();
 
   protected isRegistered$!: Observable<boolean>;
 
@@ -29,7 +29,9 @@ export class ChainCardComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
-    this.isRegistered$ = this.keplrService.isChainRegistered(this.chain().id);
+    this.isRegistered$ = this.keplrService.isChainRegistered(
+      this.chain().info.chainId
+    );
   }
 
   public ngOnDestroy(): void {

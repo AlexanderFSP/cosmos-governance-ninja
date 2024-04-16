@@ -12,7 +12,7 @@ import {
 import { connectComet } from '@cosmjs/tendermint-rpc';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { ChainListComponent } from './components/chain-list/chain-list.component';
-import { IChainInfo } from './models/chain-info.model';
+import { IChainInfoView } from './models/chain-info-view.model';
 import { CHAIN_LIST } from './constants/chain-list';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
 
@@ -35,9 +35,9 @@ export class AppComponent {
   protected readonly chains = CHAIN_LIST;
 
   private readonly window = inject<Window>(WINDOW);
-  private selectedChain?: IChainInfo;
+  private selectedChain?: IChainInfoView;
 
-  protected onSelectChain(chain: IChainInfo): void {
+  protected onSelectChain(chain: IChainInfoView): void {
     this.selectedChain = chain;
     this.currentStepIdx++;
   }

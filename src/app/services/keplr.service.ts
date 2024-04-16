@@ -7,13 +7,14 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class KeplrService {
+  public readonly isInstalled: boolean;
+
   private readonly window = inject<Window>(WINDOW);
-
-  public readonly isInstalled = !!this.window.keplr;
-
   private readonly registeredChainIds$ = new BehaviorSubject<string[]>([]);
 
   constructor() {
+    this.isInstalled = !!this.window.keplr;
+
     this.determineRegisteredChainIds();
   }
 

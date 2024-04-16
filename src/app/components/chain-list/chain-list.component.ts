@@ -5,7 +5,7 @@ import {
   output,
 } from '@angular/core';
 import { ChainCardComponent } from './components/chain-card/chain-card.component';
-import { IChainInfo } from '../../models/chain-info.model';
+import { IChainInfoView } from '../../models/chain-info-view.model';
 
 @Component({
   standalone: true,
@@ -16,7 +16,7 @@ import { IChainInfo } from '../../models/chain-info.model';
   imports: [ChainCardComponent],
 })
 export class ChainListComponent {
-  public readonly chains = input.required<IChainInfo[]>();
+  public readonly chains = input.required<IChainInfoView[]>();
 
-  public readonly selectChain = output<IChainInfo>();
+  public readonly selectChain = output<IChainInfoView>();
 }

@@ -1,3 +1,3 @@
-@for (chain of chains(); track chain.id) {
+@for (chain of chains(); track chain.info.chainId) {
 <app-chain-card [chain]="chain" (click)="selectChain.emit(chain)" />
 }
