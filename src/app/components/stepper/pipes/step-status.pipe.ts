@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { StepStatus } from '../components/step/models/step-status.model';
 
 @Pipe({

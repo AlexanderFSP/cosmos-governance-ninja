@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
-import { StepStatus } from './models/step-status.model';
+
 import { StepInfoComponent } from './components/step-info/step-info.component';
+import { StepStatus } from './models/step-status.model';
 
 @Component({
   standalone: true,

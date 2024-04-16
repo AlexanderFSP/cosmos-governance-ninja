@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 
 @Component({

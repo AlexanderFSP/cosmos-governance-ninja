@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+
 import { StepComponent } from './components/step/step.component';
 import { StepStatusPipe } from './pipes/step-status.pipe';
 

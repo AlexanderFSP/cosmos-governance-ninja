@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { StepStatus } from '../../models/step-status.model';
 import { NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+
+import { StepStatus } from '../../models/step-status.model';
 
 const STATUS_TITLE: Record<StepStatus, string> = {
   [StepStatus.COMPLETED]: 'Completed',

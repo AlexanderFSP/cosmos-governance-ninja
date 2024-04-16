@@ -1,8 +1,9 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit } from '@angular/core';
+import { filter, Observable, Subject, take, takeUntil } from 'rxjs';
+
 import { IChainInfoView } from '../../../../models/chain-info-view.model';
 import { KeplrService } from '../../../../services/keplr.service';
-import { Observable, Subject, filter, take, takeUntil } from 'rxjs';
 
 @Component({
   standalone: true,

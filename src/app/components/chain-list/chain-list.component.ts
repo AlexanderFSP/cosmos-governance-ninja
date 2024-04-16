@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { ChainCardComponent } from './components/chain-card/chain-card.component';
+
 import { IChainInfoView } from '../../models/chain-info-view.model';
+import { ChainCardComponent } from './components/chain-card/chain-card.component';
 
 @Component({
   standalone: true,

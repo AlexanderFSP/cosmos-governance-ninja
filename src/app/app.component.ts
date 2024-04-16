@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { WINDOW } from '@ng-web-apis/common';
-import { Window } from '@keplr-wallet/types';
-import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
-import { GasPrice, MsgVoteEncodeObject, QueryClient, SigningStargateClient, setupGovExtension } from '@cosmjs/stargate';
+import { GasPrice, MsgVoteEncodeObject, QueryClient, setupGovExtension, SigningStargateClient } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
-import { StepperComponent } from './components/stepper/stepper.component';
+import { Window } from '@keplr-wallet/types';
+import { WINDOW } from '@ng-web-apis/common';
+
 import { ChainListComponent } from './components/chain-list/chain-list.component';
-import { IChainInfoView } from './models/chain-info-view.model';
-import { CHAIN_LIST } from './constants/chain-list';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { CHAIN_LIST } from './constants/chain-list';
+import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
+import { IChainInfoView } from './models/chain-info-view.model';
 
 @Component({
   standalone: true,

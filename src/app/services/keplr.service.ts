@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { WINDOW } from '@ng-web-apis/common';
+import { inject, Injectable } from '@angular/core';
 import { ChainInfo, Window } from '@keplr-wallet/types';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { WINDOW } from '@ng-web-apis/common';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
