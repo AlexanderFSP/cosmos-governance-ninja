@@ -23,9 +23,9 @@ export class AppComponent {
   protected currentStepIdx = 0;
   protected readonly steps: string[] = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
+  protected selectedChain?: IChainInfoView;
 
   private readonly window = inject<Window>(WINDOW);
-  private selectedChain?: IChainInfoView;
 
   protected onSelectChain(chain: IChainInfoView): void {
     this.selectedChain = chain;

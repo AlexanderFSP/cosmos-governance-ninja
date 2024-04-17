@@ -1,1 +1,3 @@
-<p>proposal-list works!</p>
+@for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.proposal_id) {
+<app-proposal-card [proposal]="proposal" />
+}

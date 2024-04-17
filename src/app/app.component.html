@@ -5,7 +5,7 @@
     @switch (currentStepIdx) { @case (0) {
     <app-chain-list [chains]="chains" (selectChain)="onSelectChain($event)" />
     } @case (1) {
-    <app-proposal-list />
+    <app-proposal-list [selectedChain]="selectedChain!" />
     } }
   </div>
 </main>

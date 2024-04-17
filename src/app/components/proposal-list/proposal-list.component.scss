@@ -1,3 +1,9 @@
 :host {
   display: block;
 }
+
+app-proposal-card {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}

@@ -1,1 +1,8 @@
-<p>proposal-card works!</p>
+<div class="info">
+  <div class="header">
+    <div class="title">{{ proposal().content.title }}</div>
+    <div class="id">(#{{ proposal().proposal_id }})</div>
+  </div>
+
+  <div class="description">{{ proposal().content.description }}</div>
+</div>
