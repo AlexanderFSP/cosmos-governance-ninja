@@ -13,11 +13,15 @@
   }
 }
 
+.status-icon {
+  @include rectangle(40px);
+}
+
 .info {
   @include flex(null, null, column);
 
   width: 425px;
-  // margin-left: 24px;
+  margin-left: 24px;
 }
 
 .header {
