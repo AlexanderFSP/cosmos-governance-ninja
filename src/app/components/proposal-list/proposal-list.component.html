@@ -1,3 +1,8 @@
 @for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.proposal_id) {
 <app-proposal-card [proposal]="proposal" />
 }
+
+<!-- TODO: (AlexanderFSP) Temporary trigger. Implement infinite scroll -->
+@if (paginatedProposals$ | async) {
+<button (click)="onLoadNext()">Next</button>
+}

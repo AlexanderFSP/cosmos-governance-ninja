@@ -1,18 +1,15 @@
 export interface IPaginatedProposals {
   proposals: IProposal[];
   pagination: {
-    next_key: string;
-    /**
-     * string($uint64)
-     */
-    total: '196';
+    /** string($byte) */
+    next_key: string | null;
+    /** string($uint64) */
+    total: string;
   };
 }
 
 export interface IProposal {
-  /**
-   * string($uint64)
-   */
+  /** string($uint64) */
   proposal_id: string;
   content: {
     '@type': '/cosmos.gov.v1beta1.TextProposal';
@@ -26,13 +23,9 @@ export interface IProposal {
     no: string;
     no_with_veto: string;
   };
-  /**
-   * string($date-time)
-   */
+  /** string($date-time) */
   submit_time: string;
-  /**
-   * string($date-time)
-   */
+  /** string($date-time) */
   deposit_end_time: string;
   total_deposit: [
     {
@@ -40,13 +33,9 @@ export interface IProposal {
       amount: string;
     }
   ];
-  /**
-   * string($date-time)
-   */
+  /** string($date-time) */
   voting_start_time: string;
-  /**
-   * string($date-time)
-   */
+  /** string($date-time) */
   voting_end_time: string;
 }
 
@@ -57,4 +46,18 @@ export enum ProposalStatus {
   PROPOSAL_STATUS_PASSED = 'PROPOSAL_STATUS_PASSED',
   PROPOSAL_STATUS_REJECTED = 'PROPOSAL_STATUS_REJECTED',
   PROPOSAL_STATUS_FAILED = 'PROPOSAL_STATUS_FAILED'
+}
+
+export interface IPaginatedProposalsQueryParams {
+  proposal_status?: string;
+  voter?: string;
+  depositor?: string;
+  /** string($byte) */
+  'pagination.key'?: string;
+  /** string($uint64) */
+  'pagination.offset'?: string;
+  /** string($uint64) */
+  'pagination.limit'?: string;
+  'pagination.count_total'?: boolean;
+  'pagination.reverse'?: boolean;
 }

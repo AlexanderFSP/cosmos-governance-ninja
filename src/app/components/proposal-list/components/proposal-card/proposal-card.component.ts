@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { IProposal } from 'src/app/models/proposal.model';
+
+import { IProposal } from '../../../../models/paginated-proposals.model';
 
 @Component({
   standalone: true,
