@@ -1,4 +1,4 @@
-@for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.proposal_id) {
+@for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.id) {
 <app-proposal-card [proposal]="proposal" />
 }
 

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, input, OnInit } from '@angu
 import { BehaviorSubject, concatMap, exhaustMap, filter, map, Observable, shareReplay, startWith, take } from 'rxjs';
 
 import { IChainInfoView } from '../../models/chain-info-view.model';
-import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/paginated-proposals.model';
+import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/proposals/paginated-proposals.model';
 import { ProposalsService } from '../../services/proposals.service';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 
