@@ -20,7 +20,7 @@
 .info {
   @include flex(null, null, column);
 
-  width: 425px;
+  width: 450px;
   margin-left: 24px;
 }
 
@@ -49,4 +49,29 @@
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+}
+
+.voting-period {
+  color: var(--color-text-secondary);
+  margin-top: 12px;
+  font-size: 10px;
+}
+
+.vote-button {
+  @include flex(center);
+
+  margin-left: auto;
+  color: var(--color-primary);
+  transition: opacity 100ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.edit-circle {
+  @include rectangle(14px);
+
+  margin: 2px 0 0 4px;
 }

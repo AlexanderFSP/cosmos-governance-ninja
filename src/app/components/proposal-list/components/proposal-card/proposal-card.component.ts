@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
@@ -22,7 +23,8 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
   selector: 'app-proposal-card',
   templateUrl: './proposal-card.component.html',
   styleUrl: './proposal-card.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DatePipe]
 })
 export class ProposalCardComponent {
   public readonly proposal = input.required<IProposal>();
