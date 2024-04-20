@@ -60,6 +60,14 @@
   margin-left: auto;
   user-select: none;
 
+  &:not(.is-registered) {
+    transition: opacity 100ms ease-in-out;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
   &.not-installed {
     opacity: 0.5;
     cursor: not-allowed;

@@ -18,6 +18,10 @@ app-proposal-card {
   margin-top: 20px;
 }
 
-.vote-button {
-  margin-left: 16px;
+.button {
+  min-width: 172px;
+
+  &--sign {
+    margin-left: 16px;
+  }
 }

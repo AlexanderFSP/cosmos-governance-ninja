@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit } from '@angular/core';
 import { filter, Observable, Subject, take, takeUntil } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { KeplrService } from '../../../../services/keplr.service';
   templateUrl: './chain-card.component.html',
   styleUrl: './chain-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, AsyncPipe]
+  imports: [DatePipe, AsyncPipe, NgClass]
 })
 export class ChainCardComponent implements OnInit, OnDestroy {
   public readonly chain = input.required<IChainInfoView>();

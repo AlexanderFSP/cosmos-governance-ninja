@@ -11,7 +11,12 @@
   <div class="start-date">Making blocks since {{ chain().startDate | date : 'MMMM d, y' }}</div>
 </div>
 
-<div class="keplr" [class.not-installed]="!keplrService.isInstalled" role="button" (click)="onAddToKeplr($event)">
+<div
+  class="keplr"
+  [ngClass]="{ 'not-installed': !keplrService.isInstalled, 'is-registered': isRegistered$ | async }"
+  role="button"
+  (click)="onAddToKeplr($event)"
+>
   @if (isRegistered$ | async) { Added
 
   <img class="checkmark-circle" src="assets/images/checkmark-circle.svg" alt="" />
