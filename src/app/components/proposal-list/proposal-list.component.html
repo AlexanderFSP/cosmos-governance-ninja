@@ -6,3 +6,9 @@
 @if (paginatedProposals$ | async) {
 <button (click)="onLoadNext()">Next</button>
 }
+
+<div class="buttons">
+  <app-button appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
+
+  <app-button class="vote-button">Vote</app-button>
+</div>

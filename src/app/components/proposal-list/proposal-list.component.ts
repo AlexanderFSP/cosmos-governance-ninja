@@ -1,10 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
 import { BehaviorSubject, concatMap, exhaustMap, filter, map, Observable, shareReplay, startWith, take } from 'rxjs';
 
 import { IChainInfoView } from '../../models/chain-info-view.model';
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/proposals/paginated-proposals.model';
 import { ProposalsService } from '../../services/proposals.service';
+import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 
 @Component({
@@ -13,10 +14,12 @@ import { ProposalCardComponent } from './components/proposal-card/proposal-card.
   templateUrl: './proposal-list.component.html',
   styleUrl: './proposal-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ProposalCardComponent]
+  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent]
 })
 export class ProposalListComponent implements OnInit {
   public readonly selectedChain = input.required<IChainInfoView>();
+
+  public readonly backToChainList = output<void>();
 
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
 

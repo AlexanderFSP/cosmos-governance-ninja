@@ -32,6 +32,10 @@ export class AppComponent {
     this.currentStepIdx++;
   }
 
+  protected onBackToChainList(): void {
+    this.currentStepIdx = 0;
+  }
+
   /**
    * Temporary handler, which initiate transaction with 2 yes votes on proposals 897 & 899
    *

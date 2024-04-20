@@ -1,3 +1,5 @@
+@use 'styles/mixins' as *;
+
 :host {
   display: block;
 }
@@ -6,4 +8,16 @@ app-proposal-card {
   &:not(:last-child) {
     margin-bottom: 20px;
   }
+}
+
+.buttons {
+  @include flex(center, center);
+
+  position: sticky;
+  bottom: -40px;
+  margin-top: 20px;
+}
+
+.vote-button {
+  margin-left: 16px;
 }
