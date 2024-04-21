@@ -1,0 +1,38 @@
+@use 'styles/mixins' as *;
+
+:host {
+  display: block;
+}
+
+.status-button {
+  @include flex(center);
+
+  color: var(--color-primary);
+
+  &.PROPOSAL_STATUS_VOTING_PERIOD {
+    transition: opacity 100ms ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &.PROPOSAL_STATUS_PASSED {
+    color: var(--color-indication-success);
+  }
+
+  &.PROPOSAL_STATUS_REJECTED {
+    color: var(--color-indication-error);
+  }
+
+  &.PROPOSAL_STATUS_FAILED {
+    color: var(--color-text-secondary);
+  }
+}
+
+.status-icon {
+  @include rectangle(14px);
+
+  margin-left: 4px;
+}

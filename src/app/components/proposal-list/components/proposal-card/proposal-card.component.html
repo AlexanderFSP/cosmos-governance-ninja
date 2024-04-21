@@ -14,9 +14,4 @@
   </div>
 </div>
 
-<!-- TODO: (AlexanderFSP) Split into separate component -->
-<div class="vote-button">
-  Vote
-
-  <img class="edit-circle" src="assets/edit-circle.svg" alt="" />
-</div>
+<app-proposal-status-button class="status-button" [status]="proposal().status" />

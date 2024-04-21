@@ -74,14 +74,8 @@
   }
 }
 
-.arrow-right {
-  @include rectangle(12px);
-
-  margin-left: 4px;
-}
-
-.checkmark-circle {
+.keplr-icon {
   @include rectangle(14px);
 
-  margin: 2px 0 0 4px;
+  margin-left: 4px;
 }

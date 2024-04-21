@@ -1,5 +1,6 @@
 import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit } from '@angular/core';
+import { SvgIconComponent } from '@ngneat/svg-icon';
 import { filter, Observable, Subject, take, takeUntil } from 'rxjs';
 
 import { IChainInfoView } from '../../../../models/chain-info-view.model';
@@ -11,7 +12,7 @@ import { KeplrService } from '../../../../services/keplr.service';
   templateUrl: './chain-card.component.html',
   styleUrl: './chain-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, AsyncPipe, NgClass]
+  imports: [DatePipe, AsyncPipe, NgClass, SvgIconComponent]
 })
 export class ChainCardComponent implements OnInit, OnDestroy {
   public readonly chain = input.required<IChainInfoView>();

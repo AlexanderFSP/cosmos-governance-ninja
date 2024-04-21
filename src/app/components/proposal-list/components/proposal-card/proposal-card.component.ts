@@ -3,19 +3,20 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
+import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 
 /**
  * TODO: (AlexanderFSP) Add icons `PROPOSAL_STATUS_UNSPECIFIED` & `PROPOSAL_STATUS_DEPOSIT_PERIOD` (?)
  *
- * @see https://icons8.com/icons/authors/g26qDX9Ae6NS/icongeek26/external-icongeek26-linear-colour-icongeek26/external-politic-icongeek26-linear-colour-icongeek26
+ * @see https://icons8.com/icons/authors/WVmZbri2l0pj/flat-icons/external-flaticons-flat-flat-icons/external-history-flaticons-flat-flat-icons
  */
 const STATUS_ICON: Record<ProposalStatus, string | null> = {
   [ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED]: null,
   [ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD]: null,
-  [ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD]: 'assets/voting.png',
-  [ProposalStatus.PROPOSAL_STATUS_PASSED]: 'assets/passed.png',
-  [ProposalStatus.PROPOSAL_STATUS_REJECTED]: 'assets/rejected.png',
-  [ProposalStatus.PROPOSAL_STATUS_FAILED]: 'assets/rejected.png'
+  [ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD]: 'assets/images/proposal-status/voting.png',
+  [ProposalStatus.PROPOSAL_STATUS_PASSED]: 'assets/images/proposal-status/passed.png',
+  [ProposalStatus.PROPOSAL_STATUS_REJECTED]: 'assets/images/proposal-status/rejected.png',
+  [ProposalStatus.PROPOSAL_STATUS_FAILED]: 'assets/images/proposal-status/failed.png'
 };
 
 @Component({
@@ -24,7 +25,7 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
   templateUrl: './proposal-card.component.html',
   styleUrl: './proposal-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe]
+  imports: [DatePipe, ProposalStatusButtonComponent]
 })
 export class ProposalCardComponent {
   public readonly proposal = input.required<IProposal>();

@@ -1,0 +1,5 @@
+<div class="status-button" [ngClass]="status()">
+  {{ statusText[status()] }}
+
+  <svg-icon class="status-icon" [key]="statusIcon[status()]!" />
+</div>
