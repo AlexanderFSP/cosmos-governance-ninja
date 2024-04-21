@@ -9,7 +9,10 @@
     "lint": "nx lint",
     "lint:fix": "nx lint --fix",
     "prettier:check": "prettier --check .",
-    "prettier:write": "prettier --write ."
+    "prettier:write": "prettier --write .",
+    "prestart": "npm run svg",
+    "prebuild": "npm run svg",
+    "svg": "svg-generator"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +27,7 @@
     "@cosmjs/stargate": "0.32.3",
     "@cosmjs/tendermint-rpc": "0.32.3",
     "@ng-web-apis/common": "3.0.6",
+    "@ngneat/svg-icon": "7.1.0",
     "@nx/angular": "18.2.3",
     "normalize.css": "8.0.1",
     "rxjs": "~7.8.0",
@@ -41,6 +45,7 @@
     "@angular/compiler-cli": "~17.3.0",
     "@angular/language-service": "~17.3.0",
     "@keplr-wallet/types": "0.12.78",
+    "@ngneat/svg-generator": "7.0.3",
     "@nx/eslint": "18.2.3",
     "@nx/eslint-plugin": "18.2.3",
     "@nx/jest": "18.2.3",
@@ -69,5 +74,21 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "svgGenerator": {
+    "outputPath": "./src/app/svg",
+    "srcPath": "./src/assets/svg",
+    "svgoConfig": {
+      "plugins": [
+        "removeDimensions",
+        "cleanupAttrs",
+        {
+          "name": "convertColors",
+          "params": {
+            "currentColor": true
+          }
+        }
+      ]
+    }
   }
 }
