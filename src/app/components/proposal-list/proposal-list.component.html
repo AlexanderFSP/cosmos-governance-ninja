@@ -2,12 +2,9 @@
 <app-proposal-card [proposal]="proposal" />
 }
 
-<!-- TODO: (AlexanderFSP) Temporary trigger. Implement infinite scroll -->
-@if (paginatedProposals$ | async) {
-<button (click)="onLoadNext()">Next</button>
-}
-
 <div class="buttons">
+  <div class="overflow-gradient"></div>
+
   <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
 
   <app-button class="button button--sign">Sign</app-button>

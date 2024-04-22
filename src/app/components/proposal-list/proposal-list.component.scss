@@ -2,10 +2,11 @@
 
 :host {
   display: block;
+  padding-bottom: 24px;
 }
 
 app-proposal-card {
-  &:not(:last-child) {
+  &:not(:last-of-type) {
     margin-bottom: 20px;
   }
 }
@@ -13,9 +14,19 @@ app-proposal-card {
 .buttons {
   @include flex(center, center);
 
-  position: sticky;
-  bottom: -36px;
-  margin-top: 20px;
+  position: absolute;
+  bottom: 10dvh;
+  width: 720px;
+  padding: 8px 0 16px;
+  background-color: var(--color-always-white);
+}
+
+.overflow-gradient {
+  @include rectangle(100%, 48px);
+
+  position: absolute;
+  top: -48px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
 }
 
 .button {
