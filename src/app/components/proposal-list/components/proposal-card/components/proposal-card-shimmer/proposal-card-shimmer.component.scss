@@ -1,0 +1,72 @@
+@use 'styles/mixins' as *;
+
+:host {
+  @include flex(center);
+
+  width: 100%;
+}
+
+.shimmer {
+  position: relative;
+  display: inline-block;
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-size: 1000px 1000px;
+  background-repeat: no-repeat;
+  animation-name: shimmerAnimation;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  border-radius: 8px;
+}
+
+@keyframes shimmerAnimation {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.status-icon {
+  @include rectangle(40px);
+}
+
+.info {
+  @include flex(null, null, column);
+
+  width: 450px;
+  margin-left: 24px;
+}
+
+.header {
+  height: 20.7px;
+}
+
+.description-lines {
+  @include flex(null, null, column);
+
+  margin-top: 8px;
+}
+
+.description-line {
+  @include rectangle(100%, 12px);
+
+  &:not(:last-child) {
+    margin-bottom: 2.7px;
+  }
+}
+
+.voting-period {
+  height: 11.5px;
+  margin-top: 12px;
+}
+
+.status-button {
+  @include rectangle(80px, 18.4px);
+
+  margin-left: auto;
+}

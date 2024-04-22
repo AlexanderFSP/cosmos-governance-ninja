@@ -1,3 +1,7 @@
+@if (loading()) {
+<app-proposal-card-shimmer />
+} @else {
+
 <img class="status-icon" [src]="statusIcon[proposal().status]" alt="" />
 
 <div class="info">
@@ -15,3 +19,4 @@
 </div>
 
 <app-proposal-status-button class="status-button" [status]="proposal().status" />
+}

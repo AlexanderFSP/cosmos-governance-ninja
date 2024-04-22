@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
+import { ProposalCardShimmerComponent } from './components/proposal-card-shimmer/proposal-card-shimmer.component';
 import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 
 /**
@@ -25,9 +26,10 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
   templateUrl: './proposal-card.component.html',
   styleUrl: './proposal-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, ProposalStatusButtonComponent]
+  imports: [DatePipe, ProposalCardShimmerComponent, ProposalStatusButtonComponent]
 })
 export class ProposalCardComponent {
+  public readonly loading = input<boolean>();
   public readonly proposal = input.required<IProposal>();
 
   protected readonly title = computed(() => this.proposal().title || this.proposal().messages[0]?.content?.title);
