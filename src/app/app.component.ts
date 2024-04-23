@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { GasPrice, MsgVoteEncodeObject, QueryClient, setupGovExtension, SigningStargateClient } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
 import { Window } from '@keplr-wallet/types';
@@ -20,6 +20,8 @@ import { IChainInfoView } from './models/chain-info-view.model';
   imports: [StepperComponent, ChainListComponent, ProposalListComponent]
 })
 export class AppComponent {
+  @ViewChild('cardRef') private readonly cardRef!: ElementRef<HTMLElement>;
+
   protected currentStepIdx = 0;
   protected readonly steps: string[] = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
@@ -30,10 +32,14 @@ export class AppComponent {
   protected onSelectChain(chain: IChainInfoView): void {
     this.selectedChain = chain;
     this.currentStepIdx++;
+
+    this.resetScrollPosition();
   }
 
   protected onBackToChainList(): void {
     this.currentStepIdx = 0;
+
+    this.resetScrollPosition();
   }
 
   /**
@@ -102,5 +108,9 @@ export class AppComponent {
     const votingProposals = await govExtension.gov.proposals(2, '', '');
 
     console.log(votingProposals);
+  }
+
+  private resetScrollPosition(): void {
+    this.cardRef.nativeElement.scrollTop = 0;
   }
 }

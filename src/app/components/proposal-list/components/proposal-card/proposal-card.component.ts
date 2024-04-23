@@ -29,12 +29,11 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
   imports: [DatePipe, ProposalCardShimmerComponent, ProposalStatusButtonComponent]
 })
 export class ProposalCardComponent {
-  public readonly loading = input<boolean>();
-  public readonly proposal = input.required<IProposal>();
+  public readonly proposal = input<IProposal>();
 
-  protected readonly title = computed(() => this.proposal().title || this.proposal().messages[0]?.content?.title);
+  protected readonly title = computed(() => this.proposal()?.title || this.proposal()?.messages[0]?.content?.title);
   protected readonly description = computed(
-    () => this.proposal().summary || this.proposal().messages[0]?.content?.description
+    () => this.proposal()?.summary || this.proposal()?.messages[0]?.content?.description
   );
 
   protected readonly proposalStatus = ProposalStatus;

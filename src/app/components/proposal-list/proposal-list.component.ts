@@ -7,6 +7,7 @@ import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../model
 import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
+import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
 
 @Component({
   standalone: true,
@@ -14,14 +15,16 @@ import { ProposalCardComponent } from './components/proposal-card/proposal-card.
   templateUrl: './proposal-list.component.html',
   styleUrl: './proposal-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent]
+  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective]
 })
 export class ProposalListComponent implements OnInit {
   public readonly selectedChain = input.required<IChainInfoView>();
 
-  public readonly backToChainList = output<void>();
+  public readonly backToChainList = output();
 
+  protected readonly shimmers = Array(3);
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
+  protected canShowShimmers$!: Observable<boolean>;
 
   private readonly proposalsService = inject(ProposalsService);
 
@@ -29,6 +32,7 @@ export class ProposalListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.paginatedProposals$ = this.getPaginatedProposals();
+    this.canShowShimmers$ = this.getCanShowShimmers();
   }
 
   protected onLoadNext(): void {
@@ -62,5 +66,9 @@ export class ProposalListComponent implements OnInit {
       startWith(null),
       shareReplay({ bufferSize: 1, refCount: true })
     );
+  }
+
+  private getCanShowShimmers(): Observable<boolean> {
+    return this.paginatedProposals$.pipe(map(paginatedProposals => paginatedProposals?.pagination.next_key !== null));
   }
 }

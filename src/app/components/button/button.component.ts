@@ -14,5 +14,5 @@ export type ButtonAppearance = 'primary' | 'secondary';
 export class ButtonComponent {
   public readonly appearance = input<ButtonAppearance>('primary');
 
-  public readonly click = output<void>();
+  public readonly click = output();
 }

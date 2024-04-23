@@ -1,6 +1,8 @@
 @for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.id) {
 <app-proposal-card [proposal]="proposal" />
-}
+} @if (canShowShimmers$ | async) { @for (_ of shimmers; track $index) {
+<app-proposal-card appWhenInViewport (appear)="onLoadNext()" />
+}}
 
 <div class="buttons">
   <div class="overflow-gradient"></div>

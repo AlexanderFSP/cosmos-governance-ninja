@@ -1,25 +1,24 @@
-@if (loading()) {
-<app-proposal-card-shimmer />
-} @else {
-
-<img class="status-icon" [src]="statusIcon[proposal().status]" alt="" />
+@if (proposal()) {
+<img class="status-icon" [src]="statusIcon[proposal()!.status]" alt="" />
 
 <div class="info">
   <div class="header">
     <div class="title">{{ title() }}</div>
-    <div class="id">(#{{ proposal().id }})</div>
+    <div class="id">(#{{ proposal()!.id }})</div>
   </div>
 
   <div class="description">{{ description() }}</div>
 
   <div class="voting-period">
-    @if (proposal().status === proposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD) { Voting has not started yet. Proposal is
+    @if (proposal()!.status === proposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD) { Voting has not started yet. Proposal is
     in the deposit period } @else { Voting period from
-    {{ proposal().voting_start_time | date : 'MMMM d, y, HH:mm' }} to
-    {{ proposal().voting_end_time | date : 'MMMM d, y, HH:mm' }}
+    {{ proposal()!.voting_start_time | date : 'MMMM d, y, HH:mm' }} to
+    {{ proposal()!.voting_end_time | date : 'MMMM d, y, HH:mm' }}
     }
   </div>
 </div>
 
-<app-proposal-status-button class="status-button" [status]="proposal().status" />
+<app-proposal-status-button class="status-button" [status]="proposal()!.status" />
+} @else {
+<app-proposal-card-shimmer />
 }
