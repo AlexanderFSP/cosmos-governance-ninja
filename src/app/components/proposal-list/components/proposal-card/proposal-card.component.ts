@@ -7,13 +7,13 @@ import { ProposalCardShimmerComponent } from './components/proposal-card-shimmer
 import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 
 /**
- * TODO: (AlexanderFSP) Add icons `PROPOSAL_STATUS_UNSPECIFIED` & `PROPOSAL_STATUS_DEPOSIT_PERIOD` (?)
+ * TODO: (AlexanderFSP) Add icons `PROPOSAL_STATUS_UNSPECIFIED` (?)
  *
  * @see https://icons8.com/icons/authors/WVmZbri2l0pj/flat-icons/external-flaticons-flat-flat-icons/external-history-flaticons-flat-flat-icons
  */
 const STATUS_ICON: Record<ProposalStatus, string | null> = {
   [ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED]: null,
-  [ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD]: null,
+  [ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD]: 'assets/images/proposal-status/deposit-period.png',
   [ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD]: 'assets/images/proposal-status/voting.png',
   [ProposalStatus.PROPOSAL_STATUS_PASSED]: 'assets/images/proposal-status/passed.png',
   [ProposalStatus.PROPOSAL_STATUS_REJECTED]: 'assets/images/proposal-status/rejected.png',
@@ -37,5 +37,6 @@ export class ProposalCardComponent {
     () => this.proposal().summary || this.proposal().messages[0]?.content?.description
   );
 
+  protected readonly proposalStatus = ProposalStatus;
   protected readonly statusIcon = STATUS_ICON;
 }

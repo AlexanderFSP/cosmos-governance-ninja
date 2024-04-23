@@ -13,8 +13,11 @@
   <div class="description">{{ description() }}</div>
 
   <div class="voting-period">
-    Voting period from {{ proposal().voting_start_time | date : 'MMMM d, y, HH:mm' }} to
+    @if (proposal().status === proposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD) { Voting has not started yet. Proposal is
+    in the deposit period } @else { Voting period from
+    {{ proposal().voting_start_time | date : 'MMMM d, y, HH:mm' }} to
     {{ proposal().voting_end_time | date : 'MMMM d, y, HH:mm' }}
+    }
   </div>
 </div>
 
