@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
@@ -31,6 +31,8 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
 export class ProposalCardComponent {
   public readonly proposal = input<IProposal>();
 
+  public readonly vote = output();
+
   protected readonly title = computed(() => this.proposal()?.title || this.proposal()?.messages[0]?.content?.title);
   protected readonly description = computed(
     () => this.proposal()?.summary || this.proposal()?.messages[0]?.content?.description
@@ -38,4 +40,10 @@ export class ProposalCardComponent {
 
   protected readonly proposalStatus = ProposalStatus;
   protected readonly statusIcon = STATUS_ICON;
+
+  protected onProposalStatusButtonClick(): void {
+    if (this.proposal()?.status === ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD) {
+      this.vote.emit();
+    }
+  }
 }

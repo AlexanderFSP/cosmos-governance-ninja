@@ -18,7 +18,11 @@
   </div>
 </div>
 
-<app-proposal-status-button class="status-button" [status]="proposal()!.status" />
+<app-proposal-status-button
+  class="status-button"
+  [status]="proposal()!.status"
+  (click)="onProposalStatusButtonClick()"
+/>
 } @else {
 <app-proposal-card-shimmer />
 }

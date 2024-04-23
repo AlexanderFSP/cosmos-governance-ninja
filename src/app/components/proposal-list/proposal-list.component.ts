@@ -8,6 +8,7 @@ import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
+import { VoteDialogService } from './services/vote-dialog-service/vote-dialog.service';
 
 @Component({
   standalone: true,
@@ -27,6 +28,7 @@ export class ProposalListComponent implements OnInit {
   protected canShowShimmers$!: Observable<boolean>;
 
   private readonly proposalsService = inject(ProposalsService);
+  private readonly voteDialogService = inject(VoteDialogService);
 
   private readonly loadNextSig$ = new BehaviorSubject<void>(void 0);
 
@@ -37,6 +39,10 @@ export class ProposalListComponent implements OnInit {
 
   protected onLoadNext(): void {
     this.loadNextSig$.next();
+  }
+
+  protected onVote(): void {
+    this.voteDialogService.open();
   }
 
   /**
