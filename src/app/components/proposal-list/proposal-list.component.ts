@@ -4,6 +4,7 @@ import { BehaviorSubject, concatMap, exhaustMap, filter, map, Observable, shareR
 
 import { IChainInfoView } from '../../models/chain-info-view.model';
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/proposals/paginated-proposals.model';
+import { IProposal } from '../../models/proposals/proposal.model';
 import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
@@ -41,8 +42,8 @@ export class ProposalListComponent implements OnInit {
     this.loadNextSig$.next();
   }
 
-  protected onVote(): void {
-    this.voteDialogService.open();
+  protected onVote(proposal: IProposal): void {
+    this.voteDialogService.open(proposal);
   }
 
   /**

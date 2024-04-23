@@ -1,1 +1,41 @@
-<p>vote-dialog works!</p>
+<div class="header">
+  <div class="title">
+    Vote
+
+    <svg-icon
+      class="close-icon"
+      key="close"
+      aria-label="Close modal dialog"
+      role="button"
+      (click)="voteDialogRef.close()"
+    />
+  </div>
+
+  <div class="proposal-title">
+    #{{ voteDialogRef.proposal.id }}
+    {{ voteDialogRef.proposal.title || voteDialogRef.proposal.messages[0]?.content?.title }}
+  </div>
+</div>
+
+<div class="body">
+  <div class="options">
+    @for (voteOption of voteOptions; track voteOption.value) {
+    <div
+      class="option"
+      [class.selected]="selectedOption === voteOption.value"
+      [ngClass]="voteOption.className"
+      role="button"
+      (click)="selectedOption = voteOption.value"
+    >
+      {{ voteOption.title }}
+    </div>
+    }
+  </div>
+
+  <div class="description">
+    <span class="text-error">No with Veto</span> signals a proposal infringes on minority interests, is spam, or
+    breaches governance procedures. A proposal fails if over ⅓ vote "No with Veto".
+  </div>
+
+  <app-button class="confirm">Confirm</app-button>
+</div>
