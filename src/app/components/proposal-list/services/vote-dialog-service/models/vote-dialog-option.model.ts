@@ -1,4 +1,4 @@
-import { ProposalVoteOption } from 'src/app/models/proposals/proposal-vote-option.model';
+import { ProposalVoteOption } from '../../../../../models/proposals/proposal-vote-option.model';
 
 export interface IVoteDialogOption {
   value: ProposalVoteOption;

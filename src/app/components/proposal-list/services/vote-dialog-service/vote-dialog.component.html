@@ -20,13 +20,7 @@
 <div class="body">
   <div class="options">
     @for (voteOption of voteOptions; track voteOption.value) {
-    <div
-      class="option"
-      [class.selected]="selectedOption === voteOption.value"
-      [ngClass]="voteOption.className"
-      role="button"
-      (click)="selectedOption = voteOption.value"
-    >
+    <div class="option" [ngClass]="voteOption.className" role="button" (click)="voteDialogRef.close(voteOption.value)">
       {{ voteOption.title }}
     </div>
     }
@@ -36,6 +30,4 @@
     <span class="text-error">No with Veto</span> signals a proposal infringes on minority interests, is spam, or
     breaches governance procedures. A proposal fails if over ⅓ vote "No with Veto".
   </div>
-
-  <app-button class="confirm">Confirm</app-button>
 </div>

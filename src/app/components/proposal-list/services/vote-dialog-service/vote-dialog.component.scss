@@ -45,34 +45,36 @@
   font-size: 15px;
   cursor: pointer;
 
-  &:hover {
-    background-color: rgba(var(--color-secondary-rgb), 0.2);
-  }
-
   &:not(:last-child) {
     margin-bottom: 12px;
   }
 
-  &.selected {
-    &.yes {
+  &.yes {
+    &:hover {
       border-color: var(--color-indication-success);
       color: var(--color-always-white);
       background-color: var(--color-indication-success);
     }
+  }
 
-    &.no {
+  &.no {
+    &:hover {
       border-color: var(--color-indication-error);
       color: var(--color-always-white);
       background-color: var(--color-indication-error);
     }
+  }
 
-    &.no-with-veto {
+  &.no-with-veto {
+    &:hover {
       border-color: var(--color-indication-error-dark);
       color: var(--color-always-white);
       background-color: var(--color-indication-error-dark);
     }
+  }
 
-    &.abstain {
+  &.abstain {
+    &:hover {
       border-color: var(--color-background-secondary);
       color: var(--color-always-white);
       background-color: var(--color-background-secondary);
@@ -87,8 +89,4 @@
 
 .text-error {
   color: var(--color-indication-error-dark);
-}
-
-.confirm {
-  margin-top: 28px;
 }
