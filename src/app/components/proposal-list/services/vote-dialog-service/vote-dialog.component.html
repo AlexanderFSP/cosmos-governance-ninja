@@ -12,16 +12,22 @@
   </div>
 
   <div class="proposal-title">
-    #{{ voteDialogRef.proposal.id }}
-    {{ voteDialogRef.proposal.title || voteDialogRef.proposal.messages[0]?.content?.title }}
+    #{{ proposal.id }}
+    {{ proposal.title || proposal.messages[0]?.content?.title }}
   </div>
 </div>
 
 <div class="body">
   <div class="options">
     @for (voteOption of voteOptions; track voteOption.value) {
-    <div class="option" [ngClass]="voteOption.className" role="button" (click)="voteDialogRef.close(voteOption.value)">
-      {{ voteOption.title }}
+    <div
+      class="option"
+      [class.selected]="voteOption.value === selectedVote"
+      [ngClass]="voteOption.className"
+      role="button"
+      (click)="voteDialogRef.close(voteOption.value)"
+    >
+      {{ voteOptionTitle[voteOption.value] }}
     </div>
     }
   </div>
@@ -30,4 +36,9 @@
     <span class="text-error">No with Veto</span> signals a proposal infringes on minority interests, is spam, or
     breaches governance procedures. A proposal fails if over ⅓ vote "No with Veto".
   </div>
+
+  <app-button class="reset-button" [class.text-small]="submittedVote" appearance="secondary" (click)="onResetClick()">
+    @if (submittedVote) { Reset to "{{ voteOptionTitle[submittedVote] }}" that you've already signed on-chain } @else {
+    Reset vote }
+  </app-button>
 </div>

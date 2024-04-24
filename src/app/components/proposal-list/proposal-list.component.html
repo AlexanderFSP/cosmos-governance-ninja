@@ -1,5 +1,5 @@
 @for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.id) {
-<app-proposal-card [proposal]="proposal" (vote)="onVote(proposal)" />
+<app-proposal-card [proposal]="proposal" [selectedVote]="votes[proposal.id]" (vote)="onVote(proposal)" />
 } @if (canShowShimmers$ | async) { @for (_ of shimmers; track $index) {
 <app-proposal-card appWhenInViewport (appear)="onLoadNext()" />
 }}
@@ -9,5 +9,6 @@
 
   <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
 
+  <!-- TODO: (AlexanderFSP) Disable button, when user haven't made any votes or selected votes match on-chain state -->
   <app-button class="button button--sign">Sign</app-button>
 </div>

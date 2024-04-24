@@ -6,11 +6,6 @@
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
   padding: 20px 28px;
-  transition: background-color 100ms ease-in-out;
-
-  &:hover {
-    background-color: rgba(var(--color-secondary-rgb), 0.2);
-  }
 }
 
 .status-icon {

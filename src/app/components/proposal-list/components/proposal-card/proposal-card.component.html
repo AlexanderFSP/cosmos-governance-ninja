@@ -21,6 +21,7 @@
 <app-proposal-status-button
   class="status-button"
   [status]="proposal()!.status"
+  [selectedVote]="selectedVote()"
   (click)="onProposalStatusButtonClick()"
 />
 } @else {

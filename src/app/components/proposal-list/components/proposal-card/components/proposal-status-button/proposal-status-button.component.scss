@@ -9,7 +9,7 @@
 
   color: var(--color-primary);
 
-  &.PROPOSAL_STATUS_VOTING_PERIOD {
+  &.editable {
     transition: opacity 100ms ease-in-out;
     cursor: pointer;
 
@@ -18,15 +18,19 @@
     }
   }
 
-  &.PROPOSAL_STATUS_PASSED {
+  &.success {
     color: var(--color-indication-success);
   }
 
-  &.PROPOSAL_STATUS_REJECTED {
+  &.error {
     color: var(--color-indication-error);
   }
 
-  &.PROPOSAL_STATUS_FAILED {
+  &.error-dark {
+    color: var(--color-indication-error-dark);
+  }
+
+  &.secondary {
     color: var(--color-text-secondary);
   }
 }

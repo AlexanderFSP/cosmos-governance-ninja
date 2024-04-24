@@ -1,19 +1,19 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Observable, Subject } from 'rxjs';
 
-import { IProposal } from '../../../../../models/proposals/proposal.model';
 import { ProposalVoteOption } from '../../../../../models/proposals/proposal-vote-option.model';
+import { IVoteDialogComponentData } from '../vote-dialog.component';
 
 export class VoteDialogRef {
-  public readonly result$: Observable<ProposalVoteOption | undefined>;
+  public readonly result$: Observable<ProposalVoteOption | null | undefined>;
 
-  private readonly _result$ = new Subject<ProposalVoteOption | undefined>();
+  private readonly _result$ = new Subject<ProposalVoteOption | null | undefined>();
 
-  constructor(public readonly proposal: IProposal, private readonly overlayRef: OverlayRef) {
+  constructor(public readonly data: IVoteDialogComponentData, private readonly overlayRef: OverlayRef) {
     this.result$ = this._result$.asObservable();
   }
 
-  public close(option?: ProposalVoteOption): void {
+  public close(option?: ProposalVoteOption | null): void {
     this._result$.next(option);
 
     this.overlayRef.detach();

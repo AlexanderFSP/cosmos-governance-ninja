@@ -25,7 +25,7 @@
     background-color: var(--color-always-white);
 
     &:hover {
-      background-color: #f6f9ff;
+      background-color: rgba(var(--color-secondary-rgb), 0.4);
     }
   }
 }

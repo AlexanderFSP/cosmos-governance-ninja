@@ -1,5 +1,14 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  output
+} from '@angular/core';
 import {
   BehaviorSubject,
   concatMap,
@@ -22,6 +31,7 @@ import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
+import { IVoteDialogComponentData } from './services/vote-dialog-service/vote-dialog.component';
 import { VoteDialogService } from './services/vote-dialog-service/vote-dialog.service';
 
 @Component({
@@ -41,10 +51,11 @@ export class ProposalListComponent implements OnInit, OnDestroy {
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
   protected canShowShimmers$!: Observable<boolean>;
   /**
-   * TODO: (AlexanderFSP) Use this map in template (ProposalCardComponent > ProposalStatusButtonComponent)
+   * TODO: (AlexanderFSP) Resolve & merge with votes, that current user have already signed on-chain
    */
   protected readonly votes: Record<string, ProposalVoteOption> = {};
 
+  private readonly cdr = inject(ChangeDetectorRef);
   private readonly proposalsService = inject(ProposalsService);
   private readonly voteDialogService = inject(VoteDialogService);
 
@@ -66,11 +77,28 @@ export class ProposalListComponent implements OnInit, OnDestroy {
   }
 
   protected onVote(proposal: IProposal): void {
+    /**
+     * TODO: (AlexanderFSP) Resolve votes, that current user have already signed on-chain & pass `submittedVote` here
+     */
+    const data: IVoteDialogComponentData = {
+      proposal,
+      selectedVote: this.votes[proposal.id]
+    };
+
     this.voteDialogService
-      .open(proposal)
-      .pipe(filter(Boolean), takeUntil(this.destroy$))
+      .open(data)
+      .pipe(
+        filter(option => option !== undefined),
+        takeUntil(this.destroy$)
+      )
       .subscribe(option => {
-        this.votes[proposal.id] = option;
+        if (option) {
+          this.votes[proposal.id] = option;
+        } else {
+          delete this.votes[proposal.id];
+        }
+
+        this.cdr.detectChanges();
       });
   }
 

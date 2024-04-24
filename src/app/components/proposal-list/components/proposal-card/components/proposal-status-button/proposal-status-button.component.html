@@ -1,5 +1,9 @@
-<div class="status-button" [ngClass]="status()">
-  {{ statusText[status()] }}
+<div
+  class="status-button"
+  [class.editable]="status() === proposalStatus.PROPOSAL_STATUS_VOTING_PERIOD"
+  [ngClass]="statusClass()"
+>
+  {{ statusText() }}
 
-  <svg-icon class="status-icon" [key]="statusIcon[status()]!" />
+  <svg-icon class="status-icon" [key]="statusIconKey()!" />
 </div>

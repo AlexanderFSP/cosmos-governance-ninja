@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
+import { ProposalVoteOption } from '../../../../models/proposals/proposal-vote-option.model';
 import { ProposalCardShimmerComponent } from './components/proposal-card-shimmer/proposal-card-shimmer.component';
 import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 
@@ -30,6 +31,7 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
 })
 export class ProposalCardComponent {
   public readonly proposal = input<IProposal>();
+  public readonly selectedVote = input<ProposalVoteOption>();
 
   public readonly vote = output();
 

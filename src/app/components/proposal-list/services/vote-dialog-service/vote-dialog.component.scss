@@ -49,32 +49,30 @@
     margin-bottom: 12px;
   }
 
-  &.yes {
-    &:hover {
+  &:hover {
+    background-color: rgba(var(--color-secondary-rgb), 0.4);
+  }
+
+  &.selected {
+    &.yes {
       border-color: var(--color-indication-success);
       color: var(--color-always-white);
       background-color: var(--color-indication-success);
     }
-  }
 
-  &.no {
-    &:hover {
+    &.no {
       border-color: var(--color-indication-error);
       color: var(--color-always-white);
       background-color: var(--color-indication-error);
     }
-  }
 
-  &.no-with-veto {
-    &:hover {
+    &.no-with-veto {
       border-color: var(--color-indication-error-dark);
       color: var(--color-always-white);
       background-color: var(--color-indication-error-dark);
     }
-  }
 
-  &.abstain {
-    &:hover {
+    &.abstain {
       border-color: var(--color-background-secondary);
       color: var(--color-always-white);
       background-color: var(--color-background-secondary);
@@ -89,4 +87,12 @@
 
 .text-error {
   color: var(--color-indication-error-dark);
+}
+
+.reset-button {
+  margin-top: 28px;
+
+  &.text-small {
+    font-size: 13px;
+  }
 }
