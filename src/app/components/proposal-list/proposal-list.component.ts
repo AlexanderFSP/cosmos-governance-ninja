@@ -26,11 +26,11 @@ import {
 import { IChainInfoView } from '../../models/chain-info-view.model';
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/proposals/paginated-proposals.model';
 import { IProposal } from '../../models/proposals/proposal.model';
-import { ProposalVoteOption } from '../../models/proposals/proposal-vote-option.model';
 import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
+import { ProposalVotesService } from './services/proposal-votes.service';
 import { IVoteDialogComponentData } from './services/vote-dialog-service/vote-dialog.component';
 import { VoteDialogService } from './services/vote-dialog-service/vote-dialog.service';
 
@@ -40,7 +40,8 @@ import { VoteDialogService } from './services/vote-dialog-service/vote-dialog.se
   templateUrl: './proposal-list.component.html',
   styleUrl: './proposal-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective]
+  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective],
+  providers: [ProposalVotesService]
 })
 export class ProposalListComponent implements OnInit, OnDestroy {
   public readonly selectedChain = input.required<IChainInfoView>();
@@ -50,10 +51,8 @@ export class ProposalListComponent implements OnInit, OnDestroy {
   protected readonly shimmers = Array(3);
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
   protected canShowShimmers$!: Observable<boolean>;
-  /**
-   * TODO: (AlexanderFSP) Resolve & merge with votes, that current user have already signed on-chain
-   */
-  protected readonly votes: Record<string, ProposalVoteOption> = {};
+
+  protected readonly proposalVotesService = inject(ProposalVotesService);
 
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly proposalsService = inject(ProposalsService);
@@ -82,7 +81,7 @@ export class ProposalListComponent implements OnInit, OnDestroy {
      */
     const data: IVoteDialogComponentData = {
       proposal,
-      selectedVote: this.votes[proposal.id]
+      selectedVote: this.proposalVotesService.getVote(proposal.id)
     };
 
     this.voteDialogService
@@ -92,11 +91,7 @@ export class ProposalListComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(option => {
-        if (option) {
-          this.votes[proposal.id] = option;
-        } else {
-          delete this.votes[proposal.id];
-        }
+        this.proposalVotesService.setVote(proposal.id, option);
 
         this.cdr.detectChanges();
       });

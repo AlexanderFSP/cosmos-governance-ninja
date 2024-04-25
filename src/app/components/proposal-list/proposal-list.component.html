@@ -1,5 +1,9 @@
 @for (proposal of (paginatedProposals$ | async)?.proposals; track proposal.id) {
-<app-proposal-card [proposal]="proposal" [selectedVote]="votes[proposal.id]" (vote)="onVote(proposal)" />
+<app-proposal-card
+  [proposal]="proposal"
+  [selectedVote]="proposalVotesService.getVote(proposal.id)"
+  (vote)="onVote(proposal)"
+/>
 } @if (canShowShimmers$ | async) { @for (_ of shimmers; track $index) {
 <app-proposal-card appWhenInViewport (appear)="onLoadNext()" />
 }}

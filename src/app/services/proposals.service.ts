@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../models/proposals/paginated-proposals.model';
+import { IProposalVote, IProposalVoteQueryParams } from '../models/proposals/proposal-vote.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,15 @@ export class ProposalsService {
     params?: IPaginatedProposalsQueryParams
   ): Observable<IPaginatedProposals> {
     return this.http.get<IPaginatedProposals>(`${restUrl}/cosmos/gov/v1/proposals`, { params: { ...params } });
+  }
+
+  /**
+   * @see https://api-cosmoshub-ia.cosmosia.notional.ventures/swagger/#/Query/GovV1Vote
+   */
+  public getProposalVote(restUrl: string, params: IProposalVoteQueryParams): Observable<IProposalVote> {
+    return this.http.get<IProposalVote>(
+      `${restUrl}/cosmos/gov/v1/proposals/${params.proposal_id}/votes/${params.voter}`,
+      { params: { ...params } }
+    );
   }
 }
