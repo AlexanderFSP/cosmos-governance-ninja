@@ -3,11 +3,11 @@
 :host {
   @include flex(center);
 
+  padding: 20px 28px;
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
-  padding: 20px 28px;
-  transition: background-color 100ms ease-in-out;
   cursor: pointer;
+  transition: background-color 100ms ease-in-out;
 
   &:hover {
     background-color: rgba(var(--color-secondary-rgb), 0.4);
@@ -32,32 +32,32 @@
 }
 
 .ticker {
+  margin: 1px 0 0 8px;
   color: var(--color-text-secondary);
   font-size: 12px;
-  margin: 1px 0 0 8px;
 }
 
 .description {
+  display: -webkit-box;
+  overflow: hidden;
   margin-top: 8px;
   font-size: 12px;
   word-wrap: break-word;
-  overflow: hidden;
-  display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
 
 .start-date {
-  color: var(--color-text-secondary);
   margin-top: 12px;
+  color: var(--color-text-secondary);
   font-size: 10px;
 }
 
 .keplr {
   @include flex(center);
 
-  color: var(--color-primary);
   margin-left: auto;
+  color: var(--color-primary);
   user-select: none;
 
   &:not(.is-registered) {

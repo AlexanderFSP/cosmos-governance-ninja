@@ -9,7 +9,7 @@
 }
 
 html {
-  --color-primary: #99bbff;
+  --color-primary: #9bf;
   --color-secondary: #e2f1ff;
   --color-secondary-rgb: 226, 241, 255;
   --color-text-main: #414756;
@@ -23,7 +23,7 @@ html {
 
 body {
   background-color: var(--color-primary);
-  font-family: 'Barlow', sans-serif;
   font-weight: 400;
   font-style: normal;
+  font-family: Barlow, sans-serif;
 }

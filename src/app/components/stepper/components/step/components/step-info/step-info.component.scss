@@ -6,8 +6,8 @@
 
 .step-number {
   color: var(--color-text-secondary);
-  text-transform: uppercase;
   font-size: 12px;
+  text-transform: uppercase;
 }
 
 .step-title {
@@ -17,8 +17,8 @@
 
 .step-status {
   margin-top: 8px;
-  font-size: 12px;
   color: var(--color-text-secondary);
+  font-size: 12px;
   transition: color 150ms ease-in-out;
 
   &.completed {
