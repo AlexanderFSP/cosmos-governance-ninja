@@ -10,6 +10,8 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { CHAIN_LIST } from './constants/chain-list';
 import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
 import { IChainInfoView } from './models/chain-info-view.model';
+import { InstallKeplrDialogService } from './services/install-keplr-dialog/install-keplr-dialog.service';
+import { KeplrService } from './services/keplr.service';
 
 @Component({
   standalone: true,
@@ -28,8 +30,14 @@ export class AppComponent {
   protected selectedChain?: IChainInfoView;
 
   private readonly window = inject<Window>(WINDOW);
+  private readonly keplrService = inject(KeplrService);
+  private readonly installKeplrDialogService = inject(InstallKeplrDialogService);
 
   protected onSelectChain(chain: IChainInfoView): void {
+    if (!this.keplrService.isInstalled) {
+      return this.installKeplrDialogService.open();
+    }
+
     this.selectedChain = chain;
     this.currentStepIdx++;
 

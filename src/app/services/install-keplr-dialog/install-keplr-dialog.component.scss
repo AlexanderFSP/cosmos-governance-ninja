@@ -1,0 +1,44 @@
+@use 'styles/mixins' as *;
+
+:host {
+  @include flex(center, null, column);
+
+  position: relative;
+  width: 440px;
+  padding: 24px 20px;
+  border-radius: 8px;
+  background-color: var(--color-always-white);
+  text-align: center;
+}
+
+.close-icon {
+  @include rectangle(24px);
+
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  transition: opacity 100ms ease-in-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.keplr-logo {
+  margin-top: 8px;
+}
+
+.heading {
+  margin: 20px 0 0;
+}
+
+.description {
+  margin: 12px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.keplr-link {
+  align-self: stretch;
+  margin-top: 28px;
+}
