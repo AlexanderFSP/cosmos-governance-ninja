@@ -22,9 +22,19 @@ export class KeplrService {
     return this.registeredChainIds$.pipe(map(registeredChainIds => registeredChainIds.includes(chainId)));
   }
 
+  public async enable(chainInfo: ChainInfo): Promise<void> {
+    if (!this.window.keplr) {
+      throw new Error('Keplr is not installed');
+    }
+
+    await this.window.keplr.experimentalSuggestChain(chainInfo);
+
+    return this.window.keplr.enable(chainInfo.chainId);
+  }
+
   public async suggestChain(chainInfo: ChainInfo): Promise<void> {
     if (!this.window.keplr) {
-      return;
+      throw new Error('Keplr is not installed');
     }
 
     try {
@@ -38,7 +48,7 @@ export class KeplrService {
 
   private async determineRegisteredChainIds(): Promise<void> {
     if (!this.window.keplr) {
-      return;
+      throw new Error('Keplr is not installed');
     }
 
     try {

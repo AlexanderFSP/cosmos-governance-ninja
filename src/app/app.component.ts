@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { GasPrice, MsgVoteEncodeObject, QueryClient, setupGovExtension, SigningStargateClient } from '@cosmjs/stargate';
 import { connectComet } from '@cosmjs/tendermint-rpc';
 import { Window } from '@keplr-wallet/types';
@@ -32,16 +32,24 @@ export class AppComponent {
   private readonly window = inject<Window>(WINDOW);
   private readonly keplrService = inject(KeplrService);
   private readonly installKeplrDialogService = inject(InstallKeplrDialogService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
-  protected onSelectChain(chain: IChainInfoView): void {
+  protected async onSelectChain(chain: IChainInfoView): Promise<void> {
     if (!this.keplrService.isInstalled) {
       return this.installKeplrDialogService.open();
     }
 
-    this.selectedChain = chain;
-    this.currentStepIdx++;
+    try {
+      await this.keplrService.enable(chain.info);
 
-    this.resetScrollPosition();
+      this.selectedChain = chain;
+      this.currentStepIdx++;
+
+      this.resetScrollPosition();
+      this.cdr.detectChanges();
+    } catch {
+      /* empty */
+    }
   }
 
   protected onBackToChainList(): void {
