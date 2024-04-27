@@ -7,15 +7,26 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class KeplrService {
-  public readonly isInstalled: boolean;
-
   private readonly window = inject<Window>(WINDOW);
   private readonly registeredChainIds$ = new BehaviorSubject<string[]>([]);
 
+  /**
+   * Local storage key. Used to prevent the user from being prompted for
+   * access to added networks each time the application is opened
+   */
+  private readonly chainInfosRequestedKey = 'chain-infos-requested';
+
   constructor() {
-    this.isInstalled = !!this.window.keplr;
+    if (localStorage.getItem(this.chainInfosRequestedKey)) {
+      return;
+    }
 
     this.determineRegisteredChainIds();
+    localStorage.setItem(this.chainInfosRequestedKey, 'true');
+  }
+
+  public get isKeplrInstalled(): boolean {
+    return !!this.window.keplr;
   }
 
   public isChainRegistered(chainId: string): Observable<boolean> {

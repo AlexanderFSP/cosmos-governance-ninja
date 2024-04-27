@@ -35,7 +35,7 @@ export class AppComponent {
   private readonly cdr = inject(ChangeDetectorRef);
 
   protected async onSelectChain(chain: IChainInfoView): Promise<void> {
-    if (!this.keplrService.isInstalled) {
+    if (!this.keplrService.isKeplrInstalled) {
       return this.installKeplrDialogService.open();
     }
 
@@ -43,7 +43,7 @@ export class AppComponent {
       await this.keplrService.enable(chain.info);
 
       this.selectedChain = chain;
-      this.currentStepIdx++;
+      this.currentStepIdx = 1;
 
       this.resetScrollPosition();
       this.cdr.detectChanges();

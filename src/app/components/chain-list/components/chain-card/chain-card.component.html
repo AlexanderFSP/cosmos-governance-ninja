@@ -13,7 +13,7 @@
 
 <div
   class="keplr"
-  [ngClass]="{ 'not-installed': !keplrService.isInstalled, 'is-registered': isRegistered$ | async }"
+  [ngClass]="{ 'not-installed': !keplrService.isKeplrInstalled, 'is-registered': isRegistered$ | async }"
   role="button"
   (click)="onAddToKeplr($event)"
 >

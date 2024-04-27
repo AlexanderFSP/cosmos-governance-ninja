@@ -38,7 +38,7 @@ export class ChainCardComponent implements OnInit, OnDestroy {
     this.isRegistered$
       .pipe(
         take(1),
-        filter(isRegistered => !isRegistered && this.keplrService.isInstalled),
+        filter(isRegistered => !isRegistered && this.keplrService.isKeplrInstalled),
         takeUntil(this.destroy$)
       )
       .subscribe(() => this.keplrService.suggestChain(this.chain().info));
