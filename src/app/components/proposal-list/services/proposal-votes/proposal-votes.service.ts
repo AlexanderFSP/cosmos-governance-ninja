@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, from, map, Observable, of, switchMap, tap } from 'rxjs';
+import { inject, Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, catchError, from, map, Observable, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
@@ -7,13 +7,14 @@ import { IProposalVoteQueryParams } from '../../../../models/proposals/proposal-
 import { ProposalVoteOption } from '../../../../models/proposals/proposal-vote-option.model';
 import { KeplrService } from '../../../../services/keplr.service';
 import { ProposalsService } from '../../../../services/proposals.service';
+import { VoteDialogService } from '../vote-dialog-service/vote-dialog.service';
 import { IProposalVoteView } from './models/proposal-vote-view.model';
 
 /**
  * Stateful service to retrieve, store & manage user's votes
  */
 @Injectable()
-export class ProposalVotesService {
+export class ProposalVotesService implements OnDestroy {
   public hasUnsavedVotes$!: Observable<boolean>;
 
   /**
@@ -23,9 +24,17 @@ export class ProposalVotesService {
 
   private readonly proposalsService = inject(ProposalsService);
   private readonly keplrService = inject(KeplrService);
+  private readonly voteDialogService = inject(VoteDialogService);
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor() {
     this.hasUnsavedVotes$ = this.getHasUnsavedVotes();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public getVote(restUrl: string, chainId: string, proposal: IProposal): Observable<IProposalVoteView> {
@@ -61,7 +70,24 @@ export class ProposalVotesService {
     );
   }
 
-  public setVote(id: string, option?: ProposalVoteOption | null): void {
+  public editVote(proposal: IProposal): void {
+    this.votes$
+      .pipe(
+        take(1),
+        map(votes => votes[proposal.id]),
+        switchMap(({ current, submitted }) =>
+          this.voteDialogService.open({
+            proposal,
+            selectedVote: current ?? submitted,
+            submittedVote: submitted
+          })
+        ),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(option => this.setVote(proposal.id, option));
+  }
+
+  private setVote(id: string, option?: ProposalVoteOption | null): void {
     this.votes$.next({
       ...this.votes$.value,
       [id]: {

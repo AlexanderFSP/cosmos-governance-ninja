@@ -1,7 +1,7 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { inject, Injectable, Injector } from '@angular/core';
-import { Observable, takeUntil } from 'rxjs';
+import { filter, Observable, takeUntil } from 'rxjs';
 
 import { ProposalVoteOption } from '../../../../models/proposals/proposal-vote-option.model';
 import { VoteDialogRef } from './models/vote-dialog-ref.model';
@@ -14,7 +14,7 @@ export class VoteDialogService {
   private readonly overlay = inject(Overlay);
   private readonly injector = inject(Injector);
 
-  public open(data: IVoteDialogComponentData): Observable<ProposalVoteOption | null | undefined> {
+  public open(data: IVoteDialogComponentData): Observable<ProposalVoteOption | null> {
     const overlayRef = this.overlay.create({
       hasBackdrop: true,
       scrollStrategy: this.overlay.scrollStrategies.noop(),
@@ -38,6 +38,6 @@ export class VoteDialogService {
       .pipe(takeUntil(overlayRef.detachments()))
       .subscribe(() => voteDialogRef.close());
 
-    return voteDialogRef.result$;
+    return voteDialogRef.result$.pipe(filter(result => result !== undefined)) as Observable<ProposalVoteOption | null>;
   }
 }

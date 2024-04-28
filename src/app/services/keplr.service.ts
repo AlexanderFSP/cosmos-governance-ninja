@@ -46,6 +46,8 @@ export class KeplrService {
       throw new Error('Keplr is not installed');
     }
 
+    // TODO: (AlexanderFSP) Maybe we should additionally call `KeplrService#enable` here?
+
     return this.window.keplr.getKey(chainId);
   }
 
