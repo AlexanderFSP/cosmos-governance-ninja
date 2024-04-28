@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SvgIconComponent } from '@ngneat/svg-icon';
-import { ButtonComponent } from 'src/app/components/button/button.component';
 
+import { ButtonComponent } from '../../components/button/button.component';
 import { InstallKeplrDialogRef } from './models/install-keplr-dialog-ref.model';
 
 @Component({

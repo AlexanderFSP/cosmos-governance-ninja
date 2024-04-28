@@ -1,14 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  inject,
-  input,
-  OnDestroy,
-  OnInit,
-  output
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit, output } from '@angular/core';
 import {
   BehaviorSubject,
   concatMap,
@@ -19,8 +10,10 @@ import {
   shareReplay,
   startWith,
   Subject,
+  switchMap,
   take,
-  takeUntil
+  takeUntil,
+  tap
 } from 'rxjs';
 
 import { IChainInfoView } from '../../models/chain-info-view.model';
@@ -30,7 +23,8 @@ import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
-import { ProposalVotesService } from './services/proposal-votes.service';
+import { IProposalVoteView } from './services/proposal-votes/models/proposal-vote-view.model';
+import { ProposalVotesService } from './services/proposal-votes/proposal-votes.service';
 import { IVoteDialogComponentData } from './services/vote-dialog-service/vote-dialog.component';
 import { VoteDialogService } from './services/vote-dialog-service/vote-dialog.service';
 
@@ -51,10 +45,10 @@ export class ProposalListComponent implements OnInit, OnDestroy {
   protected readonly shimmers = Array(3);
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
   protected canShowShimmers$!: Observable<boolean>;
+  protected readonly votes: Record<string, Observable<IProposalVoteView>> = {};
 
   protected readonly proposalVotesService = inject(ProposalVotesService);
 
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly proposalsService = inject(ProposalsService);
   private readonly voteDialogService = inject(VoteDialogService);
 
@@ -75,32 +69,33 @@ export class ProposalListComponent implements OnInit, OnDestroy {
     this.loadNextSig$.next();
   }
 
-  protected onVote(proposal: IProposal): void {
-    /**
-     * TODO: (AlexanderFSP) Resolve votes, that current user have already signed on-chain & pass `submittedVote` here
-     */
-    const data: IVoteDialogComponentData = {
-      proposal,
-      selectedVote: this.proposalVotesService.getVote(proposal.id)
-    };
-
-    this.voteDialogService
-      .open(data)
+  protected onEditVote(proposal: IProposal): void {
+    this.votes[proposal.id]
       .pipe(
-        filter(option => option !== undefined),
+        take(1),
+        switchMap(({ current, submitted }) => {
+          const data: IVoteDialogComponentData = {
+            proposal,
+            selectedVote: current ?? submitted,
+            submittedVote: submitted
+          };
+
+          return this.voteDialogService.open(data).pipe(filter(option => option !== undefined));
+        }),
         takeUntil(this.destroy$)
       )
-      .subscribe(option => {
-        this.proposalVotesService.setVote(proposal.id, option);
-
-        this.cdr.detectChanges();
-      });
+      .subscribe(option => this.proposalVotesService.setVote(proposal.id, option));
   }
 
   /**
    * TODO: (AlexanderFSP) Handle errors somehow
    */
   private getPaginatedProposals(): Observable<IPaginatedProposals | null> {
+    const {
+      restUrl,
+      info: { chainId }
+    } = this.selectedChain();
+
     return this.loadNextSig$.pipe(
       concatMap(() => this.paginatedProposals$.pipe(take(1))),
       filter(paginatedProposals => paginatedProposals?.pagination.next_key !== null),
@@ -114,7 +109,14 @@ export class ProposalListComponent implements OnInit, OnDestroy {
           params['pagination.key'] = paginatedProposals.pagination.next_key;
         }
 
-        return this.proposalsService.getPaginatedProposals(this.selectedChain().restUrl, params).pipe(
+        return this.proposalsService.getPaginatedProposals(restUrl, params).pipe(
+          tap(response => {
+            for (const proposal of response.proposals) {
+              this.votes[proposal.id] = this.proposalVotesService
+                .getVote(restUrl, chainId, proposal)
+                .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+            }
+          }),
           map(response => ({
             proposals: [...(paginatedProposals?.proposals ?? []), ...response.proposals],
             pagination: response.pagination

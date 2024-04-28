@@ -37,8 +37,7 @@
     breaches governance procedures. A proposal fails if over ⅓ vote "No with Veto".
   </div>
 
-  <app-button class="reset-button" [class.text-small]="submittedVote" appearance="secondary" (click)="onResetClick()">
-    @if (submittedVote) { Reset to "{{ voteOptionTitle[submittedVote] }}" that you've already signed on-chain } @else {
-    Reset vote }
-  </app-button>
+  @if (!submittedVote) {
+  <app-button class="reset-button" appearance="secondary" (click)="onResetClick()">Reset vote</app-button>
+  }
 </div>

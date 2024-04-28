@@ -63,7 +63,7 @@ const VOTE_STATUS_CLASS: Record<ProposalVoteOption, string> = {
 })
 export class ProposalStatusButtonComponent {
   public readonly status = input.required<ProposalStatus>();
-  public readonly selectedVote = input<ProposalVoteOption>();
+  public readonly selectedVote = input<ProposalVoteOption | null>();
 
   protected readonly statusClass = computed(() => {
     const selectedVote = this.selectedVote();

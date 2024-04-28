@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { ChainInfo, Window } from '@keplr-wallet/types';
+import { ChainInfo, Key, Window } from '@keplr-wallet/types';
 import { WINDOW } from '@ng-web-apis/common';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
@@ -17,12 +17,10 @@ export class KeplrService {
   private readonly chainInfosRequestedKey = 'chain-infos-requested';
 
   constructor() {
-    if (localStorage.getItem(this.chainInfosRequestedKey)) {
-      return;
+    if (!localStorage.getItem(this.chainInfosRequestedKey)) {
+      this.determineRegisteredChainIds();
+      localStorage.setItem(this.chainInfosRequestedKey, 'true');
     }
-
-    this.determineRegisteredChainIds();
-    localStorage.setItem(this.chainInfosRequestedKey, 'true');
   }
 
   public get isKeplrInstalled(): boolean {
@@ -41,6 +39,14 @@ export class KeplrService {
     await this.window.keplr.experimentalSuggestChain(chainInfo);
 
     return this.window.keplr.enable(chainInfo.chainId);
+  }
+
+  public async getKey(chainId: string): Promise<Key> {
+    if (!this.window.keplr) {
+      throw new Error('Keplr is not installed');
+    }
+
+    return this.window.keplr.getKey(chainId);
   }
 
   public async suggestChain(chainInfo: ChainInfo): Promise<void> {

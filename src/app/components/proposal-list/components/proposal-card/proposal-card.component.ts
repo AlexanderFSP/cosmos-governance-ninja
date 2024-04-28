@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
-import { ProposalVoteOption } from '../../../../models/proposals/proposal-vote-option.model';
+import { IProposalVoteView } from '../../services/proposal-votes/models/proposal-vote-view.model';
 import { ProposalCardShimmerComponent } from './components/proposal-card-shimmer/proposal-card-shimmer.component';
 import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 
@@ -31,9 +31,9 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
 })
 export class ProposalCardComponent {
   public readonly proposal = input<IProposal>();
-  public readonly selectedVote = input<ProposalVoteOption>();
+  public readonly vote = input<IProposalVoteView | null>();
 
-  public readonly vote = output();
+  public readonly editVote = output();
 
   protected readonly title = computed(() => this.proposal()?.title || this.proposal()?.messages[0]?.content?.title);
   protected readonly description = computed(
@@ -45,7 +45,7 @@ export class ProposalCardComponent {
 
   protected onProposalStatusButtonClick(): void {
     if (this.proposal()?.status === ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD) {
-      this.vote.emit();
+      this.editVote.emit();
     }
   }
 }

@@ -13,8 +13,8 @@ import { VoteDialogRef } from './models/vote-dialog-ref.model';
 
 export interface IVoteDialogComponentData {
   proposal: IProposal;
-  selectedVote?: ProposalVoteOption;
-  submittedVote?: ProposalVoteOption;
+  selectedVote?: ProposalVoteOption | null;
+  submittedVote?: ProposalVoteOption | null;
 }
 
 @Component({
@@ -35,11 +35,11 @@ export class VoteDialogComponent {
     return this.voteDialogRef.data.proposal;
   }
 
-  protected get selectedVote(): ProposalVoteOption | undefined {
+  protected get selectedVote(): ProposalVoteOption | null | undefined {
     return this.voteDialogRef.data.selectedVote;
   }
 
-  protected get submittedVote(): ProposalVoteOption | undefined {
+  protected get submittedVote(): ProposalVoteOption | null | undefined {
     return this.voteDialogRef.data.submittedVote;
   }
 
