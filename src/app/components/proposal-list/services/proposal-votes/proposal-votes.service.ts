@@ -111,11 +111,9 @@ export class ProposalVotesService implements OnDestroy {
           }
         }));
 
-      // TODO: (AlexanderFSP) Time-to-time it fails "out of gas in location". Find out how to calculate gas more accurately
       await this.keplrService.signAndBroadcast(chain, messages);
-    } catch (error) {
-      // TODO: (AlexanderFSP) Remove
-      console.error(error);
+    } catch {
+      /* empty */
     }
   }
 
