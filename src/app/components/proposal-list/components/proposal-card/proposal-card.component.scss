@@ -54,4 +54,8 @@
 
 .status-button {
   margin-left: auto;
+
+  &.shimmer {
+    @include rectangle(80px, 18.4px);
+  }
 }

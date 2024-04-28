@@ -1,3 +1,3 @@
-<button class="button" [ngClass]="appearance()" (click)="click.emit()">
+<button class="button" [ngClass]="appearance()" [disabled]="disabled()" (click)="click.emit()">
   <ng-content></ng-content>
 </button>

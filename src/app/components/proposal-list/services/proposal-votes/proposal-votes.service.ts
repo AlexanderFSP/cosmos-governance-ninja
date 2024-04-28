@@ -14,6 +14,8 @@ import { IProposalVoteView } from './models/proposal-vote-view.model';
  */
 @Injectable()
 export class ProposalVotesService {
+  public hasUnsavedVotes$!: Observable<boolean>;
+
   /**
    * Map with votes on proposals in `PROPOSAL_STATUS_VOTING_PERIOD` status
    */
@@ -21,6 +23,10 @@ export class ProposalVotesService {
 
   private readonly proposalsService = inject(ProposalsService);
   private readonly keplrService = inject(KeplrService);
+
+  constructor() {
+    this.hasUnsavedVotes$ = this.getHasUnsavedVotes();
+  }
 
   public getVote(restUrl: string, chainId: string, proposal: IProposal): Observable<IProposalVoteView> {
     if (proposal.status !== ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD) {
@@ -63,5 +69,9 @@ export class ProposalVotesService {
         current: !option || this.votes$.value[id].submitted === option ? null : option
       }
     });
+  }
+
+  private getHasUnsavedVotes(): Observable<boolean> {
+    return this.votes$.pipe(map(votes => Object.values(votes).some(({ current }) => current)));
   }
 }

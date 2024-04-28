@@ -18,13 +18,15 @@
   </div>
 </div>
 
-<!-- TODO: (AlexanderFSP) Render shimmer instead of `ProposalStatusButtonComponent` when we retrieve user's vote from blockchain -->
+@if (vote(); as vote ) {
 <app-proposal-status-button
   class="status-button"
   [status]="proposal()!.status"
-  [selectedVote]="vote()?.current ?? vote()?.submitted"
+  [selectedVote]="vote.current ?? vote.submitted"
   (click)="onProposalStatusButtonClick()"
 />
 } @else {
+<div class="shimmer status-button"></div>
+} }@else {
 <app-proposal-card-shimmer />
 }

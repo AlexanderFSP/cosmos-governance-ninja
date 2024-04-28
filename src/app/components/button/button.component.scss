@@ -17,6 +17,12 @@
     &:hover {
       background-color: #6f93d4;
     }
+
+    &:disabled {
+      background-color: var(--color-background-secondary);
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   &.secondary {

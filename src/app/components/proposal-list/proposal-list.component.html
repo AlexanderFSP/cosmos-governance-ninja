@@ -9,6 +9,8 @@
 
   <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
 
-  <!-- TODO: (AlexanderFSP) Disable button, when user haven't made any votes or selected votes match on-chain state -->
-  <app-button class="button button--sign">Sign</app-button>
+  <!-- TODO: (AlexanderFSP) Handle `click` -->
+  <app-button class="button button--sign" [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false">
+    Sign
+  </app-button>
 </div>

@@ -13,6 +13,7 @@ export type ButtonAppearance = 'primary' | 'secondary';
 })
 export class ButtonComponent {
   public readonly appearance = input<ButtonAppearance>('primary');
+  public readonly disabled = input(false);
 
   public readonly click = output();
 }
