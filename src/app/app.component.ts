@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { GasPrice, MsgVoteEncodeObject, QueryClient, setupGovExtension, SigningStargateClient } from '@cosmjs/stargate';
-import { connectComet } from '@cosmjs/tendermint-rpc';
+import { GasPrice, MsgVoteEncodeObject, SigningStargateClient } from '@cosmjs/stargate';
 import { Window } from '@keplr-wallet/types';
 import { WINDOW } from '@ng-web-apis/common';
 
@@ -8,7 +7,7 @@ import { ChainListComponent } from './components/chain-list/chain-list.component
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { CHAIN_LIST } from './constants/chain-list';
-import { COSMOS_HUB_CHAIN_ID, COSMOS_HUB_RPC } from './constants/cosmos-hub';
+import { COSMOS_HUB_CHAIN_INFO } from './constants/chains';
 import { IChainInfoView } from './models/chain-info-view.model';
 import { InstallKeplrDialogService } from './services/install-keplr-dialog/install-keplr-dialog.service';
 import { KeplrService } from './services/keplr.service';
@@ -68,7 +67,12 @@ export class AppComponent {
       throw new Error('Install Keplr');
     }
 
-    await this.window.keplr.enable(COSMOS_HUB_CHAIN_ID);
+    const {
+      info: { chainId },
+      rpcUrl
+    } = COSMOS_HUB_CHAIN_INFO;
+
+    await this.window.keplr.enable(chainId);
 
     /**
      * Decided to use `getOfflineSignerOnlyAmino` instead of `getOfflineSigner`, because for Ledger I get such kind
@@ -78,9 +82,9 @@ export class AppComponent {
      */
     const offlineSigner =
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      this.window.getOfflineSignerOnlyAmino!(COSMOS_HUB_CHAIN_ID);
+      this.window.getOfflineSignerOnlyAmino!(chainId);
 
-    const signingClient = await SigningStargateClient.connectWithSigner(COSMOS_HUB_RPC, offlineSigner, {
+    const signingClient = await SigningStargateClient.connectWithSigner(rpcUrl, offlineSigner, {
       gasPrice: GasPrice.fromString('0.025ucosm')
     });
 
@@ -105,25 +109,6 @@ export class AppComponent {
     ];
 
     await signingClient.signAndBroadcast(voter, messages, 'auto');
-  }
-
-  /**
-   * Temporary method, which retrieves proposals in voting phase from RPC node
-   */
-  private async fetchProposals(): Promise<void> {
-    // 1. Setup `CometClient` for `QueryClient`
-    const cometClient = await connectComet(COSMOS_HUB_RPC);
-
-    // 2. Setup `QueryClient` for `setupGovExtension`
-    const queryClient = new QueryClient(cometClient);
-
-    // 2. Setup `GovExtension` abstraction, which provides some methods to retrieve governance staff
-    const govExtension = setupGovExtension(queryClient);
-
-    // 4. Retrieve proposals in voting phase
-    const votingProposals = await govExtension.gov.proposals(2, '', '');
-
-    console.log(votingProposals);
   }
 
   private resetScrollPosition(): void {
