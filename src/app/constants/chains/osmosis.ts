@@ -2,7 +2,7 @@ import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const OSMOSIS_CHAIN_INFO: IChainInfoView = {
   logoSrc: 'assets/images/chains/osmosis.svg',
-  rpcUrl: 'https://cosmos-rpc.publicnode.com:443',
+  rpcUrl: 'https://osmosis-rpc.publicnode.com:443',
   restUrl: 'https://osmosis-rest.publicnode.com',
   description:
     'Osmosis is an advanced automated market maker (AMM) protocol that allows developers to build customized AMMs with sovereign liquidity pools. Built using the Cosmos SDK, Osmosis utilizes Inter-Blockchain Communication (IBC) to enable cross-chain transactions.',

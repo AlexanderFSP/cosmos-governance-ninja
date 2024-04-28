@@ -13,8 +13,12 @@
 
   <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
 
-  <!-- TODO: (AlexanderFSP) Handle `click` -->
-  <app-button class="button button--sign" [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false">
+  <!-- TODO: (AlexanderFSP) Display loading spinner while signing -->
+  <app-button
+    class="button button--sign"
+    [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false"
+    (click)="proposalVotesService.sign(this.selectedChain())"
+  >
     Sign
   </app-button>
 </div>

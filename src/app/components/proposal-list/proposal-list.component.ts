@@ -59,11 +59,6 @@ export class ProposalListComponent implements OnInit {
   }
 
   private getPaginatedProposals(): Observable<IPaginatedProposals | null> {
-    const {
-      restUrl,
-      info: { chainId }
-    } = this.selectedChain();
-
     return this.loadNextSig$.pipe(
       concatMap(() => this.paginatedProposals$.pipe(take(1))),
       filter(paginatedProposals => paginatedProposals?.pagination.next_key !== null),
@@ -77,11 +72,11 @@ export class ProposalListComponent implements OnInit {
           params['pagination.key'] = paginatedProposals.pagination.next_key;
         }
 
-        return this.proposalsService.getPaginatedProposals(restUrl, params).pipe(
+        return this.proposalsService.getPaginatedProposals(this.selectedChain().restUrl, params).pipe(
           tap(response => {
             for (const proposal of response.proposals) {
               this.votes[proposal.id] = this.proposalVotesService
-                .getVote(restUrl, chainId, proposal)
+                .getVote(this.selectedChain(), proposal)
                 .pipe(shareReplay({ bufferSize: 1, refCount: true }));
             }
           }),

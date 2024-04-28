@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 export type ButtonAppearance = 'primary' | 'secondary';
 
@@ -14,6 +14,4 @@ export type ButtonAppearance = 'primary' | 'secondary';
 export class ButtonComponent {
   public readonly appearance = input<ButtonAppearance>('primary');
   public readonly disabled = input(false);
-
-  public readonly click = output();
 }

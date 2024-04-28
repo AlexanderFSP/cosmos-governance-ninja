@@ -1,10 +1,15 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
+import { MsgVoteEncodeObject } from '@cosmjs/stargate';
 import { BehaviorSubject, catchError, from, map, Observable, of, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
+import { IChainInfoView } from '../../../../models/chain-info-view.model';
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
 import { IProposalVoteQueryParams } from '../../../../models/proposals/proposal-vote.model';
-import { ProposalVoteOption } from '../../../../models/proposals/proposal-vote-option.model';
+import {
+  PROPOSAL_VOTE_OPTION_NUMBER,
+  ProposalVoteOption
+} from '../../../../models/proposals/proposal-vote-option.model';
 import { KeplrService } from '../../../../services/keplr.service';
 import { ProposalsService } from '../../../../services/proposals.service';
 import { VoteDialogService } from '../vote-dialog-service/vote-dialog.service';
@@ -37,7 +42,7 @@ export class ProposalVotesService implements OnDestroy {
     this.destroy$.complete();
   }
 
-  public getVote(restUrl: string, chainId: string, proposal: IProposal): Observable<IProposalVoteView> {
+  public getVote(chain: IChainInfoView, proposal: IProposal): Observable<IProposalVoteView> {
     if (proposal.status !== ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD) {
       return of({ current: null, submitted: null });
     }
@@ -46,14 +51,14 @@ export class ProposalVotesService implements OnDestroy {
       return this.votes$.pipe(map(votes => votes[proposal.id]));
     }
 
-    return from(this.keplrService.getKey(chainId)).pipe(
+    return from(this.keplrService.getKey(chain.info)).pipe(
       switchMap(({ bech32Address }) => {
         const params: IProposalVoteQueryParams = {
           proposal_id: proposal.id,
           voter: bech32Address
         };
 
-        return this.proposalsService.getProposalVote(restUrl, params).pipe(
+        return this.proposalsService.getProposalVote(chain.restUrl, params).pipe(
           catchError(() => of(null)),
           tap(response => {
             this.votes$.next({
@@ -85,6 +90,33 @@ export class ProposalVotesService implements OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe(option => this.setVote(proposal.id, option));
+  }
+
+  /**
+   * TODO: (AlexanderFSP) Properly handle errors / rejections
+   * TODO: (AlexanderFSP) Handle multiple clicks on 'Sign' button
+   */
+  public async sign(chain: IChainInfoView): Promise<void> {
+    try {
+      const { bech32Address } = await this.keplrService.getKey(chain.info);
+      const messages: MsgVoteEncodeObject[] = Object.entries(this.votes$.value)
+        .filter(([, vote]) => vote.current)
+        .map(([id, vote]) => ({
+          typeUrl: '/cosmos.gov.v1beta1.MsgVote',
+          value: {
+            proposalId: BigInt(id),
+            voter: bech32Address,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            option: PROPOSAL_VOTE_OPTION_NUMBER[vote.current!]
+          }
+        }));
+
+      // TODO: (AlexanderFSP) Time-to-time it fails "out of gas in location". Find out how to calculate gas more accurately
+      await this.keplrService.signAndBroadcast(chain, messages);
+    } catch (error) {
+      // TODO: (AlexanderFSP) Remove
+      console.error(error);
+    }
   }
 
   private setVote(id: string, option?: ProposalVoteOption | null): void {
