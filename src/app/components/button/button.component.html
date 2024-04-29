@@ -1,3 +1,7 @@
-<button class="button" [ngClass]="appearance()" [disabled]="disabled()">
-  <ng-content></ng-content>
+<button class="button" [class.loading]="loading()" [ngClass]="appearance()" [disabled]="disabled()">
+  @if (loading()) {
+  <svg-icon class="loading-icon" key="synchronize" />
+  } @else {
+  <ng-content />
+  }
 </button>

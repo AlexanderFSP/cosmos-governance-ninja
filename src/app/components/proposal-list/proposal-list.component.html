@@ -13,9 +13,9 @@
 
   <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
 
-  <!-- TODO: (AlexanderFSP) Display loading spinner while signing -->
   <app-button
     class="button button--sign"
+    [loading]="proposalVotesService.isSigning$ | async"
     [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false"
     (click)="proposalVotesService.sign(this.selectedChain())"
   >

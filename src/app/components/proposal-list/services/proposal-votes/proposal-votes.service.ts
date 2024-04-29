@@ -21,11 +21,13 @@ import { IProposalVoteView } from './models/proposal-vote-view.model';
 @Injectable()
 export class ProposalVotesService implements OnDestroy {
   public hasUnsavedVotes$!: Observable<boolean>;
+  public isSigning$!: Observable<boolean>;
 
   /**
    * Map with votes on proposals in `PROPOSAL_STATUS_VOTING_PERIOD` status
    */
   private readonly votes$ = new BehaviorSubject<Record<string, IProposalVoteView>>({});
+  private readonly _isSigning$ = new BehaviorSubject(false);
 
   private readonly proposalsService = inject(ProposalsService);
   private readonly keplrService = inject(KeplrService);
@@ -35,6 +37,7 @@ export class ProposalVotesService implements OnDestroy {
 
   constructor() {
     this.hasUnsavedVotes$ = this.getHasUnsavedVotes();
+    this.isSigning$ = this._isSigning$.asObservable();
   }
 
   public ngOnDestroy(): void {
@@ -93,10 +96,15 @@ export class ProposalVotesService implements OnDestroy {
   }
 
   /**
-   * TODO: (AlexanderFSP) Properly handle errors / rejections
-   * TODO: (AlexanderFSP) Handle multiple clicks on 'Sign' button
+   * TODO: (AlexanderFSP) Handle tx response & errors
    */
   public async sign(chain: IChainInfoView): Promise<void> {
+    if (this._isSigning$.value) {
+      return;
+    }
+
+    this._isSigning$.next(true);
+
     try {
       const { bech32Address } = await this.keplrService.getKey(chain.info);
       const messages: MsgVoteEncodeObject[] = Object.entries(this.votes$.value)
@@ -114,6 +122,8 @@ export class ProposalVotesService implements OnDestroy {
       await this.keplrService.signAndBroadcast(chain, messages);
     } catch {
       /* empty */
+    } finally {
+      this._isSigning$.next(false);
     }
   }
 
