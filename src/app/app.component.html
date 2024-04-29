@@ -5,7 +5,15 @@
     @switch (currentStepIdx) { @case (0) {
     <app-chain-list [chains]="chains" (selectChain)="onSelectChain($event)" />
     } @case (1) {
-    <app-proposal-list [selectedChain]="selectedChain!" (backToChainList)="onBackToChainList()" />
+    <app-proposal-list
+      [selectedChain]="selectedChain!"
+      (backToChainList)="onBackToChainList()"
+      (signed)="onSigned($event)"
+    />
+    } @case (2) {
+    <app-tx-confirmation-step [txId]="txId!" />
+    } @case (3) {
+    <app-tx-finish-step />
     } }
   </div>
 </main>

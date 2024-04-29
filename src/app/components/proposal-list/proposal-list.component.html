@@ -17,7 +17,7 @@
     class="button button--sign"
     [loading]="proposalVotesService.isSigning$ | async"
     [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false"
-    (click)="proposalVotesService.sign(this.selectedChain())"
+    (click)="onSign()"
   >
     Sign
   </app-button>

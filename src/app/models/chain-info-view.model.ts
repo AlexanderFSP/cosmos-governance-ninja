@@ -22,7 +22,7 @@ export interface IChainInfoView {
   startDate: Date;
   /**
    * Multiplier that will be applied to the simulated gas limit value.
-   * Value 'auto' equals 1.4 multiplier right now.
+   * Value 'auto' equals to `1.3` or `1.4` multiplier right now (depends on method, made PR to sync value @see https://github.com/cosmos/cosmjs/pull/1584)
    *
    * @see https://github.com/cosmos/cosmjs/blob/main/packages/stargate/src/signingstargateclient.ts#L311
    * @see https://github.com/cosmos/cosmos-sdk/issues/16020

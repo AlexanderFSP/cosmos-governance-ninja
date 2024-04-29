@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inje
 import { ChainListComponent } from './components/chain-list/chain-list.component';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { TxConfirmationStepComponent } from './components/tx-confirmation-step/tx-confirmation-step.component';
+import { TxFinishStepComponent } from './components/tx-finish-step/tx-finish-step.component';
 import { CHAIN_LIST } from './constants/chain-list';
 import { IChainInfoView } from './models/chain-info-view.model';
 import { InstallKeplrDialogService } from './services/install-keplr-dialog/install-keplr-dialog.service';
@@ -14,7 +16,13 @@ import { KeplrService } from './services/keplr.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepperComponent, ChainListComponent, ProposalListComponent]
+  imports: [
+    StepperComponent,
+    ChainListComponent,
+    ProposalListComponent,
+    TxConfirmationStepComponent,
+    TxFinishStepComponent
+  ]
 })
 export class AppComponent {
   @ViewChild('cardRef') private readonly cardRef!: ElementRef<HTMLElement>;
@@ -23,6 +31,7 @@ export class AppComponent {
   protected readonly steps: string[] = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
   protected selectedChain?: IChainInfoView;
+  protected txId?: string;
 
   private readonly keplrService = inject(KeplrService);
   private readonly installKeplrDialogService = inject(InstallKeplrDialogService);
@@ -50,6 +59,14 @@ export class AppComponent {
     this.currentStepIdx = 0;
 
     this.resetScrollPosition();
+  }
+
+  protected onSigned(txId: string): void {
+    this.txId = txId;
+    this.currentStepIdx = 2;
+
+    this.resetScrollPosition();
+    this.cdr.detectChanges();
   }
 
   private resetScrollPosition(): void {

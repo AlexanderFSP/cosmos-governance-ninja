@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { DeliverTxResponse, GasPrice, MsgVoteEncodeObject, SigningStargateClient } from '@cosmjs/stargate';
+import { GasPrice, MsgVoteEncodeObject, SigningStargateClient } from '@cosmjs/stargate';
 import { ChainInfo, Key, Window } from '@keplr-wallet/types';
 import { WINDOW } from '@ng-web-apis/common';
 import { BehaviorSubject, map, Observable } from 'rxjs';
@@ -68,7 +68,18 @@ export class KeplrService {
     }
   }
 
-  public async signAndBroadcast(chain: IChainInfoView, messages: MsgVoteEncodeObject[]): Promise<DeliverTxResponse> {
+  /**
+   * Broadcasts a signed transaction to the network without monitoring it.
+   *
+   * If broadcasting is rejected by the node for some reason (e.g. because of a CheckTx failure),
+   * an error is thrown.
+   *
+   * If the transaction is broadcasted, a `string` containing the hash of the transaction is returned. The caller then
+   * usually needs to check if the transaction was included in a block and was successful.
+   *
+   * @returns Returns the hash of the transaction
+   */
+  public async signAndBroadcastSync(chain: IChainInfoView, messages: MsgVoteEncodeObject[]): Promise<string> {
     await this.enable(chain.info);
 
     /**
@@ -88,7 +99,7 @@ export class KeplrService {
 
     const voter = (await offlineSigner.getAccounts())[0].address;
 
-    return signingClient.signAndBroadcast(voter, messages, chain.fee ?? 'auto');
+    return signingClient.signAndBroadcastSync(voter, messages, chain.fee ?? 'auto');
   }
 
   private async determineRegisteredChainIds(): Promise<void> {

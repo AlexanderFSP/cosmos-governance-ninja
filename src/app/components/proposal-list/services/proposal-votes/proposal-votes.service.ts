@@ -95,10 +95,7 @@ export class ProposalVotesService implements OnDestroy {
       .subscribe(option => this.setVote(proposal.id, option));
   }
 
-  /**
-   * TODO: (AlexanderFSP) Handle tx response & errors
-   */
-  public async sign(chain: IChainInfoView): Promise<void> {
+  public async sign(chain: IChainInfoView, cb?: (txId: string) => void): Promise<void> {
     if (this._isSigning$.value) {
       return;
     }
@@ -119,9 +116,11 @@ export class ProposalVotesService implements OnDestroy {
           }
         }));
 
-      await this.keplrService.signAndBroadcast(chain, messages);
-    } catch {
-      /* empty */
+      const txId = await this.keplrService.signAndBroadcastSync(chain, messages);
+
+      cb?.(txId);
+    } catch (error) {
+      console.error(error);
     } finally {
       this._isSigning$.next(false);
     }

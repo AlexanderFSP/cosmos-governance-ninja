@@ -37,6 +37,7 @@ export class ProposalListComponent implements OnInit {
   public readonly selectedChain = input.required<IChainInfoView>();
 
   public readonly backToChainList = output();
+  public readonly signed = output<string>();
 
   protected readonly shimmers = Array(3);
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
@@ -56,6 +57,10 @@ export class ProposalListComponent implements OnInit {
 
   protected onLoadNext(): void {
     this.loadNextSig$.next();
+  }
+
+  protected onSign(): void {
+    this.proposalVotesService.sign(this.selectedChain(), txId => this.signed.emit(txId));
   }
 
   private getPaginatedProposals(): Observable<IPaginatedProposals | null> {
