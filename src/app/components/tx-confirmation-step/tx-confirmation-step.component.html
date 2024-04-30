@@ -1,3 +1,10 @@
-<p>tx-confirmation-step works!</p>
+<svg-icon class="settings-icon" key="settings" />
 
-{{ txId() }}
+<h2 class="heading">Your transaction has been broadcasted</h2>
+
+<p class="description">
+  Please wait for the network to approve your tx. This usually takes a few seconds, but in rare cases the wait can last
+  up to 1 or 2 minutes.
+</p>
+
+<app-button class="back-button" appearance="secondary" (click)="backToProposalList.emit()">Back</app-button>
