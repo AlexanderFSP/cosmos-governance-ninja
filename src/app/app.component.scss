@@ -5,6 +5,7 @@
 }
 
 .card {
+  @include flex(null, null, column);
   @include rectangle(860px, 80dvh);
 
   overflow-y: auto;
@@ -20,5 +21,6 @@
 }
 
 .content {
+  flex-grow: 1;
   margin-top: 140px;
 }

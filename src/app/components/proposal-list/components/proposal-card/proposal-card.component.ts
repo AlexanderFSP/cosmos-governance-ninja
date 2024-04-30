@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
-import { IProposalVoteView } from '../../services/proposal-votes/models/proposal-vote-view.model';
+import { IProposalVoteView } from '../../../../services/proposal-votes/models/proposal-vote-view.model';
 import { ProposalCardShimmerComponent } from './components/proposal-card-shimmer/proposal-card-shimmer.component';
 import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 

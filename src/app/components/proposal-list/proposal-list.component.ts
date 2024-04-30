@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit, output } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
@@ -11,18 +11,21 @@ import {
   of,
   shareReplay,
   startWith,
+  Subject,
   take,
+  takeUntil,
   tap
 } from 'rxjs';
 
 import { IChainInfoView } from '../../models/chain-info-view.model';
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/proposals/paginated-proposals.model';
+import { IProposal } from '../../models/proposals/proposal.model';
+import { IProposalVoteView } from '../../services/proposal-votes/models/proposal-vote-view.model';
+import { ProposalVotesService } from '../../services/proposal-votes/proposal-votes.service';
 import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
-import { IProposalVoteView } from './services/proposal-votes/models/proposal-vote-view.model';
-import { ProposalVotesService } from './services/proposal-votes/proposal-votes.service';
 
 @Component({
   standalone: true,
@@ -30,14 +33,13 @@ import { ProposalVotesService } from './services/proposal-votes/proposal-votes.s
   templateUrl: './proposal-list.component.html',
   styleUrl: './proposal-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective],
-  providers: [ProposalVotesService]
+  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective]
 })
-export class ProposalListComponent implements OnInit {
+export class ProposalListComponent implements OnInit, OnDestroy {
   public readonly selectedChain = input.required<IChainInfoView>();
 
   public readonly backToChainList = output();
-  public readonly signed = output<string>();
+  public readonly txBroadcasted = output<string>();
 
   protected readonly shimmers = Array(3);
   protected paginatedProposals$!: Observable<IPaginatedProposals | null>;
@@ -49,18 +51,31 @@ export class ProposalListComponent implements OnInit {
   private readonly proposalsService = inject(ProposalsService);
 
   private readonly loadNextSig$ = new BehaviorSubject<void>(void 0);
+  private readonly destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
     this.paginatedProposals$ = this.getPaginatedProposals();
     this.canShowShimmers$ = this.getCanShowShimmers();
   }
 
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   protected onLoadNext(): void {
     this.loadNextSig$.next();
   }
 
+  protected onEditVote(proposal: IProposal): void {
+    this.proposalVotesService.editVote(proposal).pipe(takeUntil(this.destroy$)).subscribe();
+  }
+
   protected onSign(): void {
-    this.proposalVotesService.sign(this.selectedChain(), txId => this.signed.emit(txId));
+    this.proposalVotesService
+      .sign()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(txId => this.txBroadcasted.emit(txId));
   }
 
   private getPaginatedProposals(): Observable<IPaginatedProposals | null> {
@@ -81,7 +96,7 @@ export class ProposalListComponent implements OnInit {
           tap(response => {
             for (const proposal of response.proposals) {
               this.votes[proposal.id] = this.proposalVotesService
-                .getVote(this.selectedChain(), proposal)
+                .getVote(proposal)
                 .pipe(shareReplay({ bufferSize: 1, refCount: true }));
             }
           }),

@@ -9,6 +9,7 @@ import { CHAIN_LIST } from './constants/chain-list';
 import { IChainInfoView } from './models/chain-info-view.model';
 import { InstallKeplrDialogService } from './services/install-keplr-dialog/install-keplr-dialog.service';
 import { KeplrService } from './services/keplr.service';
+import { ProposalVotesService } from './services/proposal-votes/proposal-votes.service';
 
 @Component({
   standalone: true,
@@ -22,7 +23,8 @@ import { KeplrService } from './services/keplr.service';
     ProposalListComponent,
     TxConfirmationStepComponent,
     TxFinishStepComponent
-  ]
+  ],
+  providers: [ProposalVotesService]
 })
 export class AppComponent {
   @ViewChild('cardRef') private readonly cardRef!: ElementRef<HTMLElement>;
@@ -33,9 +35,10 @@ export class AppComponent {
   protected selectedChain?: IChainInfoView;
   protected txId?: string;
 
+  private readonly cdr = inject(ChangeDetectorRef);
   private readonly keplrService = inject(KeplrService);
   private readonly installKeplrDialogService = inject(InstallKeplrDialogService);
-  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly proposalVotesService = inject(ProposalVotesService);
 
   protected async onSelectChain(chain: IChainInfoView): Promise<void> {
     if (!this.keplrService.isKeplrInstalled) {
@@ -46,30 +49,32 @@ export class AppComponent {
       await this.keplrService.enable(chain.info);
 
       this.selectedChain = chain;
-      this.currentStepIdx = 1;
+      this.proposalVotesService.setChain(chain);
 
-      this.resetScrollPosition();
-      this.cdr.detectChanges();
+      this.setStep(1);
     } catch {
       /* empty */
     }
   }
 
   protected onBackToChainList(): void {
-    this.currentStepIdx = 0;
-
-    this.resetScrollPosition();
+    this.setStep(0);
   }
 
-  protected onSigned(txId: string): void {
+  protected onTxBroadcasted(txId: string): void {
     this.txId = txId;
-    this.currentStepIdx = 2;
 
-    this.resetScrollPosition();
-    this.cdr.detectChanges();
+    this.setStep(2);
   }
 
-  private resetScrollPosition(): void {
+  protected onBackToProposalList(): void {
+    this.setStep(1);
+  }
+
+  private setStep(stepIdx: number): void {
+    this.currentStepIdx = stepIdx;
     this.cardRef.nativeElement.scrollTop = 0;
+
+    this.cdr.detectChanges();
   }
 }

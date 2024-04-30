@@ -8,10 +8,10 @@
     <app-proposal-list
       [selectedChain]="selectedChain!"
       (backToChainList)="onBackToChainList()"
-      (signed)="onSigned($event)"
+      (txBroadcasted)="onTxBroadcasted($event)"
     />
     } @case (2) {
-    <app-tx-confirmation-step [txId]="txId!" />
+    <app-tx-confirmation-step [txId]="txId!" (backToProposalList)="onBackToProposalList()" />
     } @case (3) {
     <app-tx-finish-step />
     } }

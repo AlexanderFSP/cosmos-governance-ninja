@@ -2,12 +2,9 @@ import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 
-import { IProposal } from '../../../../models/proposals/proposal.model';
-import {
-  PROPOSAL_VOTE_OPTION_TITLE,
-  ProposalVoteOption
-} from '../../../../models/proposals/proposal-vote-option.model';
-import { ButtonComponent } from '../../../button/button.component';
+import { ButtonComponent } from '../../components/button/button.component';
+import { IProposal } from '../../models/proposals/proposal.model';
+import { PROPOSAL_VOTE_OPTION_TITLE, ProposalVoteOption } from '../../models/proposals/proposal-vote-option.model';
 import { VOTE_OPTIONS } from './models/vote-dialog-option.model';
 import { VoteDialogRef } from './models/vote-dialog-ref.model';
 

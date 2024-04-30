@@ -28,7 +28,7 @@
       cursor: not-allowed;
     }
 
-    &:not(.loading):hover {
+    &:not(.loading, :disabled):hover {
       background-color: #6f93d4;
     }
   }
