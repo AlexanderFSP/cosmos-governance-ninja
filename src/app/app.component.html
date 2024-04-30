@@ -11,9 +11,14 @@
       (txBroadcasted)="onTxBroadcasted($event)"
     />
     } @case (2) {
-    <app-tx-confirmation-step [txId]="txId!" (backToProposalList)="onBackToProposalList()" />
+    <app-tx-confirmation-step
+      [txId]="txId!"
+      [selectedChain]="selectedChain!"
+      (backToProposalList)="onBackToProposalList()"
+      (finished)="onFinished($event)"
+    />
     } @case (3) {
-    <app-tx-finish-step />
+    <app-tx-finish-step [result]="result" />
     } }
   </div>
 </main>

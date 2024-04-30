@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { IndexedTx } from '@cosmjs/stargate';
 
 import { ChainListComponent } from './components/chain-list/chain-list.component';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
@@ -34,6 +35,7 @@ export class AppComponent {
   protected readonly chains = CHAIN_LIST;
   protected selectedChain?: IChainInfoView;
   protected txId?: string;
+  protected result?: IndexedTx | null;
 
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly keplrService = inject(KeplrService);
@@ -69,6 +71,12 @@ export class AppComponent {
 
   protected onBackToProposalList(): void {
     this.setStep(1);
+  }
+
+  protected onFinished(result: IndexedTx | null): void {
+    this.result = result;
+
+    this.setStep(3);
   }
 
   private setStep(stepIdx: number): void {
