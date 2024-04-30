@@ -3,7 +3,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { inject, Injectable, Injector } from '@angular/core';
 import { filter, Observable, takeUntil } from 'rxjs';
 
-import { ProposalVoteOption } from '../../models/proposals/proposal-vote-option.model';
+import { ProposalVoteOption } from '../../../../models/proposals/proposal-vote-option.model';
 import { VoteDialogRef } from './models/vote-dialog-ref.model';
 import { IVoteDialogComponentData, VoteDialogComponent } from './vote-dialog.component';
 

@@ -1,7 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Observable, Subject } from 'rxjs';
 
-import { ProposalVoteOption } from '../../../models/proposals/proposal-vote-option.model';
+import { ProposalVoteOption } from '../../../../../models/proposals/proposal-vote-option.model';
 import { IVoteDialogComponentData } from '../vote-dialog.component';
 
 export class VoteDialogRef {

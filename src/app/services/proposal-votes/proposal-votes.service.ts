@@ -9,8 +9,8 @@ import { IProposalVoteQueryParams } from '../../models/proposals/proposal-vote.m
 import { PROPOSAL_VOTE_OPTION_NUMBER, ProposalVoteOption } from '../../models/proposals/proposal-vote-option.model';
 import { KeplrService } from '../keplr.service';
 import { ProposalsService } from '../proposals.service';
-import { VoteDialogService } from '../vote-dialog-service/vote-dialog.service';
 import { IProposalVoteView } from './models/proposal-vote-view.model';
+import { VoteDialogService } from './services/vote-dialog-service/vote-dialog.service';
 
 /**
  * Stateful service to retrieve, store & manage user's votes

@@ -30,7 +30,7 @@ export class AppComponent {
   @ViewChild('cardRef') private readonly cardRef!: ElementRef<HTMLElement>;
 
   protected currentStepIdx = 0;
-  protected readonly steps: string[] = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
+  protected readonly steps = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
   protected selectedChain?: IChainInfoView;
   protected txId?: string;
