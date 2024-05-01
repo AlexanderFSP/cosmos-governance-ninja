@@ -7,6 +7,7 @@ export const DYMENSION_CHAIN_INFO: IChainInfoView = {
   description:
     'Dymension is a modular blockchain designed to secure and interconnect rollups using the Inter-Blockchain Communication (IBC) standard.',
   startDate: new Date(2024, 1, 6),
+  txExplorerLink: 'https://www.mintscan.io/dymension/tx/',
   info: {
     chainId: 'dymension_1100-1',
     chainName: 'Dymension',

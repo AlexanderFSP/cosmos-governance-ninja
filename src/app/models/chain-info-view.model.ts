@@ -21,6 +21,12 @@ export interface IChainInfoView {
    */
   startDate: Date;
   /**
+   * Link to transaction in explorer. Tx hash will be appended to the end
+   *
+   * @example 'https://www.mintscan.io/cosmos/tx/'
+   */
+  txExplorerLink: string;
+  /**
    * Multiplier that will be applied to the simulated gas limit value.
    * Value 'auto' equals to `1.3` or `1.4` multiplier right now (depends on method, made PR to sync value @see https://github.com/cosmos/cosmjs/pull/1584)
    *

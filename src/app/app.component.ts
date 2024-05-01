@@ -59,18 +59,10 @@ export class AppComponent {
     }
   }
 
-  protected onBackToChainList(): void {
-    this.setStep(0);
-  }
-
   protected onTxBroadcasted(txId: string): void {
     this.txId = txId;
 
     this.setStep(2);
-  }
-
-  protected onBackToProposalList(): void {
-    this.setStep(1);
   }
 
   protected onFinished(result: IndexedTx | null): void {
@@ -79,7 +71,7 @@ export class AppComponent {
     this.setStep(3);
   }
 
-  private setStep(stepIdx: number): void {
+  protected setStep(stepIdx: number): void {
     this.currentStepIdx = stepIdx;
     this.cardRef.nativeElement.scrollTop = 0;
 

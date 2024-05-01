@@ -7,6 +7,7 @@ export const COSMOS_HUB_CHAIN_INFO: IChainInfoView = {
   description:
     'Cosmos Hub is the first of thousands of interconnected blockchains that will eventually comprise the Cosmos Network. The primary token of the Cosmos Hub is the ATOM, but the Hub will support many tokens in the future.',
   startDate: new Date(2019, 2, 13),
+  txExplorerLink: 'https://www.mintscan.io/cosmos/tx/',
   fee: 1.8,
   info: {
     bech32Config: {

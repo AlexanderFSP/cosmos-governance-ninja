@@ -7,18 +7,22 @@
     } @case (1) {
     <app-proposal-list
       [selectedChain]="selectedChain!"
-      (backToChainList)="onBackToChainList()"
+      (backToChainList)="setStep(0)"
       (txBroadcasted)="onTxBroadcasted($event)"
     />
     } @case (2) {
     <app-tx-confirmation-step
       [txId]="txId!"
       [selectedChain]="selectedChain!"
-      (backToProposalList)="onBackToProposalList()"
+      (backToProposalList)="setStep(1)"
       (finished)="onFinished($event)"
     />
     } @case (3) {
-    <app-tx-finish-step [result]="result" />
+    <app-tx-finish-step
+      [result]="result"
+      [txExplorerLink]="selectedChain?.txExplorerLink!"
+      (selectAnotherChain)="setStep(0)"
+    />
     } }
   </div>
 </main>

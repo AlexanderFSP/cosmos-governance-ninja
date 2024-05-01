@@ -1,3 +1,41 @@
+@use 'styles/mixins' as *;
+
 :host {
-  display: block;
+  @include flex(center, center, column);
+
+  height: 100%;
+  margin-top: -48px;
+  text-align: center;
+}
+
+.checkmark-icon {
+  @include rectangle(64px);
+
+  color: var(--color-indication-success);
+}
+
+.heading {
+  margin: 20px 0 0;
+}
+
+.description {
+  max-width: 80%;
+  margin: 12px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.explorer-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.restart-button {
+  min-width: 200px;
+  margin-top: 24px;
 }

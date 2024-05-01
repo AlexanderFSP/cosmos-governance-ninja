@@ -7,6 +7,7 @@ export const OSMOSIS_CHAIN_INFO: IChainInfoView = {
   description:
     'Osmosis is an advanced automated market maker (AMM) protocol that allows developers to build customized AMMs with sovereign liquidity pools. Built using the Cosmos SDK, Osmosis utilizes Inter-Blockchain Communication (IBC) to enable cross-chain transactions.',
   startDate: new Date(2021, 5, 18),
+  txExplorerLink: 'https://www.mintscan.io/osmosis/tx/',
   info: {
     rpc: 'https://rpc-osmosis.keplr.app',
     rest: 'https://lcd-osmosis.keplr.app',
