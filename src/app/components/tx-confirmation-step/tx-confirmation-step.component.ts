@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, input, OnDestroy, OnInit, output } from '@angular/core';
-import { IndexedTx, SigningStargateClient } from '@cosmjs/stargate';
+import { SigningStargateClient } from '@cosmjs/stargate';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 import { exhaustMap, filter, from, interval, Subject, take, takeUntil } from 'rxjs';
 
 import { IChainInfoView } from '../../models/chain-info-view.model';
+import { ITxResult } from '../../models/tx-result.model';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -19,10 +20,7 @@ export class TxConfirmationStepComponent implements OnInit, OnDestroy {
   public readonly selectedChain = input.required<IChainInfoView>();
 
   public readonly backToProposalList = output();
-  /**
-   * Returns `null` if the transaction was not found in the chain 120 seconds after it was sent
-   */
-  public readonly finished = output<IndexedTx | null>();
+  public readonly finished = output<ITxResult>();
 
   private readonly destroy$ = new Subject<void>();
 
@@ -46,6 +44,17 @@ export class TxConfirmationStepComponent implements OnInit, OnDestroy {
         take(1),
         takeUntil(this.destroy$)
       )
-      .subscribe(result => this.finished.emit(result));
+      .subscribe(result => {
+        if (!result) {
+          return this.finished.emit({ hash: this.txId() });
+        }
+
+        this.finished.emit({
+          hash: this.txId(),
+          code: result.code,
+          // TODO: (AlexanderFSP) Parse `reason` from `result.events`
+          reason: result.rawLog
+        });
+      });
   }
 }

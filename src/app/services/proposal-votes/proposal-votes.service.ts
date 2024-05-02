@@ -126,6 +126,7 @@ export class ProposalVotesService {
             }
           }));
 
+        // TODO: (AlexanderFSP) Properly handle "ERROR Error: Broadcasting transaction failed with code 4 (codespace: gaia). Log: Insufficient fees; got: 250uatom required: 1250uatom: insufficient fee"
         return from(this.keplrService.signAndBroadcastSync(chain, messages));
       }),
       finalize(() => this._isSigning$.next(false))

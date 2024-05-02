@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { IndexedTx } from '@cosmjs/stargate';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { SvgIconComponent } from '@ngneat/svg-icon';
 
+import { ITxResult } from '../../models/tx-result.model';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -13,13 +13,19 @@ import { ButtonComponent } from '../button/button.component';
   imports: [SvgIconComponent, ButtonComponent]
 })
 export class TxFinishStepComponent {
-  /**
-   * `null` if the transaction was not found in the chain 120 seconds after it was sent
-   *
-   * TODO: (AlexanderFSP) Copyright for it `Transaction with ID ${txId} was submitted but was not yet found on the chain. You might want to check later. There was a wait of 120 seconds.`
-   */
-  public readonly result = input<IndexedTx | null>();
+  public readonly result = input.required<ITxResult>();
   public readonly txExplorerLink = input.required<string>();
 
   public readonly selectAnotherChain = output();
+  public readonly backToProposalList = output();
+
+  public readonly errorDescription = computed(() => {
+    if (this.result().reason) {
+      return `Your transaction failed with the message «${this.result().reason}»`;
+    }
+
+    return `Transaction with ID ${
+      this.result().hash
+    } was submitted but was not yet found on the chain. You might want to check later. There was a wait of 120 seconds`;
+  });
 }

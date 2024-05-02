@@ -19,9 +19,10 @@
     />
     } @case (3) {
     <app-tx-finish-step
-      [result]="result"
+      [result]="result!"
       [txExplorerLink]="selectedChain?.txExplorerLink!"
       (selectAnotherChain)="setStep(0)"
+      (backToProposalList)="setStep(1)"
     />
     } }
   </div>

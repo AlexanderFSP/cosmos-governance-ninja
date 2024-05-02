@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { IndexedTx } from '@cosmjs/stargate';
 
 import { ChainListComponent } from './components/chain-list/chain-list.component';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
@@ -8,6 +7,7 @@ import { TxConfirmationStepComponent } from './components/tx-confirmation-step/t
 import { TxFinishStepComponent } from './components/tx-finish-step/tx-finish-step.component';
 import { CHAIN_LIST } from './constants/chain-list';
 import { IChainInfoView } from './models/chain-info-view.model';
+import { ITxResult } from './models/tx-result.model';
 import { InstallKeplrDialogService } from './services/install-keplr-dialog/install-keplr-dialog.service';
 import { KeplrService } from './services/keplr.service';
 import { ProposalVotesService } from './services/proposal-votes/proposal-votes.service';
@@ -35,7 +35,7 @@ export class AppComponent {
   protected readonly chains = CHAIN_LIST;
   protected selectedChain?: IChainInfoView;
   protected txId?: string;
-  protected result?: IndexedTx | null;
+  protected result?: ITxResult;
 
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly keplrService = inject(KeplrService);
@@ -65,7 +65,7 @@ export class AppComponent {
     this.setStep(2);
   }
 
-  protected onFinished(result: IndexedTx | null): void {
+  protected onFinished(result: ITxResult): void {
     this.result = result;
 
     this.setStep(3);

@@ -8,9 +8,12 @@
   text-align: center;
 }
 
-.checkmark-icon {
+.checkmark-icon,
+.cancel-icon {
   @include rectangle(64px);
+}
 
+.checkmark-icon {
   color: var(--color-indication-success);
 }
 
@@ -35,7 +38,23 @@
   }
 }
 
-.restart-button {
+.restart-button,
+.back-button {
   min-width: 200px;
+}
+
+.restart-button {
   margin-top: 24px;
+}
+
+.cancel-icon {
+  color: var(--color-indication-error);
+}
+
+.buttons {
+  @include flex(flex-end);
+}
+
+.back-button {
+  margin-right: 16px;
 }

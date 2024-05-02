@@ -1,14 +1,29 @@
-@if (result()?.code === 0) {
+@if (result().code === 0) {
 <svg-icon class="checkmark-icon" key="checkmark" />
 
 <h2 class="heading">Success!</h2>
 
 <p class="description">
   Your transaction has been successfully confirmed on-chain. See it on
-  <a class="explorer-link" [href]="txExplorerLink() + result()!.hash" target="_blank">Explorer</a>
+  <a class="explorer-link" [href]="txExplorerLink() + result().hash" target="_blank">Explorer</a>
 </p>
 
 <app-button class="restart-button" (click)="selectAnotherChain.emit()">Select another chain</app-button>
 } @else {
-<!-- TODO: (AlexanderFSP) Handle error -->
+<svg-icon class="cancel-icon" key="cancel" />
+
+<h2 class="heading">Error</h2>
+
+<p class="description">
+  {{ errorDescription() }}. See it on
+  <a class="explorer-link" [href]="txExplorerLink() + result().hash" target="_blank">Explorer</a>
+</p>
+
+<div class="buttons">
+  <app-button class="back-button" appearance="secondary" (click)="backToProposalList.emit()">
+    Back to proposals
+  </app-button>
+
+  <app-button class="restart-button" (click)="selectAnotherChain.emit()">Select another chain</app-button>
+</div>
 }
