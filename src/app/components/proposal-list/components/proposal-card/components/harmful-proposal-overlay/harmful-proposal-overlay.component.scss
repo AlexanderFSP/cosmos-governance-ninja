@@ -1,0 +1,33 @@
+@use 'styles/mixins' as *;
+
+:host {
+  @include flex(center);
+}
+
+.info {
+  @include flex(null, null, column);
+
+  width: 450px;
+}
+
+.header {
+  @include flex(center);
+
+  font-size: 18px;
+}
+
+.description {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.show {
+  margin-left: auto;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: opacity 100ms ease-in-out;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

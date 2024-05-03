@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 import { IProposal } from '../../../../models/proposals/proposal.model';
 import { ProposalStatus } from '../../../../models/proposals/proposal-status.model';
 import { IProposalVoteView } from '../../../../services/proposal-votes/models/proposal-vote-view.model';
+import { HarmfulProposalOverlayComponent } from './components/harmful-proposal-overlay/harmful-proposal-overlay.component';
 import { ProposalCardShimmerComponent } from './components/proposal-card-shimmer/proposal-card-shimmer.component';
 import { ProposalStatusButtonComponent } from './components/proposal-status-button/proposal-status-button.component';
 
@@ -27,7 +28,7 @@ const STATUS_ICON: Record<ProposalStatus, string | null> = {
   templateUrl: './proposal-card.component.html',
   styleUrl: './proposal-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, ProposalCardShimmerComponent, ProposalStatusButtonComponent]
+  imports: [DatePipe, ProposalCardShimmerComponent, ProposalStatusButtonComponent, HarmfulProposalOverlayComponent]
 })
 export class ProposalCardComponent {
   public readonly proposal = input<IProposal>();
@@ -35,6 +36,25 @@ export class ProposalCardComponent {
 
   public readonly editVote = output();
 
+  protected ignoreHarmful = false;
+  /**
+   * The approach to identifying scam proposals is now very simple - if it contains the word “airdrop” or has an emoji, then it is a scam 🧠
+   */
+  public readonly isHarmful = computed(() => {
+    const title = this.title() ?? '';
+    const description = this.description() ?? '';
+
+    const emojiPattern =
+      /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/u;
+
+    if (emojiPattern.test(title) || emojiPattern.test(description)) {
+      return true;
+    }
+
+    const airdropPattern = /airdrop/i;
+
+    return airdropPattern.test(title) || airdropPattern.test(description);
+  });
   protected readonly title = computed(() => this.proposal()?.title || this.proposal()?.messages[0]?.content?.title);
   protected readonly description = computed(
     () => this.proposal()?.summary || this.proposal()?.messages[0]?.content?.description

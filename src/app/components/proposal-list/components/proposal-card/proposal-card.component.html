@@ -1,32 +1,38 @@
 @if (proposal()) {
-<img class="status-icon" [src]="statusIcon[proposal()!.status]" alt="" />
+<div class="content" [class.content--harmful]="!ignoreHarmful && isHarmful()">
+  <img class="status-icon" [src]="statusIcon[proposal()!.status]" alt="" />
 
-<div class="info">
-  <div class="header">
-    <div class="title">{{ title() }}</div>
-    <div class="id">(#{{ proposal()!.id }})</div>
+  <div class="info">
+    <div class="header">
+      <div class="title">{{ title() }}</div>
+      <div class="id">(#{{ proposal()!.id }})</div>
+    </div>
+
+    <div class="description">{{ description() }}</div>
+
+    <div class="voting-period">
+      @if (proposal()!.status === proposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD) { Voting has not started yet. Proposal
+      is in the deposit period } @else { Voting period from
+      {{ proposal()!.voting_start_time | date : 'MMMM d, y, HH:mm' }} to
+      {{ proposal()!.voting_end_time | date : 'MMMM d, y, HH:mm' }}
+      }
+    </div>
   </div>
 
-  <div class="description">{{ description() }}</div>
-
-  <div class="voting-period">
-    @if (proposal()!.status === proposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD) { Voting has not started yet. Proposal is
-    in the deposit period } @else { Voting period from
-    {{ proposal()!.voting_start_time | date : 'MMMM d, y, HH:mm' }} to
-    {{ proposal()!.voting_end_time | date : 'MMMM d, y, HH:mm' }}
-    }
-  </div>
+  @if (vote(); as vote ) {
+  <app-proposal-status-button
+    class="status-button"
+    [status]="proposal()!.status"
+    [selectedVote]="vote.current ?? vote.submitted"
+    (click)="onProposalStatusButtonClick()"
+  />
+  } @else {
+  <div class="shimmer status-button"></div>
+  }
 </div>
 
-@if (vote(); as vote ) {
-<app-proposal-status-button
-  class="status-button"
-  [status]="proposal()!.status"
-  [selectedVote]="vote.current ?? vote.submitted"
-  (click)="onProposalStatusButtonClick()"
-/>
-} @else {
-<div class="shimmer status-button"></div>
+@if (!ignoreHarmful && isHarmful()) {
+<app-harmful-proposal-overlay class="harmful-proposal-overlay" (show)="ignoreHarmful = true" />
 } }@else {
 <app-proposal-card-shimmer />
 }

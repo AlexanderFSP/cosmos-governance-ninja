@@ -1,11 +1,20 @@
 @use 'styles/mixins' as *;
 
 :host {
-  @include flex(center);
-
+  position: relative;
+  display: block;
   padding: 20px 28px;
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
+}
+
+.content {
+  @include flex(center);
+
+  &--harmful {
+    opacity: 0.1;
+    filter: blur(2px);
+  }
 }
 
 .status-icon {
@@ -58,4 +67,11 @@
   &.shimmer {
     @include rectangle(80px, 18.4px);
   }
+}
+
+.harmful-proposal-overlay {
+  position: absolute;
+  top: 20px;
+  width: calc(100% - 56px);
+  height: calc(100% - 40px);
 }
