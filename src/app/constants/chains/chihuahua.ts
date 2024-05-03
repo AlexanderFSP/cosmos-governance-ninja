@@ -7,6 +7,7 @@ export const CHIHUAHUA_CHAIN_INFO: IChainInfoView = {
   description: '', // TODO: (AlexanderFSP)
   startDate: new Date(), // TODO: (AlexanderFSP)
   txExplorerLink: '', // TODO: (AlexanderFSP)
+  fee: 1.4,
   info: {
     chainId: 'chihuahua-1',
     chainName: 'Chihuahua',

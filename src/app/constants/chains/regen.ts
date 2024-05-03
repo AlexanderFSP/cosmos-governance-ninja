@@ -7,6 +7,7 @@ export const REGEN_CHAIN_INFO: IChainInfoView = {
   description: '', // TODO: (AlexanderFSP)
   startDate: new Date(), // TODO: (AlexanderFSP)
   txExplorerLink: '', // TODO: (AlexanderFSP)
+  fee: 1.4,
   info: {
     rpc: 'https://rpc-regen.keplr.app',
     rest: 'https://lcd-regen.keplr.app',

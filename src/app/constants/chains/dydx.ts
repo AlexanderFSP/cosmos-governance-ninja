@@ -8,6 +8,7 @@ export const DYDX_CHAIN_INFO: IChainInfoView = {
     'dYdX is a decentralized exchange (DEX) that allows users to trade perpetual futures contracts for over 35+ cryptocurrencies, including BTC, ETH, and SOL.',
   startDate: new Date(2023, 9, 26),
   txExplorerLink: 'https://www.mintscan.io/dydx/tx/',
+  fee: 1.4,
   info: {
     rpc: 'https://rpc-dydx.keplr.app',
     rest: 'https://lcd-dydx.keplr.app',

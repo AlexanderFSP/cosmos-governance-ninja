@@ -32,10 +32,8 @@ export interface IChainInfoView {
    *
    * @see https://github.com/cosmos/cosmjs/blob/main/packages/stargate/src/signingstargateclient.ts#L311
    * @see https://github.com/cosmos/cosmos-sdk/issues/16020
-   *
-   * @default 'auto'
    */
-  fee?: number | 'auto';
+  fee: number | 'auto';
   /**
    * Complete information about the chain.
    * Implements the {@link ChainInfo} interface, which is required to add a new network using `window.keplr.experimentalSuggestChain`

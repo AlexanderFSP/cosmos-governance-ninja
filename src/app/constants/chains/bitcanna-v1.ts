@@ -7,6 +7,7 @@ export const BITCANNA_V1_CHAIN_INFO: IChainInfoView = {
   description: '', // TODO: (AlexanderFSP)
   startDate: new Date(), // TODO: (AlexanderFSP)
   txExplorerLink: '', // TODO: (AlexanderFSP)
+  fee: 1.4,
   info: {
     chainId: 'bitcanna-1',
     chainName: 'BitCanna v1',

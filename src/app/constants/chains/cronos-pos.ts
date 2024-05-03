@@ -7,6 +7,7 @@ export const CRONOS_POS_CHAIN_INFO: IChainInfoView = {
   description: '', // TODO: (AlexanderFSP)
   startDate: new Date(), // TODO: (AlexanderFSP)
   txExplorerLink: '', // TODO: (AlexanderFSP)
+  fee: 1.4,
   info: {
     rpc: 'https://rpc-crypto-org.keplr.app',
     rest: 'https://lcd-crypto-org.keplr.app',

@@ -8,6 +8,7 @@ export const NOLUS_CHAIN_INFO: IChainInfoView = {
     "Nolus is revolutionizing the realm of crypto borrowing, inspired by the traditional finance leasing model. In conventional leasing, customers can secure assets by paying just a part of their total value upfront, utilize them for the lease's duration, and eventually acquire full ownership after settling the loan.",
   startDate: new Date(2023, 5, 23),
   txExplorerLink: 'https://nolus.explorers.guru/transaction/',
+  fee: 1.4,
   info: {
     rpc: 'https://nolus-rpc.lavenderfive.com:443',
     rest: 'https://nolus-api.lavenderfive.com:443',

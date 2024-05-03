@@ -8,6 +8,7 @@ export const JUNO_CHAIN_INFO: IChainInfoView = {
     'Juno is an open source platform for interoperable smart contracts which automatically executes, controls or documents a procedure of relevant events and actions according to the terms of such contract or agreement to be valid & usable across multiple sovereign networks.',
   startDate: new Date(2021, 9, 1),
   txExplorerLink: 'https://www.mintscan.io/juno/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-juno.keplr.app',
     rest: 'https://lcd-juno.keplr.app',

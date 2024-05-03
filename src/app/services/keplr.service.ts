@@ -103,7 +103,7 @@ export class KeplrService {
 
     const voter = (await offlineSigner.getAccounts())[0].address;
 
-    return signingClient.signAndBroadcastSync(voter, messages, chain.fee ?? 'auto');
+    return signingClient.signAndBroadcastSync(voter, messages, chain.fee);
   }
 
   private async determineRegisteredChainIds(): Promise<void> {

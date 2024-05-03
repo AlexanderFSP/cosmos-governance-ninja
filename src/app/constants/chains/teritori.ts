@@ -7,6 +7,7 @@ export const TERITORI_CHAIN_INFO: IChainInfoView = {
   description: '', // TODO: (AlexanderFSP)
   startDate: new Date(), // TODO: (AlexanderFSP)
   txExplorerLink: '', // TODO: (AlexanderFSP)
+  fee: 1.4,
   info: {
     chainId: 'teritori-1',
     chainName: 'Teritori',

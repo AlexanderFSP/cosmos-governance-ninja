@@ -4,9 +4,11 @@ export const KUJIRA_CHAIN_INFO: IChainInfoView = {
   logoSrc: 'assets/images/chains/kujira.svg',
   rpcUrl: 'https://kujira-rpc.publicnode.com:443',
   restUrl: 'https://kujira-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
+  description:
+    'Kujira is a Layer 1 blockchain platform designed to provide tools and DApps that democratize access to DeFi opportunities. It aims to make decentralized trading, investing, liquidity mining and staking more accessible to wider segments of crypto users by providing beginner-friendly DeFi solutions.',
+  startDate: new Date(2021, 10, 20),
+  txExplorerLink: 'https://finder.kujira.network/kaiyo-1/tx/',
+  fee: 1.6,
   info: {
     chainId: 'kaiyo-1',
     chainName: 'Kujira',
@@ -72,7 +74,12 @@ export const KUJIRA_CHAIN_INFO: IChainInfoView = {
         coinMinimalDenom: 'ukuji',
         coinDecimals: 6,
         coinGeckoId: 'kujira',
-        coinImageUrl: 'https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/kaiyo/ukuji.png'
+        coinImageUrl: 'https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/images/kaiyo/ukuji.png',
+        gasPriceStep: {
+          low: 0.01,
+          average: 0.025,
+          high: 0.03
+        }
       },
       {
         coinDenom: 'USK',
