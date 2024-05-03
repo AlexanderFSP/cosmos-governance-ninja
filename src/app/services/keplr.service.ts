@@ -21,8 +21,11 @@ export class KeplrService {
 
   constructor() {
     if (!localStorage.getItem(this.chainInfosRequestedKey)) {
-      this.determineRegisteredChainIds();
-      localStorage.setItem(this.chainInfosRequestedKey, 'true');
+      try {
+        this.determineRegisteredChainIds();
+      } catch {
+        localStorage.setItem(this.chainInfosRequestedKey, 'true');
+      }
     }
   }
 
@@ -114,6 +117,7 @@ export class KeplrService {
       );
 
       this.registeredChainIds$.next(registeredChainIds);
+      localStorage.removeItem(this.chainInfosRequestedKey);
     } catch {
       /* empty */
     }
