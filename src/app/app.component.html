@@ -20,10 +20,14 @@
     } @case (3) {
     <app-tx-finish-step
       [result]="result!"
-      [txExplorerLink]="selectedChain?.txExplorerLink!"
+      [txExplorerLink]="selectedChain!.txExplorerLink"
       (selectAnotherChain)="setStep(0)"
       (backToProposalList)="setStep(1)"
     />
     } }
   </div>
 </main>
+
+<a href="https://github.com/AlexanderFSP/cosmos-governance-ninja" target="_blank">
+  <img class="form-me-on-github" src="assets/images/form-me-on-github@2x.webp" alt="" />
+</a>

@@ -24,3 +24,11 @@
   flex-grow: 1;
   margin-top: 140px;
 }
+
+.form-me-on-github {
+  @include rectangle(169px);
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}

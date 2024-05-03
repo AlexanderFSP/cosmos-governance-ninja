@@ -94,7 +94,8 @@ export class KeplrService {
 
     const { gasPriceStep, coinMinimalDenom } = chain.info.feeCurrencies[0];
     const signingClient = await SigningStargateClient.connectWithSigner(chain.rpcUrl, offlineSigner, {
-      gasPrice: GasPrice.fromString(`${gasPriceStep?.average}${coinMinimalDenom}`)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      gasPrice: GasPrice.fromString(`${gasPriceStep!.average}${coinMinimalDenom}`)
     });
 
     const voter = (await offlineSigner.getAccounts())[0].address;

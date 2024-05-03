@@ -100,6 +100,7 @@ export class ProposalListComponent implements OnInit, OnDestroy {
                 .pipe(shareReplay({ bufferSize: 1, refCount: true }));
             }
           }),
+          // TODO: (AlexanderFSP) Display error in snackbar
           catchError(() => of({ proposals: [], pagination: { next_key: null, total: '0' } })),
           map(response => ({
             proposals: [...(paginatedProposals?.proposals ?? []), ...response.proposals],
