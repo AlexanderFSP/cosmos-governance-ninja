@@ -16,6 +16,9 @@
     "prebuild": "npm run svg",
     "svg": "svg-generator"
   },
+  "browser": {
+    "crypto": false
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~17.3.0",

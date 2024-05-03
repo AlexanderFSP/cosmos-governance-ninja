@@ -16,6 +16,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "./tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "allowedCommonJsDependencies": ["@cosmjs/stargate"],
         "assets": ["./src/favicon.ico", "./src/assets"],
         "styles": ["node_modules/normalize.css/normalize.css", "./src/styles.scss"],
         "stylePreprocessorOptions": {
@@ -29,7 +30,7 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "3mb"
             },
             {
               "type": "anyComponentStyle",
