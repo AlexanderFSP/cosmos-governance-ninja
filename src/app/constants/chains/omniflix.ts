@@ -1,12 +1,13 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const OMNIFLIX_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/omniflix.svg',
   rpcUrl: 'https://omniflix-rpc.publicnode.com:443',
   restUrl: 'https://omniflix-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description:
+    'OmniFlix is a p2p network for creators & communities to mint, manage, distribute and monetize media assets, NFTs while collaborating with their communities/DAOs, other creators, curators, collectors & contributors',
+  startDate: new Date(2022, 1, 22),
+  txExplorerLink: 'https://www.mintscan.io/omniflix/tx/',
   info: {
     rpc: 'https://rpc-omniflixhub.keplr.app',
     rest: 'https://lcd-omniflixhub.keplr.app',

@@ -1,12 +1,13 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const SAGA_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/saga.png',
   rpcUrl: 'https://saga-rpc.publicnode.com:443',
   restUrl: 'https://saga-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description:
+    'Saga is a Layer 1 protocol that allows developers to automatically spin up VM-agnostic, parallelized and interoperable dedicated chains, or “Chainlets”, that provide applications with infinite horizontal scalability.',
+  startDate: new Date(2024, 3, 8),
+  txExplorerLink: 'https://www.mintscan.io/saga/tx/',
   info: {
     chainId: 'ssc-1',
     chainName: 'Saga',

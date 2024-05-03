@@ -1,7 +1,7 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const NOLUS_CHAIN_INFO: IChainInfoView = {
-  logoSrc: 'assets/images/chains/nolus-logo.svg',
+  logoSrc: 'assets/images/chains/nolus.svg',
   rpcUrl: 'https://nolus-rpc.publicnode.com:443',
   restUrl: 'https://nolus-rest.publicnode.com',
   description:

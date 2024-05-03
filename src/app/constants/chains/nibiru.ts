@@ -1,12 +1,13 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const NIBIRU_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/nibiru.svg',
   rpcUrl: 'https://nibiru-rpc.publicnode.com:443',
   restUrl: 'https://nibiru-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description:
+    'Nibiru Chain is a breakthrough L1 blockchain and smart contract ecosystem sporting superior throughput and unparalleled security. Nibiru aims to be the most developer-friendly and user-friendly smart contract ecosystem, leading the charge toward mainstream Web3 adoption by innovating at each layer of the stack.',
+  startDate: new Date(2024, 2, 12),
+  txExplorerLink: 'https://explorer.nibiru.fi/cataclysm-1/tx/',
   info: {
     chainId: 'cataclysm-1',
     chainName: 'Nibiru',

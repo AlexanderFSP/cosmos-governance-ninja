@@ -1,12 +1,12 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const STARGAZE_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/stargaze.svg',
   rpcUrl: 'https://stargaze-rpc.publicnode.com:443',
   restUrl: 'https://stargaze-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description: 'Community-owned app chain for NFTs with CosmWasm smart contracts. 100% carbon neutral.',
+  startDate: new Date(2021, 9, 29),
+  txExplorerLink: 'https://www.mintscan.io/stargaze/tx/',
   info: {
     rpc: 'https://rpc-stargaze.keplr.app',
     rest: 'https://lcd-stargaze.keplr.app',

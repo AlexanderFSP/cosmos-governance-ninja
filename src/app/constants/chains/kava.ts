@@ -1,12 +1,13 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const KAVA_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/kava.svg',
   rpcUrl: 'https://kava-rpc.publicnode.com:443',
   restUrl: 'https://kava-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description:
+    'Kava is a lightning-fast Layer-1 blockchain featuring a developer-optimized co-chain architecture that combines the two most used permissionless ecosystems - Ethereum and Cosmos - into a single, scalable, network.',
+  startDate: new Date(2019, 10, 5),
+  txExplorerLink: 'https://www.mintscan.io/kava/tx/',
   info: {
     rpc: 'https://rpc-kava.keplr.app',
     rest: 'https://lcd-kava.keplr.app',

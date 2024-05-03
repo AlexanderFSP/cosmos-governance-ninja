@@ -1,12 +1,13 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const JUNO_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/juno.svg',
   rpcUrl: 'https://juno-rpc.publicnode.com:443',
   restUrl: 'https://juno-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description:
+    'Juno is an open source platform for interoperable smart contracts which automatically executes, controls or documents a procedure of relevant events and actions according to the terms of such contract or agreement to be valid & usable across multiple sovereign networks.',
+  startDate: new Date(2021, 9, 1),
+  txExplorerLink: 'https://www.mintscan.io/juno/tx/',
   info: {
     rpc: 'https://rpc-juno.keplr.app',
     rest: 'https://lcd-juno.keplr.app',

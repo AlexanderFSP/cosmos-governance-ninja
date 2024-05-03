@@ -1,12 +1,12 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const PERSISTENCE_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: '', // TODO: (AlexanderFSP)
   rpcUrl: 'https://persistence-rpc.publicnode.com:443',
   restUrl: 'https://persistence-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description: '', // TODO: (AlexanderFSP)
+  startDate: new Date(), // TODO: (AlexanderFSP)
+  txExplorerLink: '', // TODO: (AlexanderFSP)
   info: {
     rpc: 'https://rpc-persistence.keplr.app',
     rest: 'https://lcd-persistence.keplr.app',

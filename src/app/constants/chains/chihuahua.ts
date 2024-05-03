@@ -1,12 +1,12 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const CHIHUAHUA_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: '', // TODO: (AlexanderFSP)
   rpcUrl: 'https://chihuahua-rpc.publicnode.com:443',
   restUrl: 'https://chihuahua-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description: '', // TODO: (AlexanderFSP)
+  startDate: new Date(), // TODO: (AlexanderFSP)
+  txExplorerLink: '', // TODO: (AlexanderFSP)
   info: {
     chainId: 'chihuahua-1',
     chainName: 'Chihuahua',

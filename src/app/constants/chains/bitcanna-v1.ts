@@ -1,12 +1,12 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const BITCANNA_V1_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: '', // TODO: (AlexanderFSP)
   rpcUrl: 'https://bitcanna-rpc.publicnode.com:443',
   restUrl: 'https://bitcanna-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description: '', // TODO: (AlexanderFSP)
+  startDate: new Date(), // TODO: (AlexanderFSP)
+  txExplorerLink: '', // TODO: (AlexanderFSP)
   info: {
     chainId: 'bitcanna-1',
     chainName: 'BitCanna v1',

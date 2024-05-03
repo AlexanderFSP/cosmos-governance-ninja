@@ -1,12 +1,13 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const STRIDE_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: 'assets/images/chains/stride.webp',
   rpcUrl: 'https://stride-rpc.publicnode.com:443',
   restUrl: 'https://stride-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description:
+    'Liquidity for your staked assets. Earn both staking and DeFi yields across IBC. Sell your staked tokens for instant liquidity.',
+  startDate: new Date(2022, 8, 4),
+  txExplorerLink: 'https://www.mintscan.io/stride/tx/',
   info: {
     rpc: 'https://rpc-stride.keplr.app',
     rest: 'https://lcd-stride.keplr.app',

@@ -1,12 +1,12 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const CRONOS_POS_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: '', // TODO: (AlexanderFSP)
   rpcUrl: 'https://cro-chain-rpc.publicnode.com:443',
   restUrl: 'https://cro-chain-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description: '', // TODO: (AlexanderFSP)
+  startDate: new Date(), // TODO: (AlexanderFSP)
+  txExplorerLink: '', // TODO: (AlexanderFSP)
   info: {
     rpc: 'https://rpc-crypto-org.keplr.app',
     rest: 'https://lcd-crypto-org.keplr.app',

@@ -1,6 +1,6 @@
 @if (proposal()) {
 <div class="content" [class.content--harmful]="!ignoreHarmful && isHarmful()">
-  <img class="status-icon" [src]="statusIcon[proposal()!.status]" alt="" />
+  <img class="status-icon" [src]="statusIcon[proposal()!.status]" width="40" height="40" loading="lazy" alt="" />
 
   <div class="info">
     <div class="header">

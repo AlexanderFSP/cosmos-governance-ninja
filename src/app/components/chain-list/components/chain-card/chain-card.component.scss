@@ -14,10 +14,6 @@
   }
 }
 
-.logo {
-  @include rectangle(40px);
-}
-
 .info {
   @include flex(null, null, column);
 

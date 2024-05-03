@@ -1,12 +1,12 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const MARS_HUB_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '',
+  logoSrc: '', // TODO: (AlexanderFSP)
   rpcUrl: 'https://mars-rpc.publicnode.com:443',
   restUrl: 'https://mars-rest.publicnode.com',
-  description: '',
-  startDate: new Date(),
-  txExplorerLink: '',
+  description: '', // TODO: (AlexanderFSP)
+  startDate: new Date(), // TODO: (AlexanderFSP)
+  txExplorerLink: '', // TODO: (AlexanderFSP)
   info: {
     rpc: 'https://rpc-mars.keplr.app',
     rest: 'https://lcd-mars.keplr.app',
