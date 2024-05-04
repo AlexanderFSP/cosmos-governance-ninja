@@ -4,17 +4,19 @@
 <app-proposal-card appWhenInViewport (appear)="onLoadNext()" />
 }}
 
-<div class="buttons">
-  <div class="overflow-gradient"></div>
+<ng-template #buttonsTplRef>
+  <div class="buttons">
+    <div class="overflow-gradient"></div>
 
-  <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
+    <app-button class="button" appearance="secondary" (click)="backToChainList.emit()">Back</app-button>
 
-  <app-button
-    class="button button--sign"
-    [loading]="proposalVotesService.isSigning$ | async"
-    [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false"
-    (click)="onSign()"
-  >
-    Sign
-  </app-button>
-</div>
+    <app-button
+      class="button button--sign"
+      [loading]="proposalVotesService.isSigning$ | async"
+      [disabled]="(proposalVotesService.hasUnsavedVotes$ | async) === false"
+      (click)="onSign()"
+    >
+      Sign
+    </app-button>
+  </div>
+</ng-template>

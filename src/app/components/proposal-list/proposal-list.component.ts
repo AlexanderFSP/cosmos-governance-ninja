@@ -1,5 +1,15 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  output,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
@@ -20,6 +30,7 @@ import {
 import { IChainInfoView } from '../../models/chain-info-view.model';
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../../models/proposals/paginated-proposals.model';
 import { IProposal } from '../../models/proposals/proposal.model';
+import { AbsoluteCardContentService } from '../../services/absolute-card-content.service';
 import { IProposalVoteView } from '../../services/proposal-votes/models/proposal-vote-view.model';
 import { ProposalVotesService } from '../../services/proposal-votes/proposal-votes.service';
 import { ProposalsService } from '../../services/proposals.service';
@@ -36,6 +47,8 @@ import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-v
   imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective]
 })
 export class ProposalListComponent implements OnInit, OnDestroy {
+  @ViewChild('buttonsTplRef', { static: true }) private readonly buttonsTplRef!: TemplateRef<void>;
+
   public readonly selectedChain = input.required<IChainInfoView>();
 
   public readonly backToChainList = output();
@@ -49,16 +62,21 @@ export class ProposalListComponent implements OnInit, OnDestroy {
   protected readonly proposalVotesService = inject(ProposalVotesService);
 
   private readonly proposalsService = inject(ProposalsService);
+  private readonly absoluteCardContentService = inject(AbsoluteCardContentService);
 
   private readonly loadNextSig$ = new BehaviorSubject<void>(void 0);
   private readonly destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
+    this.absoluteCardContentService.setTplRef(this.buttonsTplRef);
+
     this.paginatedProposals$ = this.getPaginatedProposals();
     this.canShowShimmers$ = this.getCanShowShimmers();
   }
 
   public ngOnDestroy(): void {
+    this.absoluteCardContentService.setTplRef(null);
+
     this.destroy$.next();
     this.destroy$.complete();
   }

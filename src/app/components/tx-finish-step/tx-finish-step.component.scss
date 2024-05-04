@@ -3,8 +3,7 @@
 :host {
   @include flex(center, center, column);
 
-  height: 100%;
-  margin-top: -48px;
+  padding-bottom: 70px;
   text-align: center;
 }
 

@@ -1,32 +1,38 @@
-<main #cardRef class="card">
-  <app-stepper [currentStepIdx]="currentStepIdx" [steps]="steps" />
+<div class="card">
+  <ng-scrollbar class="scrollbar" appearance="compact">
+    <div class="container">
+      <app-stepper [currentStepIdx]="currentStepIdx" [steps]="steps" />
 
-  <div class="content">
-    @switch (currentStepIdx) { @case (0) {
-    <app-chain-list [chains]="chains" (selectChain)="onSelectChain($event)" />
-    } @case (1) {
-    <app-proposal-list
-      [selectedChain]="selectedChain!"
-      (backToChainList)="setStep(0)"
-      (txBroadcasted)="onTxBroadcasted($event)"
-    />
-    } @case (2) {
-    <app-tx-confirmation-step
-      [txId]="txId!"
-      [selectedChain]="selectedChain!"
-      (backToProposalList)="setStep(1)"
-      (finished)="onFinished($event)"
-    />
-    } @case (3) {
-    <app-tx-finish-step
-      [result]="result!"
-      [txExplorerLink]="selectedChain!.txExplorerLink"
-      (selectAnotherChain)="setStep(0)"
-      (backToProposalList)="setStep(1)"
-    />
-    } }
-  </div>
-</main>
+      @switch (currentStepIdx) { @case (0) {
+      <app-chain-list [chains]="chains" (selectChain)="onSelectChain($event)" />
+      } @case (1) {
+      <app-proposal-list
+        [selectedChain]="selectedChain!"
+        (backToChainList)="setStep(0)"
+        (txBroadcasted)="onTxBroadcasted($event)"
+      />
+      } @case (2) {
+      <app-tx-confirmation-step
+        [txId]="txId!"
+        [selectedChain]="selectedChain!"
+        (backToProposalList)="setStep(1)"
+        (finished)="onFinished($event)"
+      />
+      } @case (3) {
+      <app-tx-finish-step
+        [result]="result!"
+        [txExplorerLink]="selectedChain!.txExplorerLink"
+        (selectAnotherChain)="setStep(0)"
+        (backToProposalList)="setStep(1)"
+      />
+      } }
+    </div>
+  </ng-scrollbar>
+
+  @if (absoluteCardContentService.tplRef$ | async; as tplRef) {
+  <ng-container *ngTemplateOutlet="tplRef"></ng-container>
+  }
+</div>
 
 <a href="https://github.com/AlexanderFSP/cosmos-governance-ninja" target="_blank">
   <img class="form-me-on-github" src="assets/images/form-me-on-github@2x.webp" width="144" height="144" alt="" />

@@ -1,16 +1,17 @@
 @use 'styles/mixins' as *;
 
+$card-height: 80dvh;
+
 :host {
   display: block;
 }
 
 .card {
   @include flex(null, null, column);
-  @include rectangle(860px, 80dvh);
+  @include rectangle(860px, $card-height);
 
-  overflow-y: auto;
-  margin: 10dvh auto;
-  padding: 60px 70px;
+  position: relative;
+  margin: ((100 - $card-height) / 2) auto;
   border-radius: 8px;
   background-color: var(--color-always-white);
 
@@ -20,9 +21,20 @@
     16px 32px 32px hsl(220deg 60% 50% / 20%);
 }
 
-.content {
-  flex-grow: 1;
-  margin-top: 140px;
+.scrollbar {
+  --scrollbar-border-radius: 8px;
+  --scrollbar-offset: 4;
+  --scrollbar-thumb-color: rgb(153 187 255 / 25%);
+  --scrollbar-thumb-hover-color: rgb(153 187 255 / 50%);
+  --scrollbar-hover-thickness: 6;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 140px;
+  min-height: $card-height;
+  padding: 60px 70px;
 }
 
 .form-me-on-github {

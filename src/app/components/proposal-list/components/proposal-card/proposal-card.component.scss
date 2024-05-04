@@ -11,6 +11,8 @@
 .content {
   @include flex(center);
 
+  transition: all 150ms ease-in-out;
+
   &--harmful {
     opacity: 0.1;
     filter: blur(2px);
@@ -66,8 +68,8 @@
 }
 
 .harmful-proposal-overlay {
+  @include rectangle(calc(100% - 56px), calc(100% - 40px));
+
   position: absolute;
   top: 20px;
-  width: calc(100% - 56px);
-  height: calc(100% - 40px);
 }

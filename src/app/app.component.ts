@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
+import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
 
 import { ChainListComponent } from './components/chain-list/chain-list.component';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
@@ -6,8 +8,10 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { TxConfirmationStepComponent } from './components/tx-confirmation-step/tx-confirmation-step.component';
 import { TxFinishStepComponent } from './components/tx-finish-step/tx-finish-step.component';
 import { CHAIN_LIST } from './constants/chain-list';
+import { COSMOS_HUB_CHAIN_INFO } from './constants/chains';
 import { IChainInfoView } from './models/chain-info-view.model';
 import { ITxResult } from './models/tx-result.model';
+import { AbsoluteCardContentService } from './services/absolute-card-content.service';
 import { InstallKeplrDialogService } from './services/install-keplr-dialog/install-keplr-dialog.service';
 import { KeplrService } from './services/keplr.service';
 import { ProposalVotesService } from './services/proposal-votes/proposal-votes.service';
@@ -19,6 +23,9 @@ import { ProposalVotesService } from './services/proposal-votes/proposal-votes.s
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    AsyncPipe,
+    NgTemplateOutlet,
+    NgScrollbarModule,
     StepperComponent,
     ChainListComponent,
     ProposalListComponent,
@@ -28,7 +35,7 @@ import { ProposalVotesService } from './services/proposal-votes/proposal-votes.s
   providers: [ProposalVotesService]
 })
 export class AppComponent {
-  @ViewChild('cardRef') private readonly cardRef!: ElementRef<HTMLElement>;
+  @ViewChild(NgScrollbar) private readonly scrollable!: NgScrollbar;
 
   protected currentStepIdx = 0;
   protected selectedChain?: IChainInfoView;
@@ -37,6 +44,8 @@ export class AppComponent {
 
   protected readonly steps = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
+
+  protected readonly absoluteCardContentService = inject(AbsoluteCardContentService);
 
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly keplrService = inject(KeplrService);
@@ -74,7 +83,7 @@ export class AppComponent {
 
   protected setStep(stepIdx: number): void {
     this.currentStepIdx = stepIdx;
-    this.cardRef.nativeElement.scrollTop = 0;
+    this.scrollable.scrollTo({ top: 0, duration: 0 });
 
     this.cdr.detectChanges();
   }

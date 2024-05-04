@@ -15,7 +15,8 @@ app-proposal-card {
   @include flex(center, center);
 
   position: absolute;
-  bottom: 10dvh;
+  bottom: 0;
+  align-self: center;
   width: 720px;
   padding: 8px 0 16px;
   background-color: var(--color-always-white);

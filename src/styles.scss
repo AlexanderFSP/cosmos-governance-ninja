@@ -2,6 +2,14 @@
 
 @import '@angular/cdk/overlay-prebuilt.css';
 
+@font-face {
+  font-weight: 400;
+  font-style: normal;
+  font-family: Barlow;
+  src: url('./assets/fonts/Barlow-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
