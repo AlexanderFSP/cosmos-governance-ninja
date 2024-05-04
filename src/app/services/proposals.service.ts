@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { IPaginatedProposals, IPaginatedProposalsQueryParams } from '../models/proposals/paginated-proposals.model';
 import { IProposalVote, IProposalVoteQueryParams } from '../models/proposals/proposal-vote.model';
 
+/**
+ * Http service for receiving information about proposals from blockchain via REST APIs
+ */
 @Injectable({
   providedIn: 'root'
 })

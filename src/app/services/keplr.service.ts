@@ -6,6 +6,11 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import { IChainInfoView } from '../models/chain-info-view.model';
 
+/**
+ * Facade over `window.keplr` object (entity that is injected by Keplr extension)
+ *
+ * @see https://docs.keplr.app/api/cosmjs.html
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -20,13 +25,7 @@ export class KeplrService {
   private readonly chainInfosRequestedKey = 'chain-infos-requested';
 
   constructor() {
-    if (!localStorage.getItem(this.chainInfosRequestedKey)) {
-      try {
-        this.determineRegisteredChainIds();
-      } catch {
-        localStorage.setItem(this.chainInfosRequestedKey, 'true');
-      }
-    }
+    this.determineRegisteredChainIds();
   }
 
   public get isKeplrInstalled(): boolean {
@@ -64,8 +63,7 @@ export class KeplrService {
 
     try {
       await this.window.keplr.experimentalSuggestChain(chainInfo);
-
-      this.determineRegisteredChainIds();
+      this.determineRegisteredChainIds(true);
     } catch {
       /* empty */
     }
@@ -106,9 +104,16 @@ export class KeplrService {
     return signingClient.signAndBroadcastSync(voter, messages, chain.fee);
   }
 
-  private async determineRegisteredChainIds(): Promise<void> {
+  /**
+   * @param force Indicates that it is necessary to re-request access to the user's networks, even if it was previously denied
+   */
+  private async determineRegisteredChainIds(force?: boolean): Promise<void> {
     if (!this.window.keplr) {
       throw new Error('Keplr is not installed');
+    }
+
+    if (!force && localStorage.getItem(this.chainInfosRequestedKey)) {
+      return;
     }
 
     try {
@@ -119,7 +124,7 @@ export class KeplrService {
       this.registeredChainIds$.next(registeredChainIds);
       localStorage.removeItem(this.chainInfosRequestedKey);
     } catch {
-      /* empty */
+      localStorage.setItem(this.chainInfosRequestedKey, 'true');
     }
   }
 }
