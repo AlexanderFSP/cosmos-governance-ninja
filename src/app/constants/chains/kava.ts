@@ -8,7 +8,7 @@ export const KAVA_CHAIN_INFO: IChainInfoView = {
     'Kava is a lightning-fast Layer-1 blockchain featuring a developer-optimized co-chain architecture that combines the two most used permissionless ecosystems - Ethereum and Cosmos - into a single, scalable, network.',
   startDate: new Date(2019, 10, 5),
   txExplorerLink: 'https://www.mintscan.io/kava/tx/',
-  fee: 1.4,
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-kava.keplr.app',
     rest: 'https://lcd-kava.keplr.app',

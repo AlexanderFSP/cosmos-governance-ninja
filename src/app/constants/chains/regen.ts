@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const REGEN_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/regen.webp',
   rpcUrl: 'https://regen-rpc.publicnode.com:443',
   restUrl: 'https://regen-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    "Ecological assets for the #ReFi economy Regen Network's infrastructure originates digital carbon assets in the Interchain economy, unlocking web3 regenerative finance.",
+  startDate: new Date(2021, 3, 16),
+  txExplorerLink: 'https://www.mintscan.io/regen/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-regen.keplr.app',
     rest: 'https://lcd-regen.keplr.app',

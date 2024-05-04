@@ -7,7 +7,7 @@ export const STARGAZE_CHAIN_INFO: IChainInfoView = {
   description: 'Community-owned app chain for NFTs with CosmWasm smart contracts. 100% carbon neutral.',
   startDate: new Date(2021, 9, 29),
   txExplorerLink: 'https://www.mintscan.io/stargaze/tx/',
-  fee: 1.4,
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-stargaze.keplr.app',
     rest: 'https://lcd-stargaze.keplr.app',

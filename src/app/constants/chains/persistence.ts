@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const PERSISTENCE_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/persistence.png',
   rpcUrl: 'https://persistence-rpc.publicnode.com:443',
   restUrl: 'https://persistence-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Persistence is a Tendermint based specialized Layer-1 powering an ecosystem of DeFi dApps focused on unlocking the liquidity of staked assets.',
+  startDate: new Date(2021, 2, 30),
+  txExplorerLink: 'https://www.mintscan.io/persistence/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-persistence.keplr.app',
     rest: 'https://lcd-persistence.keplr.app',

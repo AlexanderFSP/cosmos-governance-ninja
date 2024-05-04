@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const MARS_HUB_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/mars-hub.png',
   rpcUrl: 'https://mars-rpc.publicnode.com:443',
   restUrl: 'https://mars-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Lend, borrow and earn with an autonomous credit protocol in the Cosmos universe. Open to all, closed to none.',
+  startDate: new Date(2023, 0, 31),
+  txExplorerLink: 'https://www.mintscan.io/mars-protocol/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-mars.keplr.app',
     rest: 'https://lcd-mars.keplr.app',

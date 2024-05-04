@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const CHIHUAHUA_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/chihuahua.png',
   rpcUrl: 'https://chihuahua-rpc.publicnode.com:443',
   restUrl: 'https://chihuahua-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Chihuahua is a meme coin and aims to be a community-driven project with a Community Pool of 10B HUAHUA that can be used to fund projects on top of the chain proposed and voted via the Governance built-in in the Chihuahua chain.',
+  startDate: new Date(2021, 11, 14),
+  txExplorerLink: 'https://www.mintscan.io/chihuahua/tx/',
+  fee: 1.6,
   info: {
     chainId: 'chihuahua-1',
     chainName: 'Chihuahua',

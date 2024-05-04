@@ -1,4 +1,3 @@
-export { BITCANNA_V1_CHAIN_INFO } from './bitcanna-v1';
 export { CHIHUAHUA_CHAIN_INFO } from './chihuahua';
 export { COMDEX_CHAIN_INFO } from './comdex';
 export { COREUM_CHAIN_INFO } from './coreum';

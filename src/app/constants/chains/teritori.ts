@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const TERITORI_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/teritori.png',
   rpcUrl: 'https://teritori-rpc.publicnode.com:443',
   restUrl: 'https://teritori-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Teritori is a web3 Super App powered by its own autonomous blockchain and TeritoriOS, the interchain Operating System.',
+  startDate: new Date(2022, 9, 3),
+  txExplorerLink: 'https://www.mintscan.io/teritori/tx/',
+  fee: 1.6,
   info: {
     chainId: 'teritori-1',
     chainName: 'Teritori',

@@ -78,7 +78,7 @@ export const KUJIRA_CHAIN_INFO: IChainInfoView = {
         gasPriceStep: {
           low: 0.01,
           average: 0.025,
-          high: 0.03
+          high: 0.04
         }
       },
       {

@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const QUICKSILVER_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/quicksilver.png',
   rpcUrl: 'https://quicksilver-rpc.publicnode.com:443',
   restUrl: 'https://quicksilver-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Quicksilver is a liquid staking zone which leverages interchain accounts and interchain queries to create permissionless liquid staking qAssets for any Cosmos-SDK chains.',
+  startDate: new Date(2022, 11, 16),
+  txExplorerLink: 'https://www.mintscan.io/quicksilver/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-quicksilver.keplr.app',
     rest: 'https://lcd-quicksilver.keplr.app',

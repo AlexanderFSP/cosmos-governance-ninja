@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const COMDEX_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/comdex.png',
   rpcUrl: 'https://comdex-rpc.publicnode.com:443',
   restUrl: 'https://comdex-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Comdex chain serves as a DeFi Infrastructure Layer for the Cosmos Ecosystem. It provides a variety of interoperable plug & play modules for projects to use to create their own DeFi platforms providing utility to the Cosmos community as well as DeFi users worldwide.',
+  startDate: new Date(2021, 10, 20),
+  txExplorerLink: 'https://www.mintscan.io/comdex/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc.comdex.one',
     rest: 'https://rest.comdex.one',

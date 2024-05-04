@@ -8,7 +8,7 @@ export const OMNIFLIX_CHAIN_INFO: IChainInfoView = {
     'OmniFlix is a p2p network for creators & communities to mint, manage, distribute and monetize media assets, NFTs while collaborating with their communities/DAOs, other creators, curators, collectors & contributors.',
   startDate: new Date(2022, 1, 22),
   txExplorerLink: 'https://www.mintscan.io/omniflix/tx/',
-  fee: 1.4,
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-omniflixhub.keplr.app',
     rest: 'https://lcd-omniflixhub.keplr.app',

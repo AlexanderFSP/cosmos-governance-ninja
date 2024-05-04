@@ -1,13 +1,14 @@
 import { IChainInfoView } from '../../models/chain-info-view.model';
 
 export const CRONOS_POS_CHAIN_INFO: IChainInfoView = {
-  logoSrc: '', // TODO: (AlexanderFSP)
+  logoSrc: 'assets/images/chains/cronos-pos.png',
   rpcUrl: 'https://cro-chain-rpc.publicnode.com:443',
   restUrl: 'https://cro-chain-rest.publicnode.com',
-  description: '', // TODO: (AlexanderFSP)
-  startDate: new Date(), // TODO: (AlexanderFSP)
-  txExplorerLink: '', // TODO: (AlexanderFSP)
-  fee: 1.4,
+  description:
+    'Cronos POS is a public, open-source and permissionless blockchain - a fully decentralized network with high speed and low fees, designed to be a public good that helps drive mass adoption of blockchain technology through use cases like Payments, DeFi and NFTs.',
+  startDate: new Date(2021, 2, 25),
+  txExplorerLink: 'https://www.mintscan.io/crypto-org/tx/',
+  fee: 1.6,
   info: {
     rpc: 'https://rpc-crypto-org.keplr.app',
     rest: 'https://lcd-crypto-org.keplr.app',

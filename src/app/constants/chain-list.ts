@@ -1,6 +1,5 @@
 import { IChainInfoView } from '../models/chain-info-view.model';
 import {
-  BITCANNA_V1_CHAIN_INFO,
   CHIHUAHUA_CHAIN_INFO,
   COMDEX_CHAIN_INFO,
   COREUM_CHAIN_INFO,
@@ -45,6 +44,5 @@ export const CHAIN_LIST: IChainInfoView[] = [
   COMDEX_CHAIN_INFO,
   PERSISTENCE_CHAIN_INFO,
   QUICKSILVER_CHAIN_INFO,
-  BITCANNA_V1_CHAIN_INFO,
   REGEN_CHAIN_INFO
 ];
