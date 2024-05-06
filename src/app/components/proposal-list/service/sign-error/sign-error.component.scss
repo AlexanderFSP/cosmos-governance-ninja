@@ -25,6 +25,12 @@
   }
 }
 
+.cancel-icon {
+  @include rectangle(80px);
+
+  color: var(--color-indication-error);
+}
+
 .heading {
   margin: 20px 0 0;
 }
@@ -33,10 +39,10 @@
   margin: 12px 0 0;
   color: var(--color-text-secondary);
   font-size: 14px;
+  word-break: break-word;
 }
 
-.keplr-link {
+.got-it {
   align-self: stretch;
   margin-top: 28px;
-  text-decoration: none;
 }

@@ -1,0 +1,15 @@
+<svg-icon
+  class="close-icon"
+  key="close"
+  aria-label="Close modal dialog"
+  role="button"
+  (click)="signErrorDialogRef.close()"
+/>
+
+<svg-icon class="cancel-icon" key="cancel" />
+
+<h2 class="heading">Oops, an error occurred!</h2>
+
+<p class="description">{{ signErrorDialogRef.message }}</p>
+
+<app-button class="got-it" (click)="signErrorDialogRef.close()">Got it</app-button>

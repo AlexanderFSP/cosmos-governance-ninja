@@ -37,6 +37,7 @@ import { ProposalsService } from '../../services/proposals.service';
 import { ButtonComponent } from '../button/button.component';
 import { ProposalCardComponent } from './components/proposal-card/proposal-card.component';
 import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-viewport.directive';
+import { SignErrorService } from './service/sign-error/sign-error.service';
 
 @Component({
   standalone: true,
@@ -44,7 +45,8 @@ import { WhenInViewportDirective } from './directives/when-in-viewport/when-in-v
   templateUrl: './proposal-list.component.html',
   styleUrl: './proposal-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective]
+  imports: [AsyncPipe, ProposalCardComponent, ButtonComponent, WhenInViewportDirective],
+  providers: [SignErrorService]
 })
 export class ProposalListComponent implements OnInit, OnDestroy {
   @ViewChild('buttonsTplRef', { static: true }) private readonly buttonsTplRef!: TemplateRef<void>;
@@ -63,6 +65,7 @@ export class ProposalListComponent implements OnInit, OnDestroy {
 
   private readonly proposalsService = inject(ProposalsService);
   private readonly absoluteCardContentService = inject(AbsoluteCardContentService);
+  private readonly signErrorService = inject(SignErrorService);
 
   private readonly loadNextSig$ = new BehaviorSubject<void>(void 0);
   private readonly destroy$ = new Subject<void>();
@@ -93,7 +96,14 @@ export class ProposalListComponent implements OnInit, OnDestroy {
     this.proposalVotesService
       .sign()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(txId => this.txBroadcasted.emit(txId));
+      .subscribe(
+        txId => this.txBroadcasted.emit(txId),
+        (error: Error) => {
+          if (error.message !== 'Request rejected') {
+            this.signErrorService.open(error.message);
+          }
+        }
+      );
   }
 
   private getPaginatedProposals(): Observable<IPaginatedProposals | null> {
