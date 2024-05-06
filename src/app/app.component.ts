@@ -1,14 +1,16 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
 import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
+import { map } from 'rxjs';
 
 import { ChainListComponent } from './components/chain-list/chain-list.component';
 import { ProposalListComponent } from './components/proposal-list/proposal-list.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { TxConfirmationStepComponent } from './components/tx-confirmation-step/tx-confirmation-step.component';
 import { TxFinishStepComponent } from './components/tx-finish-step/tx-finish-step.component';
+import { UnsupportedScreenSizeComponent } from './components/unsupported-screen-size/unsupported screen size.component';
 import { CHAIN_LIST } from './constants/chain-list';
-import { COSMOS_HUB_CHAIN_INFO } from './constants/chains';
 import { IChainInfoView } from './models/chain-info-view.model';
 import { ITxResult } from './models/tx-result.model';
 import { AbsoluteCardContentService } from './services/absolute-card-content.service';
@@ -30,7 +32,8 @@ import { ProposalVotesService } from './services/proposal-votes/proposal-votes.s
     ChainListComponent,
     ProposalListComponent,
     TxConfirmationStepComponent,
-    TxFinishStepComponent
+    TxFinishStepComponent,
+    UnsupportedScreenSizeComponent
   ],
   providers: [ProposalVotesService]
 })
@@ -42,6 +45,9 @@ export class AppComponent {
   protected txId?: string;
   protected result?: ITxResult;
 
+  protected readonly isUnsupportedScreenSize$ = inject(BreakpointObserver)
+    .observe('(max-width: 960px)')
+    .pipe(map(state => state.matches));
   protected readonly steps = ['Select a chain', 'Vote', 'Get confirmation', 'Finish'];
   protected readonly chains = CHAIN_LIST;
 

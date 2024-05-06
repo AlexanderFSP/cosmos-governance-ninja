@@ -4,13 +4,15 @@ $card-height: 80dvh;
 
 :host {
   display: block;
+  padding: 0 20px;
 }
 
 .card {
   @include flex(null, null, column);
-  @include rectangle(860px, $card-height);
+  @include rectangle(100%, $card-height);
 
   position: relative;
+  max-width: 860px;
   margin: ((100 - $card-height) / 2) auto;
   border-radius: 8px;
   background-color: var(--color-always-white);
@@ -29,11 +31,15 @@ $card-height: 80dvh;
   --scrollbar-hover-thickness: 6;
 }
 
+.container,
+.unsupported-screen-size {
+  min-height: $card-height;
+}
+
 .container {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 140px;
-  min-height: $card-height;
   padding: 60px 70px;
 }
 
@@ -41,4 +47,8 @@ $card-height: 80dvh;
   position: absolute;
   top: 0;
   right: 0;
+
+  @media (width <= 960px) {
+    display: none;
+  }
 }

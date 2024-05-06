@@ -1,0 +1,25 @@
+@use 'styles/mixins' as *;
+
+:host {
+  @include flex(center, center, column);
+
+  padding: 24px;
+  text-align: center;
+}
+
+.unavailable-icon {
+  @include rectangle(64px);
+
+  color: var(--color-indication-error);
+}
+
+.heading {
+  margin: 20px 0 0;
+}
+
+.description {
+  max-width: 80%;
+  margin: 12px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}

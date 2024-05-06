@@ -1,5 +1,4 @@
-import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, Signal, signal, TemplateRef } from '@angular/core';
 
 /**
  * A "crutch" for rendering content, the position of which must be absolute relative to the `.card`, and not the `ng-scrollbar`.
@@ -12,15 +11,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AbsoluteCardContentService {
-  public readonly tplRef$: Observable<TemplateRef<unknown> | null>;
+  public readonly tplRef: Signal<TemplateRef<unknown> | null>;
 
-  private readonly _tplRef$ = new BehaviorSubject<TemplateRef<unknown> | null>(null);
+  private readonly _tplRef = signal<TemplateRef<unknown> | null>(null);
 
   constructor() {
-    this.tplRef$ = this._tplRef$.asObservable();
+    this.tplRef = this._tplRef.asReadonly();
   }
 
   public setTplRef(tplRef: TemplateRef<unknown> | null): void {
-    this._tplRef$.next(tplRef);
+    this._tplRef.set(tplRef);
   }
 }

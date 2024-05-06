@@ -1,5 +1,8 @@
 <div class="card">
   <ng-scrollbar class="scrollbar" appearance="compact">
+    @if (isUnsupportedScreenSize$ | async) {
+    <app-unsupported-screen-size class="unsupported-screen-size" />
+    } @else {
     <div class="container">
       <app-stepper [currentStepIdx]="currentStepIdx" [steps]="steps" />
 
@@ -27,11 +30,10 @@
       />
       } }
     </div>
+    }
   </ng-scrollbar>
 
-  @if (absoluteCardContentService.tplRef$ | async; as tplRef) {
-  <ng-container *ngTemplateOutlet="tplRef"></ng-container>
-  }
+  <ng-container [ngTemplateOutlet]="absoluteCardContentService.tplRef()"></ng-container>
 </div>
 
 <a href="https://github.com/AlexanderFSP/cosmos-governance-ninja" target="_blank">
