@@ -1,10 +1,8 @@
-<a href="https://cosmos-governance-ninja.alexanderfsp.tech">
-  <img src="./static/banner.png?v=1" alt="" />
-</a>
+<img src="./static/banner.png?v=1" alt="" />
 
 ## 📙 Description
 
-[Cosmos Governance Ninja](https://cosmos-governance-ninja.alexanderfsp.tech) is a minimalistic client app that provides bulk voting capabilities on proposals in Cosmos CDK-based blockchains. Currently, about 20 networks are supported, such as Cosmos Hub, Osmosis, dYdX, Saga, Stride, Kujira, Stargaze, Juno, Kava, Nibiru, etc.
+Cosmos Governance Ninja is a minimalistic client app that provides bulk voting capabilities on proposals in Cosmos CDK-based blockchains. Currently, about 20 networks are supported, such as Cosmos Hub, Osmosis, dYdX, Saga, Stride, Kujira, Stargaze, Juno, Kava, Nibiru, etc.
 
 #### What problems does this application solve:
 * It reduces the number of necessary actions. Those who use a cold wallet (e.g., Ledger) know how tedious it can be to click buttons countless times to confirm a transaction. When voting through this application, all votes are collected in one "batch", requiring only one signature.
